@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'SwiftyChuck'
-  s.version          = '1.0.1'
+  s.version          = '1.0.2'
   s.summary          = 'Chuck is in-app HTTP inspector for iOS OkHttp clients.'
   s.swift_versions   = '5.0'
 
@@ -20,11 +20,11 @@ Pod::Spec.new do |s|
 
   s.description      = "Chuck is in-app HTTP inspector for iOS OkHttp clients. Chuck intercepts and persists all HTTP requests and responses inside your application, and provides a UI for inspecting their content."
 
-  s.homepage         = 'https://github.com/MacKevinCE/SwiftyChuck'
+  s.homepage         = 'https://github.com/MacKevinCE/SwiftyChuck.git'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'Apache License 2.0', :file => 'LICENSE' }
   s.author           = { 'Mac Kevin C. E.' => 'mac.kevin.c.e@gmail.com' }
-  s.source           = { :git => 'https://github.com/MacKevinCE/SwiftyChuck', :tag => s.version.to_s }
+  s.source           = { :git => 'https://github.com/MacKevinCE/SwiftyChuck.git', :tag => s.version.to_s }
   s.social_media_url = 'https://twitter.com/MacKevinCE'
 
   s.ios.deployment_target = '13.0'
