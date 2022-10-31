@@ -61,7 +61,7 @@ extension NSMutableAttributedString {
             addAttribute(.font, value: font, range: ranteFinal)
         }
         if isUnderline {
-            addAttribute(.underlineStyle, value: NSUnderlineStyle.styleSingle.rawValue, range: ranteFinal)
+            addAttribute(.underlineStyle, value: NSUnderlineStyle.single.rawValue, range: ranteFinal)
         }
         if let backgroundColor = backgroundColor {
             addAttribute(.backgroundColor, value: backgroundColor, range: ranteFinal)
