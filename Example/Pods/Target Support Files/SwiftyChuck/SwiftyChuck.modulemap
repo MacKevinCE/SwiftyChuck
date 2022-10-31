@@ -1,0 +1,6 @@
+framework module SwiftyChuck {
+  umbrella header "SwiftyChuck-umbrella.h"
+
+  export *
+  module * { export * }
+}

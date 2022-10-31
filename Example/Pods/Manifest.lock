@@ -1,0 +1,16 @@
+PODS:
+  - SwiftyChuck (1.0.0)
+
+DEPENDENCIES:
+  - SwiftyChuck (from `../`)
+
+EXTERNAL SOURCES:
+  SwiftyChuck:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  SwiftyChuck: 806252b556a7bbb5c76f7b4d547afe60bdb1997e
+
+PODFILE CHECKSUM: b8eb46ba579a0937ba93c1f0d63b163b5c47c87b
+
+COCOAPODS: 1.11.3

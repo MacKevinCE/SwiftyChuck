@@ -8,8 +8,9 @@
 
 Pod::Spec.new do |s|
   s.name             = 'SwiftyChuck'
-  s.version          = '0.1.0'
-  s.summary          = 'A short description of SwiftyChuck.'
+  s.version          = '1.0.0'
+  s.summary          = 'Chuck is in-app HTTP inspector for iOS OkHttp clients.'
+  s.swift_versions   = '5.0'
 
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
@@ -17,18 +18,16 @@ Pod::Spec.new do |s|
 #   * Write the description between the DESC delimiters below.
 #   * Finally, don't worry about the indent, CocoaPods strips it!
 
-  s.description      = <<-DESC
-TODO: Add long description of the pod here.
-                       DESC
+  s.description      = "Chuck is in-app HTTP inspector for iOS OkHttp clients. Chuck intercepts and persists all HTTP requests and responses inside your application, and provides a UI for inspecting their content."
 
-  s.homepage         = 'https://github.com/Hermes Mac Kevin Cabanillas Encarnación/SwiftyChuck'
+  s.homepage         = 'https://github.com/MacKevinCE/SwiftyChuck'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
-  s.license          = { :type => 'MIT', :file => 'LICENSE' }
-  s.author           = { 'Hermes Mac Kevin Cabanillas Encarnación' => 'mac.kevin.c.e@gmail.com' }
-  s.source           = { :git => 'https://github.com/Hermes Mac Kevin Cabanillas Encarnación/SwiftyChuck.git', :tag => s.version.to_s }
-  # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
+  s.license          = { :type => 'Apache License 2.0', :file => 'LICENSE' }
+  s.author           = { 'Mac Kevin C. E.' => 'mac.kevin.c.e@gmail.com' }
+  s.source           = { :git => 'https://github.com/MacKevinCE/SwiftyChuck', :tag => s.version.to_s }
+  s.social_media_url = 'https://twitter.com/MacKevinCE'
 
-  s.ios.deployment_target = '10.0'
+  s.ios.deployment_target = '13.0'
 
   s.source_files = 'SwiftyChuck/Classes/**/*'
   

@@ -1,0 +1,6 @@
+framework module Pods_SwiftyChuck_Example {
+  umbrella header "Pods-SwiftyChuck_Example-umbrella.h"
+
+  export *
+  module * { export * }
+}

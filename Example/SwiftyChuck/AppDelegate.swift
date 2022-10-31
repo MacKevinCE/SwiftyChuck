@@ -2,7 +2,7 @@
 //  AppDelegate.swift
 //  SwiftyChuck
 //
-//  Created by Hermes Mac Kevin Cabanillas Encarnación on 10/30/2022.
+//  Created by Hermes Mac Kevin Cabanillas Encarnación on 07/09/2022.
 //  Copyright (c) 2022 Hermes Mac Kevin Cabanillas Encarnación. All rights reserved.
 //
 
@@ -14,7 +14,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         return true
     }
