@@ -24,15 +24,21 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vjq-MB-VqE">
-                                <rect key="frame" x="12" y="73" width="84" height="27"/>
+                                <rect key="frame" x="12" y="68.5" width="100" height="27"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="wWx-FE-dQd"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
-                                <state key="normal" title="Detecting: ---"/>
+                                <state key="normal" title="Detecting: ----"/>
                                 <connections>
                                     <action selector="settingButtonTapped:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="zlU-Me-xVf"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HnX-vb-Nq8">
-                                <rect key="frame" x="329" y="73" width="73" height="27"/>
+                                <rect key="frame" x="329" y="68.5" width="73" height="27"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="73" id="Vw5-zU-7uI"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
                                 <state key="normal" title="DELETE ALL">
                                     <color key="titleColor" systemColor="systemRedColor"/>
@@ -41,41 +47,41 @@
                                     <action selector="deleteButtonTapped:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="GLU-tC-1yZ"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Chuck Debug" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w7Q-vW-Nte">
-                                <rect key="frame" x="133" y="72" width="148" height="29"/>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="24"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Chuck Debug" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="w7Q-vW-Nte">
+                                <rect key="frame" x="156" y="72" width="102.5" height="19.5"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Crt-a1-ZKg">
-                                <rect key="frame" x="0.0" y="101" width="414" height="0.0"/>
+                                <rect key="frame" x="0.0" y="91.5" width="414" height="0.0"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" id="6Ra-UP-Sgq"/>
                                 </constraints>
                             </view>
                             <searchBar contentMode="redraw" searchBarStyle="minimal" translatesAutoresizingMaskIntoConstraints="NO" id="5r0-9o-Y3q">
-                                <rect key="frame" x="0.0" y="101" width="365" height="56"/>
+                                <rect key="frame" x="0.0" y="91.5" width="365" height="56"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="56" id="UWx-bg-EwL"/>
                                 </constraints>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5 of 10" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mEq-Ud-hpt">
-                                <rect key="frame" x="368" y="101" width="43" height="56"/>
+                                <rect key="frame" x="368" y="91.5" width="43" height="56"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="13"/>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GQJ-LP-3ma">
-                                <rect key="frame" x="0.0" y="157" width="414" height="0.0"/>
+                                <rect key="frame" x="0.0" y="147.5" width="414" height="0.0"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" id="nl8-JO-ijo"/>
                                 </constraints>
                             </view>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="qAd-nF-qCt">
-                                <rect key="frame" x="0.0" y="157" width="414" height="1"/>
+                                <rect key="frame" x="0.0" y="147.5" width="414" height="1"/>
                                 <constraints>
                                     <constraint firstAttribute="height" id="nKi-Gq-M15"/>
                                 </constraints>
@@ -89,14 +95,14 @@
                                 </segments>
                             </segmentedControl>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Gh-7E-BPD">
-                                <rect key="frame" x="0.0" y="157" width="414" height="0.0"/>
+                                <rect key="frame" x="0.0" y="147.5" width="414" height="0.0"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" id="fYC-dy-9bz"/>
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="s2D-wX-bWV">
-                                <rect key="frame" x="0.0" y="157" width="414" height="705"/>
+                                <rect key="frame" x="0.0" y="147.5" width="414" height="714.5"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ChuckDebugCell" id="AvY-qX-IEF">
@@ -181,9 +187,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rVc-IZ-OTO">
-                                <rect key="frame" x="12" y="72" width="57" height="24"/>
+                                <rect key="frame" x="12" y="72" width="60" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="24" id="4H4-Wp-a6t"/>
+                                    <constraint firstAttribute="width" constant="60" id="RYa-6B-9hV"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
                                 <state key="normal" title="BACK" image="arrowtriangle.left.fill" catalog="system"/>
@@ -192,9 +199,10 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l2c-m9-DB3">
-                                <rect key="frame" x="383" y="72" width="19" height="24"/>
+                                <rect key="frame" x="382" y="72" width="20" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="24" id="08l-NF-AWH"/>
+                                    <constraint firstAttribute="width" constant="20" id="acW-BT-U7R"/>
                                 </constraints>
                                 <state key="normal">
                                     <imageReference key="image" image="square.and.arrow.up.fill" catalog="system" symbolScale="default"/>
@@ -204,7 +212,7 @@
                                     <action selector="sharedButtonTapped:" destination="bS8-Hw-LgA" eventType="touchUpInside" id="3uG-Fu-mbT"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="middleTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iYG-IJ-rUU">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="middleTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" minimumFontSize="12" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iYG-IJ-rUU">
                                 <rect key="frame" x="182" y="72" width="50" height="24"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
