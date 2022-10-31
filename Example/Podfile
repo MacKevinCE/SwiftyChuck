@@ -1,0 +1,13 @@
+use_frameworks!
+
+platform :ios, '10.0'
+
+target 'SwiftyChuck_Example' do
+  pod 'SwiftyChuck', :path => '../'
+
+  target 'SwiftyChuck_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
