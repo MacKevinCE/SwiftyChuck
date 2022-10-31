@@ -1,6 +1,5 @@
 # SwiftyChuck
 
-[![CI Status](https://img.shields.io/travis/Hermes Mac Kevin Cabanillas Encarnación/SwiftyChuck.svg?style=flat)](https://travis-ci.org/Hermes Mac Kevin Cabanillas Encarnación/SwiftyChuck)
 [![Version](https://img.shields.io/cocoapods/v/SwiftyChuck.svg?style=flat)](https://cocoapods.org/pods/SwiftyChuck)
 [![License](https://img.shields.io/cocoapods/l/SwiftyChuck.svg?style=flat)](https://cocoapods.org/pods/SwiftyChuck)
 [![Platform](https://img.shields.io/cocoapods/p/SwiftyChuck.svg?style=flat)](https://cocoapods.org/pods/SwiftyChuck)
