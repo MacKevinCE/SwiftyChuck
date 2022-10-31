@@ -9,8 +9,6 @@
 import SwiftyChuck
 import UIKit
 
-let log = SwiftyChuck.self
-
 class ViewController: ARCViewController {
     let animal = Animal(name: "cangrejo")
     override func viewDidLoad() {

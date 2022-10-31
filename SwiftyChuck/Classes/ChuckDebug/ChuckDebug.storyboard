@@ -18,14 +18,15 @@
         <!--Chuck Debug View Controller-->
         <scene sceneID="s0d-6b-0kx">
             <objects>
-                <viewController id="Y6W-OH-hqX" customClass="ChuckDebugViewController" customModule="ChuckDebug" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Y6W-OH-hqX" customClass="ChuckDebugViewController" customModule="SwiftyChuck" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vjq-MB-VqE">
-                                <rect key="frame" x="12" y="73" width="30.5" height="27"/>
-                                <state key="normal" title=" " image="gearshape.fill" catalog="system"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vjq-MB-VqE">
+                                <rect key="frame" x="12" y="73" width="84" height="27"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
+                                <state key="normal" title="Detecting: ---"/>
                                 <connections>
                                     <action selector="settingButtonTapped:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="zlU-Me-xVf"/>
                                 </connections>
@@ -33,7 +34,9 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HnX-vb-Nq8">
                                 <rect key="frame" x="329" y="73" width="73" height="27"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
-                                <state key="normal" title="DELETE ALL"/>
+                                <state key="normal" title="DELETE ALL">
+                                    <color key="titleColor" systemColor="systemRedColor"/>
+                                </state>
                                 <connections>
                                     <action selector="deleteButtonTapped:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="GLU-tC-1yZ"/>
                                 </connections>
@@ -172,20 +175,18 @@
         <!--Chuck Debug Detail View Controller-->
         <scene sceneID="CBB-mJ-IGK">
             <objects>
-                <viewController storyboardIdentifier="ChuckDebugDetailViewController" id="bS8-Hw-LgA" customClass="ChuckDebugDetailViewController" customModule="ChuckDebug" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ChuckDebugDetailViewController" id="bS8-Hw-LgA" customClass="ChuckDebugDetailViewController" customModule="SwiftyChuck" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="xlf-0z-kgE">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rVc-IZ-OTO">
-                                <rect key="frame" x="12" y="72" width="20" height="24"/>
+                                <rect key="frame" x="12" y="72" width="57" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="24" id="4H4-Wp-a6t"/>
                                 </constraints>
-                                <state key="normal">
-                                    <imageReference key="image" image="arrow.uturn.backward" catalog="system" symbolScale="default"/>
-                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="default"/>
-                                </state>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
+                                <state key="normal" title="BACK" image="arrowtriangle.left.fill" catalog="system"/>
                                 <connections>
                                     <action selector="backButtonTapped:" destination="bS8-Hw-LgA" eventType="touchUpInside" id="NAD-h1-stQ"/>
                                 </connections>
@@ -335,14 +336,16 @@
         </scene>
     </scenes>
     <resources>
-        <image name="arrow.uturn.backward" catalog="system" width="128" height="113"/>
-        <image name="gearshape.fill" catalog="system" width="128" height="123"/>
+        <image name="arrowtriangle.left.fill" catalog="system" width="128" height="113"/>
         <image name="square.and.arrow.up.fill" catalog="system" width="115" height="128"/>
         <systemColor name="linkColor">
             <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemRedColor">
+            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

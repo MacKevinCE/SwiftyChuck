@@ -29,7 +29,7 @@ open class BaseDestination {
     /// and for unit tests (nil if error)
     func send(_ chuck: InputProtocol, thread: String) -> String? {
         DispatchQueue.main.async {
-            guard SwiftyChuck.isDetecting else { return }
+            guard SwiftyChuck.isDetecting && SwiftyChuck.isEnabled else { return }
             if let service = chuck as? InputService {
                 SwiftyChuck.dataChuck.append(OutputService(service: service))
             } else if let log = chuck as? InputLog {

@@ -16,16 +16,17 @@
 import Foundation
 
 open class SwiftyChuck {
-    public private(set) static var destination = BaseDestination()
+    static let destination = BaseDestination()
+    public private(set) static var isEnabled: Bool = false
     public private(set) static var baseURL: String = empty
     public private(set) static var enverimoment: String = empty
+    private(set) static var enableType: [ChuckLevel] = ChuckLevel.allCases
+    static var isDetecting: Bool = true
     static var searchText: String = empty
     static var searchTextDetail: String = empty
     static var tabControl: Int = .zero
     static var tabControlDetail: Int = .zero
     static var dataChuck: [OutputProtocol] = []
-    static var enableType: [ChuckLevel] = ChuckLevel.allCases
-    static var isDetecting: Bool = true
 
     // MARK: Setting Handling
 
@@ -35,6 +36,10 @@ open class SwiftyChuck {
 
     open class func setEnverimoment(_ enverimoment: String) {
         self.enverimoment = enverimoment
+    }
+
+    open class func isEnabled(_ isEnabled: Bool) {
+        self.isEnabled = isEnabled
     }
 
     open class func setEnableType(_ enableType: [ChuckLevel]) {
@@ -146,5 +151,13 @@ open class SwiftyChuck {
                 _ = destination.send(chuck, thread: thread)
             }
         }
+    }
+
+    static func openViewChuckDebug() {
+        guard let owner = UIApplication.rootViewController else { return }
+        let final = owner.presentedViewController ?? owner
+        let navigation = UINavigationController(rootViewController: ChuckDebugAssembly.build())
+        navigation.isNavigationBarHidden = true
+        final.present(navigation, animated: true, completion: nil)
     }
 }

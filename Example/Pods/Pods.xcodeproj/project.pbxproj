@@ -25,6 +25,7 @@
 		5820B7AB75B1A36F3C7B39044AE6ABF2 /* Pods-SwiftyChuck_Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 34B6A2920FA6A4CDA83F816E5D131769 /* Pods-SwiftyChuck_Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		59863D040CB0F0175DE0D76B24A875A1 /* OutputLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 861FADC15CE8CB24CF51D171F675D226 /* OutputLog.swift */; };
 		608E160C332D91C75C2D42879B331C0F /* Range.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89ACA35EF50BB770CC9980A6E33E9BAF /* Range.swift */; };
+		6417DD3F2910483500B0266D /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6417DD3E2910483500B0266D /* UIViewController.swift */; };
 		6BFBD4CEAFAE303235832795FAABD671 /* UIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8450E9A74398213261414611E56FFB8B /* UIFont.swift */; };
 		71A49292ADBDCA75D6354781E278AC33 /* Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4C7E1738DEB181FAC950639D031CA1 /* Collection.swift */; };
 		83D666A13CC05EEFB57660645E37F4E7 /* ChuckDebug.storyboard in Sources */ = {isa = PBXBuildFile; fileRef = CCAC7D36E80674A30A4325BA906F4F99 /* ChuckDebug.storyboard */; };
@@ -84,6 +85,7 @@
 		59DA2539787B8E9FF8543421BE62CFA7 /* Pods-SwiftyChuck_Example-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-SwiftyChuck_Example-acknowledgements.markdown"; sourceTree = "<group>"; };
 		5B759C54C28FF6BC27D36B4762496AA7 /* SwiftyChuck.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; path = SwiftyChuck.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		5FF23349300FC61282A0CE65F489A7E9 /* SwiftyChuck-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SwiftyChuck-prefix.pch"; sourceTree = "<group>"; };
+		6417DD3E2910483500B0266D /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
 		6A76E73624E2D031002FA91A20D5A930 /* Pods-SwiftyChuck_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SwiftyChuck_Example.release.xcconfig"; sourceTree = "<group>"; };
 		6D02CDD158C28F3E0DD04C5B352E3187 /* Pods-SwiftyChuck_Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-SwiftyChuck_Example.modulemap"; sourceTree = "<group>"; };
 		6D5F429F6846C6EA5695ED2E966239C0 /* Pods-SwiftyChuck_Example-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-SwiftyChuck_Example-Info.plist"; sourceTree = "<group>"; };
@@ -297,6 +299,7 @@
 				571B0F5EA89D454FC4F14148428BFE9D /* UIColor.swift */,
 				8450E9A74398213261414611E56FFB8B /* UIFont.swift */,
 				3E66A1E226229852E635AC0305F81E5A /* UIView.swift */,
+				6417DD3E2910483500B0266D /* UIViewController.swift */,
 			);
 			name = Extension;
 			path = SwiftyChuck/Classes/Extension;
@@ -519,6 +522,7 @@
 				C9D166AB4C408409D9F50B32D6A49E42 /* InputARC.swift in Sources */,
 				40E760622FFC1F9B89B2BBBECAB08EBA /* InputLog.swift in Sources */,
 				0679CBF94DB45A60D1354ED5B8063352 /* InputProtocol.swift in Sources */,
+				6417DD3F2910483500B0266D /* UIViewController.swift in Sources */,
 				1CB7C863AB916A2D1A40805C900BC839 /* InputService.swift in Sources */,
 				182214463870A90CCC489B48A5C93558 /* NSMutableAttributedString.swift in Sources */,
 				1461F321A1BEE42BA344B83BA342E370 /* NSMutableString.swift in Sources */,

@@ -26,19 +26,3 @@ class ChuckDebugDetailAssembly {
         return view
     }
 }
-
-extension UIViewController {
-    private func openViewChuckDebug() {
-        guard let owner = UIApplication.rootViewController else { return }
-        let final = owner.presentedViewController ?? owner
-        let navigation = UINavigationController(rootViewController: ChuckDebugAssembly.build())
-        navigation.isNavigationBarHidden = true
-        final.present(navigation, animated: true, completion: nil)
-    }
-
-    override open func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
-        if motion == .motionShake {
-            openViewChuckDebug()
-        }
-    }
-}

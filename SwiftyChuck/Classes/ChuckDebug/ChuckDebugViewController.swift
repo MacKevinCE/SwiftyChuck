@@ -44,15 +44,14 @@ class ChuckDebugViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configView()
-        enverimomentState()
     }
 
     private func configView() {
         titleLabel.font = .semibold16
         heightSegmentedControlConstraint.isActive = enableType.count < 2
         segmentedControl.isHidden = enableType.count < 2
-        enverimomentButton.isEnabled = false
-        enverimomentButton.setTitle(SwiftyChuck.enverimoment, for: .normal)
+        enverimomentState()
+        settingSate()
     }
 
     func reloadData() {
@@ -91,19 +90,29 @@ class ChuckDebugViewController: UIViewController {
         enverimomentButton.setTitle(enverimoment, for: .normal)
     }
 
+    func settingSate() {
+        let title = "Detecting: \(SwiftyChuck.isDetecting.description)"
+        settingButton.setTitle(title, for: .normal)
+        let color: UIColor = SwiftyChuck.isDetecting ? .green : .red
+        settingButton.setTitleColor(color, for: .normal)
+    }
+
     @objc
     func changedSegmentedControl(_ sender: UISegmentedControl) {
         SwiftyChuck.tabControl = sender.selectedSegmentIndex
         tableView.reloadData()
     }
 
-    @IBAction private func enverimomentButtonTapped(_ sender: Any) {}
-
-    @IBAction private func settingButtonTapped(_ sender: Any) {
+    @IBAction private func enverimomentButtonTapped(_ sender: UIButton) {
         // falta
     }
 
-    @IBAction private func deleteButtonTapped(_ sender: Any) {
+    @IBAction private func settingButtonTapped(_ sender: UIButton) {
+        SwiftyChuck.isDetecting.toggle()
+        settingSate()
+    }
+
+    @IBAction private func deleteButtonTapped(_ sender: UIButton) {
         SwiftyChuck.resetChuck()
         searchBar.text = empty
         searchBar.resignFirstResponder()
