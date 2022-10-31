@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'SwiftyChuck'
-  s.version          = '1.0.2'
+  s.version          = '1.0.3'
   s.summary          = 'Chuck is in-app HTTP inspector for iOS OkHttp clients.'
   s.swift_versions   = '5.0'
 
@@ -22,7 +22,7 @@ Pod::Spec.new do |s|
 
   s.homepage         = 'https://github.com/MacKevinCE/SwiftyChuck.git'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
-  s.license          = { :type => 'Apache License 2.0', :file => 'LICENSE' }
+  s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'Mac Kevin C. E.' => 'mac.kevin.c.e@gmail.com' }
   s.source           = { :git => 'https://github.com/MacKevinCE/SwiftyChuck.git', :tag => s.version.to_s }
   s.social_media_url = 'https://twitter.com/MacKevinCE'
