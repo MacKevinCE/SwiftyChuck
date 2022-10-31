@@ -52,7 +52,7 @@ extension Date {
         static let zone = "SSSZ"
     }
 
-    public enum DateFormat {
+    enum DateFormat {
         /// "HH:mm" example: 12:01
         case time
         
