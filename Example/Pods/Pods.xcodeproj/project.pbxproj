@@ -78,7 +78,7 @@
 		3E66A1E226229852E635AC0305F81E5A /* UIView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		4775F545E2D363507E81B2FD0BD963E1 /* Data.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		4873B8FA162BBAE1D255CEFE64A12684 /* SwiftyChuck.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SwiftyChuck.debug.xcconfig; sourceTree = "<group>"; };
-		4AA5A18481E75175053B091999FB32D2 /* SwiftyChuck */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = SwiftyChuck; path = SwiftyChuck.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4AA5A18481E75175053B091999FB32D2 /* SwiftyChuck.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftyChuck.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		571B0F5EA89D454FC4F14148428BFE9D /* UIColor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		58227DD868EE6040E9CF7E774E090F3D /* Pods-SwiftyChuck_Tests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-SwiftyChuck_Tests-acknowledgements.plist"; sourceTree = "<group>"; };
 		59DA2539787B8E9FF8543421BE62CFA7 /* Pods-SwiftyChuck_Example-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-SwiftyChuck_Example-acknowledgements.markdown"; sourceTree = "<group>"; };
@@ -106,7 +106,7 @@
 		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		A6FC87B38F14AAE091A8D50774D3D7DE /* Pods-SwiftyChuck_Tests-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-SwiftyChuck_Tests-Info.plist"; sourceTree = "<group>"; };
 		AEF1F7D057293CB9B67A79F8F5BCEA4E /* Array.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
-		B03EEAFEB37F83505320A418A021A620 /* Pods-SwiftyChuck_Tests */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "Pods-SwiftyChuck_Tests"; path = Pods_SwiftyChuck_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B03EEAFEB37F83505320A418A021A620 /* Pods_SwiftyChuck_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftyChuck_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B24D0DB9375D075384F8F0B448BA4562 /* Pods-SwiftyChuck_Example-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-SwiftyChuck_Example-acknowledgements.plist"; sourceTree = "<group>"; };
 		B95FC402216A19CEBA367D0B1B2AE455 /* Pods-SwiftyChuck_Tests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-SwiftyChuck_Tests-dummy.m"; sourceTree = "<group>"; };
 		BBB799D9383AB00CFF976976F7C39454 /* Pods-SwiftyChuck_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SwiftyChuck_Tests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -114,7 +114,7 @@
 		BDD39773870A2D13EE2140AFD2B01E90 /* NSMutableAttributedString.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NSMutableAttributedString.swift; sourceTree = "<group>"; };
 		BF041FDD76C29CFBEFA44AFC3E662764 /* Pods-SwiftyChuck_Tests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-SwiftyChuck_Tests-acknowledgements.markdown"; sourceTree = "<group>"; };
 		BF5DD8F445886FFF24808C5FF7E4FD75 /* String.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
-		C4091FD973E4B3E3917BBA3DFE0E988D /* Pods-SwiftyChuck_Example */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "Pods-SwiftyChuck_Example"; path = Pods_SwiftyChuck_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C4091FD973E4B3E3917BBA3DFE0E988D /* Pods_SwiftyChuck_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftyChuck_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C561E5C42CCC2F8F4F7B7E52CC9D442C /* InputService.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = InputService.swift; sourceTree = "<group>"; };
 		CCAC7D36E80674A30A4325BA906F4F99 /* ChuckDebug.storyboard */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file.storyboard; path = ChuckDebug.storyboard; sourceTree = "<group>"; };
 		D1CD7B137FED68082B4F2D3A82329304 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
@@ -236,9 +236,9 @@
 		5910136B24332C4EE69A089FB310884B /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				C4091FD973E4B3E3917BBA3DFE0E988D /* Pods-SwiftyChuck_Example */,
-				B03EEAFEB37F83505320A418A021A620 /* Pods-SwiftyChuck_Tests */,
-				4AA5A18481E75175053B091999FB32D2 /* SwiftyChuck */,
+				C4091FD973E4B3E3917BBA3DFE0E988D /* Pods_SwiftyChuck_Example.framework */,
+				B03EEAFEB37F83505320A418A021A620 /* Pods_SwiftyChuck_Tests.framework */,
+				4AA5A18481E75175053B091999FB32D2 /* SwiftyChuck.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -401,7 +401,7 @@
 			);
 			name = SwiftyChuck;
 			productName = SwiftyChuck;
-			productReference = 4AA5A18481E75175053B091999FB32D2 /* SwiftyChuck */;
+			productReference = 4AA5A18481E75175053B091999FB32D2 /* SwiftyChuck.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		89CEB36BAA3B2FCE4AE60D3F78FD959B /* Pods-SwiftyChuck_Example */ = {
@@ -420,7 +420,7 @@
 			);
 			name = "Pods-SwiftyChuck_Example";
 			productName = Pods_SwiftyChuck_Example;
-			productReference = C4091FD973E4B3E3917BBA3DFE0E988D /* Pods-SwiftyChuck_Example */;
+			productReference = C4091FD973E4B3E3917BBA3DFE0E988D /* Pods_SwiftyChuck_Example.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		BEAC541C61ABDCC537AABE82163E0E0F /* Pods-SwiftyChuck_Tests */ = {
@@ -439,7 +439,7 @@
 			);
 			name = "Pods-SwiftyChuck_Tests";
 			productName = Pods_SwiftyChuck_Tests;
-			productReference = B03EEAFEB37F83505320A418A021A620 /* Pods-SwiftyChuck_Tests */;
+			productReference = B03EEAFEB37F83505320A418A021A620 /* Pods_SwiftyChuck_Tests.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
@@ -449,7 +449,12 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1300;
-				LastUpgradeCheck = 1300;
+				LastUpgradeCheck = 1400;
+				TargetAttributes = {
+					2AB14FFD72C1B8A2BB2E3343983A2566 = {
+						LastSwiftMigration = "";
+					};
+				};
 			};
 			buildConfigurationList = 4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -571,7 +576,6 @@
 			baseConfigurationReference = 32D0FD7CD61D52D812D0BBAFA1CD4FF6 /* Pods-SwiftyChuck_Example.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -604,7 +608,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 4873B8FA162BBAE1D255CEFE64A12684 /* SwiftyChuck.debug.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -625,7 +628,7 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -637,7 +640,6 @@
 			baseConfigurationReference = 6A76E73624E2D031002FA91A20D5A930 /* Pods-SwiftyChuck_Example.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -672,7 +674,6 @@
 			baseConfigurationReference = BBB799D9383AB00CFF976976F7C39454 /* Pods-SwiftyChuck_Tests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -736,6 +737,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -802,6 +804,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -833,7 +836,6 @@
 			baseConfigurationReference = 8AA54F0D76774552DB2B4101095B90D6 /* Pods-SwiftyChuck_Tests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -867,7 +869,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 1E7FADFDF02E90E2D4589A9154D41A93 /* SwiftyChuck.release.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -888,7 +889,7 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
