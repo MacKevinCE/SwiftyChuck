@@ -13,7 +13,8 @@ class ViewController: ARCViewController {
     let animal = Animal(name: "cangrejo")
     override func viewDidLoad() {
         super.viewDidLoad()
-        // log.setEnableType([.service])
+        log.addEnableType(.custom("Nuevooo"))
+        log.addEnableType([.custom("Nuevooo"), .custom("Nuevoo0o"), .service])
         log.service(nil, nil, nil)
         log.custom(Inputtt("Entroooo"))
         // Do any additional setup after loading the view, typically from a nib.
@@ -110,7 +111,7 @@ struct Inputtt: InputProtocol {
         self.title = title
         self.function = function
         self.line = line
-        self.type = .service
+        self.type = .custom("Nuevooo")
         self.colorText = UIColor.black.toHexString()
         self.time = Date()
     }

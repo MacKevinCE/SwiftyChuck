@@ -85,3 +85,21 @@ func getColor(_ type: LogLevel) -> String {
     case .error: return UIColor.red.toHexString()
     }
 }
+
+enum LogLevel: CaseIterable {
+    case print
+    case debug
+    case info
+    case warning
+    case error
+
+    var text: String {
+        switch self {
+        case .print: return "Print"
+        case .debug: return "Debug"
+        case .info: return "Info"
+        case .warning: return "Warning"
+        case .error: return "Error"
+        }
+    }
+}

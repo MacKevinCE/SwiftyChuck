@@ -20,7 +20,7 @@ public extension Array where Element == ParString {
 }
 
 extension Array where Element: Hashable {
-    func uniqued() -> Array {
+    mutating func uniqued() {
         var buffer = Array()
         var added = Set<Element>()
         for elem in self {
@@ -29,6 +29,6 @@ extension Array where Element: Hashable {
                 added.insert(elem)
             }
         }
-        return buffer
+        self = buffer
     }
 }

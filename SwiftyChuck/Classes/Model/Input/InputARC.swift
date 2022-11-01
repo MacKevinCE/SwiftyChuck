@@ -101,3 +101,14 @@ struct InputARC: InputProtocol {
         return String(self.getNameComplete().split(separator: ".").last ?? "")
     }
 }
+
+enum ARCFlow: CaseIterable {
+    case inital
+    case deinital
+    var text: String {
+        switch self {
+        case .inital: return "Init"
+        case .deinital: return "Deinit"
+        }
+    }
+}

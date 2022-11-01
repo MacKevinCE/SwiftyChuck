@@ -43,20 +43,36 @@ open class SwiftyChuck {
     }
 
     open class func setEnableType(_ enableType: [ChuckLevel]) {
-        self.enableType = enableType.isEmpty ? ChuckLevel.allCases : enableType.uniqued()
+        self.enableType = enableType.isEmpty ? ChuckLevel.allCases : enableType
+        self.enableType.uniqued()
+    }
+
+    open class func addEnableType(_ enableType: ChuckLevel) {
+        self.enableType.append(enableType)
+        self.enableType.uniqued()
+    }
+
+    open class func addEnableType(_ enableType: [ChuckLevel]) {
+        self.enableType.append(contentsOf: enableType)
+        self.enableType.uniqued()
     }
 
     // MARK: Method Handling
 
-    static func resetChuck() {
+    open class func resetChuck() {
         searchText = empty
         searchTextDetail = empty
-        tabControl = 0
-        tabControlDetail = 0
-        dataChuck = []
+        tabControl = .zero
+        tabControlDetail = .zero
+        dataChuck.removeAll()
     }
 
-    static func removeChuck(_ chuck: (any OutputProtocol)?) {
+    open class func remove(_ id: UUID) {
+        guard let index = dataChuck.firstIndex(where: { $0.id == id }) else { return }
+        dataChuck.remove(at: index)
+    }
+
+    open class func removeChuck(_ chuck: (any OutputProtocol)?) {
         guard let id = chuck?.id else { return }
         remove(id)
     }
@@ -122,11 +138,6 @@ open class SwiftyChuck {
 
     open class func classInit(_ id: UUID, _ anyObject: AnyObject, file: String = #file, function: String = #function, line: Int = #line) {
         return custom(InputARC(id, anyObject, .inital, file, function, line))
-    }
-
-    open class func remove(_ id: UUID) {
-        guard let index = dataChuck.firstIndex(where: { $0.id == id }) else { return }
-        dataChuck.remove(at: index)
     }
 
     /// custom logging to manually adjust values, should just be used by other frameworks
