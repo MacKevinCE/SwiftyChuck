@@ -40,4 +40,64 @@ struct InputARC: InputProtocol {
     func output() -> any OutputProtocol {
         return OutputARC(arc: self)
     }
+    
+    func getTabPreview() -> NSMutableAttributedString {
+        let colorText = UIColor(hexString: self.colorText)
+        return "\(self.flow.text):"
+            .initAttributeText(color: colorText, font: .semibold16)
+            .printSpacer()
+            .addTextWithAttributeText(text: self.getNameClass())
+            .printEnter().printTab().printTab().printSpacer()
+            .addTextWithAttributeText(text: self.time.toString(), color: .gray, font: .regular12)
+    }
+    
+    func getTabAll() -> NSMutableAttributedString {
+        var pares: [ParString] = []
+        pares.append(ParString(key: "ID", value: self.id.uuidString))
+        pares.append(ParString(key: "Project's Name", value: self.getNameProject()))
+        pares.append(ParString(key: "Class Name", value: self.getNameClass()))
+        pares.append(ParString(key: "All Describing Class", value: self.describingClass()))
+        pares.append(ParString(key: "Encodable Class", value: self.encodableClass()))
+        pares.append(ParString(key: "NavigationController Description", value: self.navigationControllerDescription()))
+        pares.append(ParString(key: "View Description", value: self.viewDescription()))
+        pares.append(ParString(key: "File", value: self.file))
+        pares.append(ParString(key: "Function", value: self.function))
+        pares.append(ParString(key: "Line", value: String(self.line)))
+        pares.append(ParString(key: "Time", value: self.time.toString(with: .iso8601)))
+        
+        return pares.reduce()
+    }
+    
+    func encodableClass() -> String {
+        guard let value = (anyObject as? Encodable) else { return empty }
+        let data = try? JSONEncoder().encode(value)
+        return data?.prettyPrintedJSONString?.null() ?? empty
+    }
+    
+    func navigationControllerDescription() -> String {
+        guard let value = (anyObject as? UIViewController) else { return empty }
+        return value.navigationController?.description ?? empty
+    }
+    
+    func viewDescription() -> String {
+        guard let value = (anyObject as? UIViewController) else { return empty }
+        return value.view.description
+    }
+
+    func describingClass() -> String {
+        return String(describing: self.anyObject)
+    }
+
+    func getNameComplete() -> String {
+        let describing = self.describingClass()
+        return String(describing.split(separator: ":").first ?? "").replacingOccurrences(of: "<", with: "")
+    }
+    
+    func getNameProject() -> String {
+        return String(self.getNameComplete().split(separator: ".").first ?? "")
+    }
+    
+    func getNameClass() -> String {
+        return String(self.getNameComplete().split(separator: ".").last ?? "")
+    }
 }

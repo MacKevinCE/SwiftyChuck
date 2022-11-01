@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension Array where Element == ParString {
+public extension Array where Element == ParString {
     func toString() -> String {
         reduce(empty) { ($1.value != empty) ? "\($0)\n(\($1.key)): \($1.value)" : empty }
     }

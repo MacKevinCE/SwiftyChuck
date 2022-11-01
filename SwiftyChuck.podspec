@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'SwiftyChuck'
-  s.version          = '1.2.0'
+  s.version          = '1.2.1'
   s.summary          = 'Chuck is in-app HTTP inspector for iOS OkHttp clients.'
   s.swift_versions   = '5'
 

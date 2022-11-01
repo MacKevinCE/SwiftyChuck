@@ -49,7 +49,7 @@ class ChuckDebugDetailViewController: UIViewController {
         titleLabel.textColor = UIColor(hexString: chuck.colorText)
         titleLabel.font = .semibold16
         titleLabel.textAlignment = .center
-        heightSegmentedControlConstraint.isActive = chuck.type != .service
+        heightSegmentedControlConstraint.isActive = chuck.detailTabs.count < 2
         segmentedControl.isHidden = chuck.detailTabs.count < 2
         titleLabel.text = chuck.title
     }

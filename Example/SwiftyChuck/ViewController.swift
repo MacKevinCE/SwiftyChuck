@@ -13,8 +13,9 @@ class ViewController: ARCViewController {
     let animal = Animal(name: "cangrejo")
     override func viewDidLoad() {
         super.viewDidLoad()
-        log.setEnableType([])
+        // log.setEnableType([.service])
         log.service(nil, nil, nil)
+        log.custom(Inputtt("Entroooo"))
         // Do any additional setup after loading the view, typically from a nib.
     }
 
@@ -35,7 +36,8 @@ class MyViewController: BaseViewController {
         // animal.amo = amo
 
         super.viewDidLoad()
-        log.print("something", "to", "print")
+        log.print("something", "to", "print", separator: "\n")
+        log.info("something", "to", "print")
         // Do any additional setup after loading the view, typically from a nib.
     }
 
@@ -58,7 +60,7 @@ class BaseViewController: UIViewController {
     }
 
     deinit {
-        log.classDeinit(idARC)
+        log.remove(idARC)
     }
 }
 
@@ -84,5 +86,73 @@ class Persona: ARC, Encodable {
         self.name = name
         self.animal = animal
         super.init()
+    }
+}
+
+struct Inputtt: InputProtocol {
+    var id: UUID
+    var time: Date
+    var file: String
+    var title: String
+    var function: String
+    var line: Int
+    var type: ChuckLevel
+    var colorText: String
+
+    init(
+        _ title: String,
+        _ file: String = #file,
+        _ function: String = #function,
+        _ line: Int = #line
+    ) {
+        self.id = UUID()
+        self.file = file
+        self.title = title
+        self.function = function
+        self.line = line
+        self.type = .service
+        self.colorText = UIColor.black.toHexString()
+        self.time = Date()
+    }
+
+    func output() -> any OutputProtocol {
+        Outputtt(input: self)
+    }
+
+    func getTabPreview() -> NSMutableAttributedString {
+        let colorText = UIColor(hexString: colorText)
+        return "\(type.text):"
+            .initAttributeText(color: colorText, font: .systemFont(ofSize: 16, weight: .semibold))
+    }
+
+    func getTabAll() -> NSMutableAttributedString {
+        var pares: [ParString] = []
+        pares.append(ParString(key: "File", value: file))
+        pares.append(ParString(key: "Function", value: function))
+        pares.append(ParString(key: "Line", value: String(line)))
+
+        return pares.reduce()
+    }
+}
+
+struct Outputtt: OutputProtocol {
+    var id: UUID
+    var type: ChuckLevel
+    var colorText: String
+    var title: String
+    var previewAttributed: NSMutableAttributedString
+    var detailTabs: [DetailTabs]
+
+    init(input: Inputtt) {
+        self.id = input.id
+        self.type = input.type
+        self.colorText = input.colorText
+        self.title = input.title
+        self.previewAttributed = input.getTabPreview()
+        self.detailTabs = [
+            DetailTabs(name: "ALL", attributed: input.getTabAll()),
+            DetailTabs(name: "ALL2", attributed: input.getTabAll()),
+            DetailTabs(name: "ALL3", attributed: input.getTabAll())
+        ]
     }
 }

@@ -45,6 +45,35 @@ struct InputLog: InputProtocol {
     func output() -> any OutputProtocol {
         return OutputLog(log: self)
     }
+
+    func getTabPreview() -> NSMutableAttributedString {
+        let colorText = UIColor(hexString: self.colorText)
+        return "\(self.level.text):"
+            .initAttributeText(color: colorText, font: .semibold16)
+            .printSpacer()
+            .addTextWithAttributeText(text: getTitle())
+            .printEnter().printTab().printTab().printSpacer()
+            .addTextWithAttributeText(text: self.time.toString(), color: .gray, font: .regular12)
+    }
+
+    func getTabAll() -> NSMutableAttributedString {
+        var pares: [ParString] = []
+        pares.append(ParString(key: "ID", value: self.id.uuidString))
+        pares.append(ParString(key: "Text", value: self.items.joined(separator: self.separator) + self.terminator))
+        pares.append(ParString(key: "Items", value: "[" + self.items.map { $0.visibleUltra() }.joined(separator: ", ") + "]"))
+        pares.append(ParString(key: "Separator", value: self.separator.visibleUltra()))
+        pares.append(ParString(key: "Terminator", value: self.terminator.visibleUltra()))
+        pares.append(ParString(key: "File", value: self.file))
+        pares.append(ParString(key: "Function", value: self.function))
+        pares.append(ParString(key: "Line", value: String(self.line)))
+        pares.append(ParString(key: "Time", value: self.time.toString(with: .iso8601)))
+
+        return pares.reduce()
+    }
+    
+    func getTitle() -> String {
+        return "\(self.items.joined(separator: self.separator.visible()))\(self.terminator.visibleUltra())"
+    }
 }
 
 func getColor(_ type: LogLevel) -> String {

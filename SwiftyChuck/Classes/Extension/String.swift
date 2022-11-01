@@ -25,6 +25,13 @@ extension String {
 
     func visible() -> String {
         return self
+            .replacingOccurrences(of: "\r", with: "\\r")
+            .replacingOccurrences(of: "\n", with: "\\n")
+            .replacingOccurrences(of: "\t", with: "\\t")
+    }
+
+    func visibleUltra() -> String {
+        return self
             .replacingOccurrences(of: " ", with: "(space)")
             .replacingOccurrences(of: "\r", with: "\\r")
             .replacingOccurrences(of: "\n", with: "\\n")
@@ -55,11 +62,11 @@ extension String {
         }
     }
 
-    func initAttributeText(color: UIColor? = nil, font: UIFont? = nil, isUnderline: Bool = false, backgroundColor: UIColor? = nil) -> NSMutableAttributedString {
+    public func initAttributeText(color: UIColor? = nil, font: UIFont? = nil, isUnderline: Bool = false, backgroundColor: UIColor? = nil) -> NSMutableAttributedString {
         NSMutableAttributedString(string: self).addAttributeText(color: color, font: font, isUnderline: isUnderline, backgroundColor: backgroundColor)
     }
 
-    func initAttributeIndentation(indentation: CGFloat = 20) -> NSMutableAttributedString {
+    public func initAttributeIndentation(indentation: CGFloat = 20) -> NSMutableAttributedString {
         NSMutableAttributedString(string: self).addAttributeIndentation(indentation: indentation)
     }
 }

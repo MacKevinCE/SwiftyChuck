@@ -16,6 +16,8 @@ public protocol InputProtocol: Equatable {
     var type: ChuckLevel { get }
     var colorText: String { get }
     func output() -> any OutputProtocol
+    func getTabPreview() -> NSMutableAttributedString
+    func getTabAll() -> NSMutableAttributedString
 }
 
 extension InputProtocol {

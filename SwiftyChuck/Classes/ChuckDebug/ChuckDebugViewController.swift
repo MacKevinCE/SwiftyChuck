@@ -161,7 +161,7 @@ extension ChuckDebugViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             let dato = data[indexPath.row]
-            SwiftyChuck.removeChuck(dato as? (any OutputProtocol))
+            SwiftyChuck.removeChuck(dato)
             tableView.deleteRows(at: [indexPath], with: .automatic)
         }
     }

@@ -14,7 +14,7 @@ open class ARC {
     }
 
     deinit {
-        SwiftyChuck.classDeinit(idARC)
+        SwiftyChuck.remove(idARC)
     }
 }
 
@@ -31,7 +31,7 @@ open class ARCViewController: UIViewController {
     }
 
     deinit {
-        SwiftyChuck.classDeinit(idARC)
+        SwiftyChuck.remove(idARC)
     }
 }
 
@@ -48,7 +48,7 @@ open class ARCTableViewCell: UITableViewCell {
     }
 
     deinit {
-        SwiftyChuck.classDeinit(idARC)
+        SwiftyChuck.remove(idARC)
     }
 }
 
@@ -65,7 +65,7 @@ open class ARCCollectionViewCell: UICollectionViewCell {
     }
 
     deinit {
-        SwiftyChuck.classDeinit(idARC)
+        SwiftyChuck.remove(idARC)
     }
 }
 
@@ -82,6 +82,6 @@ open class ARCNavigationController: UINavigationController {
     }
 
     deinit {
-        SwiftyChuck.classDeinit(idARC)
+        SwiftyChuck.remove(idARC)
     }
 }

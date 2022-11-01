@@ -57,9 +57,8 @@ open class SwiftyChuck {
     }
 
     static func removeChuck(_ chuck: (any OutputProtocol)?) {
-        if let index = dataChuck.firstIndex(where: { $0.id == chuck?.id }) {
-            dataChuck.remove(at: index)
-        }
+        guard let id = chuck?.id else { return }
+        remove(id)
     }
 
     /// returns the current thread name
@@ -125,12 +124,9 @@ open class SwiftyChuck {
         return custom(InputARC(id, anyObject, .inital, file, function, line))
     }
 
-    open class func classDeinit(_ id: UUID, file: String = #file, function: String = #function, line: Int = #line) {
-        guard let chuckARC = SwiftyChuck.dataChuck.filter({ $0.type == .arc }).filter({
-            guard let arc = $0 as? OutputARC else { return false }
-            return arc.id == id
-        }).first else { return }
-        SwiftyChuck.removeChuck(chuckARC)
+    open class func remove(_ id: UUID) {
+        guard let index = dataChuck.firstIndex(where: { $0.id == id }) else { return }
+        dataChuck.remove(at: index)
     }
 
     /// custom logging to manually adjust values, should just be used by other frameworks

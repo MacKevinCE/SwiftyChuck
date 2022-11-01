@@ -25,4 +25,9 @@ extension OutputProtocol {
 public struct DetailTabs: Hashable {
     let name: String
     let attributed: NSMutableAttributedString
+    
+    public init(name: String, attributed: NSMutableAttributedString) {
+        self.name = name
+        self.attributed = attributed
+    }
 }

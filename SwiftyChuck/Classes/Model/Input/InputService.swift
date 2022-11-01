@@ -62,11 +62,145 @@ struct InputService: InputProtocol {
     func output() -> any OutputProtocol {
         return OutputService(service: self)
     }
-}
 
-struct ParString: Codable, Hashable {
-    let key: String
-    let value: String
+    func getTabPreview() -> NSMutableAttributedString {
+        let colorText = UIColor(hexString: self.colorText)
+        let colorState: UIColor = (colorText == .black) ? .green : colorText
+        return "\(self.state)"
+            .initAttributeIndentation(indentation: 35)
+            .addAttributeText(color: colorState, font: .semibold16)
+            .printSpacer().printSpacer()
+            .addTextWithAttributeText(text: self.method.uppercased(), color: colorText, font: .semibold14)
+            .printSpacer().printSpacer()
+            .addTextWithAttributeText(text: self.endPoint.resumen(), color: colorText, font: .regular14)
+            .printEnter().printTab().printTab().printSpacer()
+            .addTextWithAttributeText(text: self.time.toString(), color: .gray, font: .regular12)
+    }
+
+    func getTabAll() -> NSMutableAttributedString {
+        var pares: [ParString] = []
+        pares.append(ParString(key: "ID", value: self.id.uuidString))
+        pares.append(ParString(key: "Method", value: self.method))
+        pares.append(ParString(key: "URL", value: self.url))
+        pares.append(ParString(key: "Error", value: self.error))
+        pares.append(ParString(key: "Request Headers", value: self.headersResquest.toString()))
+        pares.append(ParString(key: "Request Body", value: self.request))
+        pares.append(ParString(key: "Response Status", value: self.state))
+        pares.append(ParString(key: "Response Headers", value: self.headersResponse.toString()))
+        pares.append(ParString(key: "Response Body", value: self.response))
+        pares.append(ParString(key: "File", value: self.file))
+        pares.append(ParString(key: "Function", value: self.function))
+        pares.append(ParString(key: "Line", value: String(self.line)))
+        pares.append(ParString(key: "Time", value: self.time.toString(with: .iso8601)))
+
+        return pares.reduce()
+    }
+
+    func getTabResume() -> NSMutableAttributedString {
+        let colorText = UIColor(hexString: self.colorText)
+        let colorState = (colorText == .black) ? .green : colorText
+
+        var attributeText = empty.initAttributeText(font: .regular14)
+            .printTitleChuck("URL")
+            .printEnter()
+            .addTextWithAttributeText(text: self.state, color: colorState, font: .semibold14)
+            .printSpacer().printSpacer()
+            .addAttributeIndentation(indentation: 35)
+            .addTextWithAttributeText(text: self.method.uppercased(), color: colorText, font: .semibold14)
+            .printSpacer().printSpacer()
+            .addTextWithAttributeText(text: self.url, color: colorText, font: .regular14)
+            .printEnter()
+
+        if let err = self.error.null() {
+            attributeText = attributeText
+                .printEnter()
+                .printTitleChuck("ERROR", color: .red)
+                .printEnter()
+                .addTextWithAttributeText(text: err, color: .red, font: .regular14)
+                .printEnter()
+        }
+
+        if let typeRequest = self.typeRequest.null(),
+           let typeResponse = self.typeResponse.null()
+        {
+            attributeText = attributeText
+                .printEnter()
+                .printTitleChuck("TYPE")
+                .printEnter()
+                .printParStringForChuck(ParString(key: "TYPE REQUEST", value: typeRequest))
+                .printEnter()
+                .printParStringForChuck(ParString(key: "TYPE RESPONSE", value: typeResponse))
+                .printEnter()
+        }
+
+        if let request = self.request.null() {
+            attributeText = attributeText
+                .printEnter()
+                .printTitleChuck("REQUEST")
+                .printEnter()
+                .printJSONForChuck(request)
+                .printEnter()
+        }
+        if let response = self.response.null() {
+            attributeText = attributeText
+                .printEnter()
+                .printTitleChuck("RESPONSE")
+                .printEnter()
+                .printJSONForChuck(response)
+                .printEnter()
+        }
+        return attributeText
+    }
+
+    func getTabRequest() -> NSMutableAttributedString {
+        var attributeText = empty.initAttributeText(font: .regular14)
+
+        if let request = self.request.null() {
+            attributeText = attributeText
+                .printEnter()
+                .printTitleChuck("REQUEST BODY")
+                .printEnter()
+                .printJSONForChuck(request)
+                .printEnter()
+        }
+        if self.headersResquest.count > 0 {
+            attributeText = attributeText
+                .printEnter()
+                .printTitleChuck("REQUEST HEADER")
+                .printEnter()
+            self.headersResquest.forEach {
+                attributeText = attributeText
+                    .printParStringForChuck($0)
+                    .printEnter()
+            }
+        }
+        return attributeText
+    }
+
+    func getTabResponse() -> NSMutableAttributedString {
+        var attributeText = empty.initAttributeText(font: .regular14)
+
+        if let response = self.response.null() {
+            attributeText = attributeText
+                .printEnter()
+                .printTitleChuck("RESPONSE BODY")
+                .printEnter()
+                .printJSONForChuck(response)
+                .printEnter()
+        }
+        if self.headersResponse.count > 0 {
+            attributeText = attributeText
+                .printEnter()
+                .printTitleChuck("RESPONSE HEADER")
+                .printEnter()
+            self.headersResponse.forEach {
+                attributeText = attributeText
+                    .printParStringForChuck($0)
+                    .printEnter()
+            }
+        }
+        return attributeText
+    }
 }
 
 func getState(_ response: HTTPURLResponse?) -> String {

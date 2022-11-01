@@ -7,13 +7,23 @@
 
 import Foundation
 
+public struct ParString: Codable, Hashable {
+    let key: String
+    let value: String
+
+    public init(key: String, value: String) {
+        self.key = key
+        self.value = value
+    }
+}
+
 public enum ChuckLevel: CaseIterable {
     case custom
     case log
     case service
     case arc
 
-    var text: String {
+    public var text: String {
         switch self {
         case .custom: return "CUSTOM"
         case .log: return "LOG"
@@ -29,6 +39,16 @@ enum LogLevel: CaseIterable {
     case info
     case warning
     case error
+
+    var text: String {
+        switch self {
+        case .print: return "Print"
+        case .debug: return "Debug"
+        case .info: return "Info"
+        case .warning: return "Warning"
+        case .error: return "Error"
+        }
+    }
 }
 
 enum ARCFlow: CaseIterable {
@@ -36,8 +56,8 @@ enum ARCFlow: CaseIterable {
     case deinital
     var text: String {
         switch self {
-        case .inital: return "init:"
-        case .deinital: return "deinit:"
+        case .inital: return "Init"
+        case .deinital: return "Deinit"
         }
     }
 }
