@@ -41,6 +41,10 @@ struct InputLog: InputProtocol, InputEquatable {
         self.terminator = terminator
         self.time = Date()
     }
+
+    func output() -> OutputProtocol {
+        return OutputLog(log: self)
+    }
 }
 
 func getColor(_ type: LogLevel) -> String {

@@ -24,7 +24,6 @@
 		55EE54D46D7C0B5EE58EF1486310743C /* ChuckLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EED336E1E6502C48CCF48E93FA95D273 /* ChuckLevel.swift */; };
 		5820B7AB75B1A36F3C7B39044AE6ABF2 /* Pods-SwiftyChuck_Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 34B6A2920FA6A4CDA83F816E5D131769 /* Pods-SwiftyChuck_Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		59863D040CB0F0175DE0D76B24A875A1 /* OutputLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 861FADC15CE8CB24CF51D171F675D226 /* OutputLog.swift */; };
-		608E160C332D91C75C2D42879B331C0F /* Range.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89ACA35EF50BB770CC9980A6E33E9BAF /* Range.swift */; };
 		6417DD3F2910483500B0266D /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6417DD3E2910483500B0266D /* UIViewController.swift */; };
 		6BFBD4CEAFAE303235832795FAABD671 /* UIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8450E9A74398213261414611E56FFB8B /* UIFont.swift */; };
 		71A49292ADBDCA75D6354781E278AC33 /* Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4C7E1738DEB181FAC950639D031CA1 /* Collection.swift */; };
@@ -98,7 +97,6 @@
 		8450E9A74398213261414611E56FFB8B /* UIFont.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UIFont.swift; sourceTree = "<group>"; };
 		850F53E8E231C8A1E4E161460B1CE4BA /* InputLog.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = InputLog.swift; sourceTree = "<group>"; };
 		861FADC15CE8CB24CF51D171F675D226 /* OutputLog.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = OutputLog.swift; sourceTree = "<group>"; };
-		89ACA35EF50BB770CC9980A6E33E9BAF /* Range.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Range.swift; sourceTree = "<group>"; };
 		8AA54F0D76774552DB2B4101095B90D6 /* Pods-SwiftyChuck_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SwiftyChuck_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		8BE061D8767E2204B71A06CF1066F533 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		8DE7A4CAA099E096159CA964070CFAD5 /* OutputARC.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = OutputARC.swift; sourceTree = "<group>"; };
@@ -293,7 +291,6 @@
 				995F04E87CDDF7A16077FDCBAE581523 /* Date.swift */,
 				BDD39773870A2D13EE2140AFD2B01E90 /* NSMutableAttributedString.swift */,
 				823646D5A5A117583778365BDB7D7C79 /* NSMutableString.swift */,
-				89ACA35EF50BB770CC9980A6E33E9BAF /* Range.swift */,
 				BF5DD8F445886FFF24808C5FF7E4FD75 /* String.swift */,
 				7F33CC023994AA625CF055E4244D68C7 /* UIApplication.swift */,
 				571B0F5EA89D454FC4F14148428BFE9D /* UIColor.swift */,
@@ -530,7 +527,6 @@
 				59863D040CB0F0175DE0D76B24A875A1 /* OutputLog.swift in Sources */,
 				FA45769A3E1A46919A5E97D98E1939A0 /* OutputProtocol.swift in Sources */,
 				AA17E4A6B59A07C98E3823CF414B5D80 /* OutputService.swift in Sources */,
-				608E160C332D91C75C2D42879B331C0F /* Range.swift in Sources */,
 				DDB2F8625802351D5540F399A29E0FDF /* String.swift in Sources */,
 				E91763B554847528E9BB7229875F1F28 /* SwiftyChuck.swift in Sources */,
 				ED7FBED5320F20ECCC48B606D9849F1A /* SwiftyChuck-dummy.m in Sources */,

@@ -24,4 +24,5 @@ public protocol InputProtocol {
     var line: Int { get }
     var type: ChuckLevel { get }
     var colorText: String { get }
+    func output() -> OutputProtocol
 }

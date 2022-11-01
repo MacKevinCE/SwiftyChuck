@@ -36,4 +36,8 @@ struct InputARC: InputProtocol, InputEquatable {
         self.colorText = UIColor.black.toHexString()
         self.time = Date()
     }
+
+    func output() -> OutputProtocol {
+        return OutputARC(arc: self)
+    }
 }

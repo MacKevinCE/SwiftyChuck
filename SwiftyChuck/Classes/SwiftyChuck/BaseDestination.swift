@@ -8,7 +8,6 @@
 import Dispatch
 import Foundation
 
-
 /// destination which all others inherit from. do not directly use
 open class BaseDestination {
     /// runs in own serial background thread for better performance
@@ -29,16 +28,8 @@ open class BaseDestination {
     /// and for unit tests (nil if error)
     func send(_ chuck: InputProtocol, thread: String) -> String? {
         DispatchQueue.main.async {
-            guard SwiftyChuck.isDetecting && SwiftyChuck.isEnabled else { return }
-            if let service = chuck as? InputService {
-                SwiftyChuck.dataChuck.append(OutputService(service: service))
-            } else if let log = chuck as? InputLog {
-                SwiftyChuck.dataChuck.append(OutputLog(log: log))
-            } else if let vc = chuck as? InputARC {
-                SwiftyChuck.dataChuck.append(OutputARC(arc: vc))
-            }
+            SwiftyChuck.dataChuck.append(chuck.output())
         }
         return nil
     }
-
 }

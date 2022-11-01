@@ -58,6 +58,10 @@ struct InputService: InputProtocol, InputEquatable {
         self.error = getError(error)
         self.time = Date()
     }
+
+    func output() -> OutputProtocol {
+        return OutputService(service: self)
+    }
 }
 
 struct ParString: Codable, Hashable {

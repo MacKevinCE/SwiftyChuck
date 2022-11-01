@@ -62,7 +62,7 @@ class BaseViewController: UIViewController {
     }
 }
 
-class Animal: ARC {
+class Animal: ARC, Encodable {
     let name: String
     var amo: Persona?
     init(name: String) {
@@ -77,7 +77,7 @@ class Gato: Animal {
     }
 }
 
-class Persona: ARC {
+class Persona: ARC, Encodable {
     let name: String
     let animal: Animal
     init(name: String, animal: Animal) {

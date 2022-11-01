@@ -9,7 +9,13 @@ import Foundation
 
 extension Array where Element == ParString {
     func toString() -> String {
-        reduce(empty) { "\($0)\n(\($1.key)): \($1.value)" }
+        reduce(empty) { ($1.value != empty) ? "\($0)\n(\($1.key)): \($1.value)" : empty }
+    }
+
+    func reduce() -> NSMutableAttributedString {
+        reduce(empty.initAttributeText(font: .regular14)) {
+            ($1.value != empty) ? $0.printParStringForChuck($1).printEnter() : $0
+        }
     }
 }
 

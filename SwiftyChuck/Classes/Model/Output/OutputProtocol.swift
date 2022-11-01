@@ -22,5 +22,10 @@ public protocol OutputProtocol {
     var colorText: String { get }
     var title: String { get }
     var previewAttributed: NSMutableAttributedString { get }
-    var allAttributed: NSMutableAttributedString { get }
+    var detailTabs: [DetailTabs] { get }
+}
+
+public struct DetailTabs: Hashable {
+    let name: String
+    let attributed: NSMutableAttributedString
 }

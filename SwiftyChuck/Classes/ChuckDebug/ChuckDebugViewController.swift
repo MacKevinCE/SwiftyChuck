@@ -22,7 +22,7 @@ class ChuckDebugViewController: UIViewController {
             enableType.enumerated().forEach {
                 newValue.insertSegment(withTitle: $0.element.text, at: $0.offset, animated: false)
             }
-            newValue.selectedSegmentIndex = min(SwiftyChuck.tabControl, enableType.count - 1)
+            newValue.selectedSegmentIndex = min(SwiftyChuck.tabControl, newValue.numberOfSegments - 1)
         }
     }
 

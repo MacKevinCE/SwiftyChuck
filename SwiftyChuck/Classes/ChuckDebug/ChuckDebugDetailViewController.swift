@@ -20,7 +20,11 @@ class ChuckDebugDetailViewController: UIViewController {
     @IBOutlet private var segmentedControl: UISegmentedControl! {
         willSet {
             newValue.addTarget(self, action: #selector(changedSegmentedControl(_:)), for: .valueChanged)
-            newValue.selectedSegmentIndex = SwiftyChuck.tabControlDetail
+            newValue.removeAllSegments()
+            chuck?.detailTabs.enumerated().forEach {
+                newValue.insertSegment(withTitle: $0.element.name, at: $0.offset, animated: false)
+            }
+            newValue.selectedSegmentIndex = min(SwiftyChuck.tabControlDetail, newValue.numberOfSegments - 1)
         }
     }
 
@@ -46,7 +50,7 @@ class ChuckDebugDetailViewController: UIViewController {
         titleLabel.font = .semibold16
         titleLabel.textAlignment = .center
         heightSegmentedControlConstraint.isActive = chuck.type != .service
-        segmentedControl.isHidden = chuck.type != .service
+        segmentedControl.isHidden = chuck.detailTabs.count < 2
         titleLabel.text = chuck.title
     }
 
@@ -74,24 +78,7 @@ class ChuckDebugDetailViewController: UIViewController {
     }
 
     private func selectAttributed(_ select: Int) -> NSMutableAttributedString? {
-        if let chuckService = chuck as? OutputService {
-            switch select {
-            case 0:
-                return chuckService.resumeAttributed
-            case 1:
-                return chuckService.requestAttributed
-            case 2:
-                return chuckService.responseAttributed
-            default:
-                return chuckService.allAttributed
-            }
-        } else if let chuckLog = chuck as? OutputLog {
-            return chuckLog.allAttributed
-        } else if let chuckARC = chuck as? OutputARC {
-            return chuckARC.allAttributed
-        } else {
-            return nil
-        }
+        return chuck?.detailTabs[safe: select]?.attributed
     }
 
     private func printAttributed(_ ranges: [NSRange], _ attributed: NSMutableAttributedString?) {
