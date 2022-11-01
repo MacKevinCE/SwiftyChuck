@@ -1,6 +1,6 @@
 use_frameworks!
 
-platform :ios, '13.0'
+platform :ios, '12.0'
 
 target 'SwiftyChuck_Example' do
   pod 'SwiftyChuck', :path => '../'
