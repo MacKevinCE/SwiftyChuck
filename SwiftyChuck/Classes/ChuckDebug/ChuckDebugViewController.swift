@@ -36,7 +36,6 @@ class ChuckDebugViewController: UIViewController {
     @IBOutlet private var searchBar: UISearchBar! {
         willSet {
             newValue.delegate = self
-            newValue.searchTextField.delegate = self
             newValue.text = SwiftyChuck.searchText
         }
     }
@@ -125,12 +124,9 @@ extension ChuckDebugViewController: UISearchBarDelegate {
         SwiftyChuck.searchText = searchText
         tableView.reloadData()
     }
-}
-
-extension ChuckDebugViewController: UITextFieldDelegate {
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        return true
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
     }
 }
 

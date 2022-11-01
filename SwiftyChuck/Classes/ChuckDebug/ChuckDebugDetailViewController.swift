@@ -31,7 +31,6 @@ class ChuckDebugDetailViewController: UIViewController {
     @IBOutlet private var searchBar: UISearchBar! {
         willSet {
             newValue.delegate = self
-            newValue.searchTextField.delegate = self
             newValue.text = SwiftyChuck.searchTextDetail
         }
     }
@@ -121,11 +120,8 @@ extension ChuckDebugDetailViewController: UISearchBarDelegate {
         SwiftyChuck.searchTextDetail = searchText
         queue()
     }
-}
-
-extension ChuckDebugDetailViewController: UITextFieldDelegate {
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        return true
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
     }
 }

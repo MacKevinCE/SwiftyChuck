@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'SwiftyChuck'
-  s.version          = '1.2.1'
+  s.version          = '1.2.2'
   s.summary          = 'Chuck is in-app HTTP inspector for iOS OkHttp clients.'
   s.swift_versions   = '5'
 
@@ -28,9 +28,7 @@ Pod::Spec.new do |s|
   s.documentation_url= 'https://github.com/MacKevinCE/SwiftyChuck'
   s.social_media_url = 'https://twitter.com/MacKevinCE'
 
-  s.ios.deployment_target = '13.0'
-  s.osx.deployment_target = '13.0'
-  s.tvos.deployment_target = '13.0'
+  s.ios.deployment_target = '11.0'
 
   s.source_files = 'SwiftyChuck/Classes/**/*'
   
@@ -39,6 +37,6 @@ Pod::Spec.new do |s|
   # }
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
-  # s.frameworks = 'UIKit', 'MapKit'
+s.frameworks = 'UIKit'
   # s.dependency 'AFNetworking', '~> 2.3'
 end
