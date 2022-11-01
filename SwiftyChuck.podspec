@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'SwiftyChuck'
-  s.version          = '1.2.2'
+  s.version          = '1.2.3'
   s.summary          = 'Chuck is in-app HTTP inspector for iOS OkHttp clients.'
   s.swift_versions   = '5'
 
@@ -37,6 +37,6 @@ Pod::Spec.new do |s|
   # }
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
-s.frameworks = 'UIKit'
+  # s.frameworks = 'UIKit'
   # s.dependency 'AFNetworking', '~> 2.3'
 end
