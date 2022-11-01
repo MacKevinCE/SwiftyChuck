@@ -7,22 +7,19 @@
 
 import Foundation
 
-protocol OutputEquatable: Hashable {
+public protocol OutputProtocol: Equatable {
     var id: UUID { get }
-}
-
-extension OutputEquatable {
-    static func == (lhs: Self, rhs: Self) -> Bool {
-        lhs.id == rhs.id
-    }
-}
-
-public protocol OutputProtocol {
     var type: ChuckLevel { get }
     var colorText: String { get }
     var title: String { get }
     var previewAttributed: NSMutableAttributedString { get }
     var detailTabs: [DetailTabs] { get }
+}
+
+extension OutputProtocol {
+    static func == (lhs: Self, rhs: Self) -> Bool {
+        lhs.id == rhs.id
+    }
 }
 
 public struct DetailTabs: Hashable {

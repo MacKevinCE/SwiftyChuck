@@ -18,7 +18,7 @@ class ChuckDebugAssembly {
 }
 
 class ChuckDebugDetailAssembly {
-    static func build(chuck: OutputProtocol) -> ChuckDebugDetailViewController {
+    static func build(chuck: any OutputProtocol) -> ChuckDebugDetailViewController {
         let bundle = Bundle(for: ChuckDebugDetailViewController.self)
         let storyboard = UIStoryboard(name: "ChuckDebug", bundle: bundle)
         let view = storyboard.instantiateViewController(withIdentifier: "ChuckDebugDetailViewController") as! ChuckDebugDetailViewController

@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct InputARC: InputProtocol, InputEquatable {
+struct InputARC: InputProtocol {
     let id: UUID
     let file: String
     let function: String
@@ -37,7 +37,7 @@ struct InputARC: InputProtocol, InputEquatable {
         self.time = Date()
     }
 
-    func output() -> OutputProtocol {
+    func output() -> any OutputProtocol {
         return OutputARC(arc: self)
     }
 }

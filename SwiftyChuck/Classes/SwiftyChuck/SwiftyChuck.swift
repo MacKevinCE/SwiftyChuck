@@ -26,7 +26,7 @@ open class SwiftyChuck {
     static var searchTextDetail: String = empty
     static var tabControl: Int = .zero
     static var tabControlDetail: Int = .zero
-    static var dataChuck: [OutputProtocol] = []
+    static var dataChuck: [any OutputProtocol] = []
 
     // MARK: Setting Handling
 
@@ -56,8 +56,8 @@ open class SwiftyChuck {
         dataChuck = []
     }
 
-    static func removeChuck(_ chuck: (any OutputEquatable)?) {
-        if let index = dataChuck.firstIndex(where: { ($0 as? (any OutputEquatable))?.id == chuck?.id }) {
+    static func removeChuck(_ chuck: (any OutputProtocol)?) {
+        if let index = dataChuck.firstIndex(where: { $0.id == chuck?.id }) {
             dataChuck.remove(at: index)
         }
     }
@@ -130,16 +130,16 @@ open class SwiftyChuck {
             guard let arc = $0 as? OutputARC else { return false }
             return arc.id == id
         }).first else { return }
-        SwiftyChuck.removeChuck(chuckARC as? (any OutputEquatable))
+        SwiftyChuck.removeChuck(chuckARC)
     }
 
     /// custom logging to manually adjust values, should just be used by other frameworks
-    open class func custom(_ chuck: InputProtocol) {
+    open class func custom(_ chuck: any InputProtocol) {
         dispatch_send(chuck, thread: threadName())
     }
 
     /// internal helper which dispatches send to dedicated queue if minLevel is ok
-    class func dispatch_send(_ chuck: InputProtocol, thread: String) {
+    class func dispatch_send(_ chuck: any InputProtocol, thread: String) {
         guard let queue = destination.queue else { return }
 
         if destination.asynchronously {

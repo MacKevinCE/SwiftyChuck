@@ -68,9 +68,9 @@ class ChuckDebugViewController: UIViewController {
         }
     }()
 
-    private var data: [OutputProtocol] = []
+    private var data: [any OutputProtocol] = []
 
-    func dataFinal(type: ChuckLevel) -> [OutputProtocol] {
+    func dataFinal(type: ChuckLevel) -> [any OutputProtocol] {
         var data = SwiftyChuck.dataChuck.filter { $0.type == type }
         let countInicial = data.count
         if let textFilter = searchBar.text?.null() {
@@ -161,7 +161,7 @@ extension ChuckDebugViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             let dato = data[indexPath.row]
-            SwiftyChuck.removeChuck(dato as? (any OutputEquatable))
+            SwiftyChuck.removeChuck(dato as? (any OutputProtocol))
             tableView.deleteRows(at: [indexPath], with: .automatic)
         }
     }

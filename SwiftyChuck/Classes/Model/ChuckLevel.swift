@@ -8,12 +8,14 @@
 import Foundation
 
 public enum ChuckLevel: CaseIterable {
+    case custom
     case log
     case service
     case arc
 
     var text: String {
         switch self {
+        case .custom: return "CUSTOM"
         case .log: return "LOG"
         case .service: return "SERVICE"
         case .arc: return "ARC"

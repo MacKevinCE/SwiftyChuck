@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct OutputService: OutputProtocol, OutputEquatable {
+struct OutputService: OutputProtocol {
     let id: UUID
     let type: ChuckLevel
     let colorText: String

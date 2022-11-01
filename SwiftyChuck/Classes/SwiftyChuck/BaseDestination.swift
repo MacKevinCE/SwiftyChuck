@@ -26,7 +26,7 @@ open class BaseDestination {
     /// send / store the formatted log message to the destination
     /// returns the formatted log message for processing by inheriting method
     /// and for unit tests (nil if error)
-    func send(_ chuck: InputProtocol, thread: String) -> String? {
+    func send(_ chuck: any InputProtocol, thread: String) -> String? {
         DispatchQueue.main.async {
             SwiftyChuck.dataChuck.append(chuck.output())
         }

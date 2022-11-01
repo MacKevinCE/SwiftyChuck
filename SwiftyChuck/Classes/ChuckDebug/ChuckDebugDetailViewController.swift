@@ -36,7 +36,7 @@ class ChuckDebugDetailViewController: UIViewController {
         }
     }
 
-    var chuck: OutputProtocol?
+    var chuck: (any OutputProtocol)?
 
     override func viewDidLoad() {
         super.viewDidLoad()

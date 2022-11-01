@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct InputService: InputProtocol, InputEquatable {
+struct InputService: InputProtocol {
     let id: UUID
     let file: String
     let function: String
@@ -59,7 +59,7 @@ struct InputService: InputProtocol, InputEquatable {
         self.time = Date()
     }
 
-    func output() -> OutputProtocol {
+    func output() -> any OutputProtocol {
         return OutputService(service: self)
     }
 }
