@@ -164,7 +164,6 @@ open class SwiftyChuck {
         guard let owner = UIApplication.rootViewController else { return }
         let final = owner.presentedViewController ?? owner
         let navigation = UINavigationController(rootViewController: ChuckDebugAssembly.build())
-        navigation.isNavigationBarHidden = true
         final.present(navigation, animated: true, completion: nil)
     }
 }

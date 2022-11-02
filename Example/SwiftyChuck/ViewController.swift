@@ -13,10 +13,20 @@ class ViewController: ARCViewController {
     let animal = Animal(name: "cangrejo")
     override func viewDidLoad() {
         super.viewDidLoad()
+        log.setEnverimoment("DEBUG")
         log.addEnableType(.custom("Nuevooo"))
-        log.addEnableType([.custom("Nuevooo"), .custom("Nuevoo0o"), .service])
         log.service(nil, nil, nil)
-        log.custom(Inputtt("Entroooo"))
+        log.custom(Inputtt("Entroooo1", actions: [
+            ExecuteActions(name: "BUILD", color: .blue, execute: { _, _ in
+                print("holaaaaaa2")
+            }),
+            ExecuteActions(name: "INDEX", color: .gray, execute: { _, indexPath in
+                print("holaaaaaa", indexPath)
+            }),
+            ExecuteActions(name: "ID", color: .brown, execute: { output, indexPath in
+                print("holaaaaaa", indexPath, output?.id.uuidString ?? "--")
+            })
+        ]))
         // Do any additional setup after loading the view, typically from a nib.
     }
 
@@ -98,13 +108,15 @@ struct Inputtt: InputProtocol {
     var function: String
     var line: Int
     var type: ChuckLevel
-    var colorText: String
+    var colorText: UIColor
+    var actions: [ExecuteActions]
 
     init(
         _ title: String,
         _ file: String = #file,
         _ function: String = #function,
-        _ line: Int = #line
+        _ line: Int = #line,
+        actions: [ExecuteActions]
     ) {
         self.id = UUID()
         self.file = file
@@ -112,8 +124,9 @@ struct Inputtt: InputProtocol {
         self.function = function
         self.line = line
         self.type = .custom("Nuevooo")
-        self.colorText = UIColor.black.toHexString()
+        self.colorText = .black
         self.time = Date()
+        self.actions = actions
     }
 
     func output() -> any OutputProtocol {
@@ -121,7 +134,7 @@ struct Inputtt: InputProtocol {
     }
 
     func getTabPreview() -> NSMutableAttributedString {
-        let colorText = UIColor(hexString: colorText)
+        let colorText = colorText
         return "\(type.text):"
             .initAttributeText(color: colorText, font: .systemFont(ofSize: 16, weight: .semibold))
     }
@@ -139,11 +152,11 @@ struct Inputtt: InputProtocol {
 struct Outputtt: OutputProtocol {
     var id: UUID
     var type: ChuckLevel
-    var colorText: String
+    var colorText: UIColor
     var title: String
     var previewAttributed: NSMutableAttributedString
     var detailTabs: [DetailTabs]
-
+    var actions: [ExecuteActions]
     init(input: Inputtt) {
         self.id = input.id
         self.type = input.type
@@ -155,5 +168,6 @@ struct Outputtt: OutputProtocol {
             DetailTabs(name: "ALL2", attributed: input.getTabAll()),
             DetailTabs(name: "ALL3", attributed: input.getTabAll())
         ]
+        self.actions = input.actions
     }
 }

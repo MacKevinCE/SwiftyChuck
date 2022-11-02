@@ -9,9 +9,6 @@ import Foundation
 import UIKit
 
 class ChuckDebugDetailViewController: UIViewController {
-    @IBOutlet private var titleLabel: UILabel!
-    @IBOutlet private var backButton: UIButton!
-    @IBOutlet private var sharedButton: UIButton!
     @IBOutlet private var resultLabel: UILabel!
     @IBOutlet private var subtitleTextView: UITextView!
     @IBOutlet private var loaderView: UIView!
@@ -43,14 +40,31 @@ class ChuckDebugDetailViewController: UIViewController {
         queue()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        guard let chuck = chuck else { return }
+        navigationController?.navigationBar.titleTextAttributes = [
+            NSAttributedString.Key.foregroundColor: chuck.colorText,
+            NSAttributedString.Key.font: UIFont.semibold16
+        ]
+    }
+
     private func configView() {
         guard let chuck = chuck else { return }
-        titleLabel.textColor = UIColor(hexString: chuck.colorText)
-        titleLabel.font = .semibold16
-        titleLabel.textAlignment = .center
         heightSegmentedControlConstraint.isActive = chuck.detailTabs.count < 2
         segmentedControl.isHidden = chuck.detailTabs.count < 2
-        titleLabel.text = chuck.title
+        title = chuck.title
+        rightBarButtonItem()
+        backBarButtonItem()
+    }
+
+    private func rightBarButtonItem() {
+        let button = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(sharedButtonTapped))
+        navigationItem.rightBarButtonItem = button
+    }
+
+    private func backBarButtonItem() {
+        let button = UIBarButtonItem(title: "BACK", style: .plain, target: nil, action: nil)
+        navigationController?.navigationBar.topItem?.backBarButtonItem = button
     }
 
     private func loader(_ value: Bool) {
@@ -104,11 +118,7 @@ class ChuckDebugDetailViewController: UIViewController {
         queue()
     }
 
-    @IBAction private func backButtonTapped(_ sender: Any) {
-        navigationController?.popViewController(animated: true)
-    }
-
-    @IBAction private func sharedButtonTapped(_ sender: Any) {
+    @objc private func sharedButtonTapped() {
         let textoFinal = subtitleTextView.attributedText.string
         let activityController = UIActivityViewController(activityItems: [textoFinal], applicationActivities: nil)
         present(activityController, animated: true, completion: nil)
@@ -120,7 +130,7 @@ extension ChuckDebugDetailViewController: UISearchBarDelegate {
         SwiftyChuck.searchTextDetail = searchText
         queue()
     }
-    
+
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
     }

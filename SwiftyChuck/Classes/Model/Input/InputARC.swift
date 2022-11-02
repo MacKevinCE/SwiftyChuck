@@ -14,7 +14,7 @@ struct InputARC: InputProtocol {
     let line: Int
     let type: ChuckLevel
     let flow: ARCFlow
-    let colorText: String
+    let colorText: UIColor
     let anyObject: AnyObject
     let time: Date
 
@@ -33,24 +33,23 @@ struct InputARC: InputProtocol {
         self.function = function
         self.line = line
         self.type = .arc
-        self.colorText = UIColor.black.toHexString()
+        self.colorText = .black
         self.time = Date()
     }
 
     func output() -> any OutputProtocol {
         return OutputARC(arc: self)
     }
-    
+
     func getTabPreview() -> NSMutableAttributedString {
-        let colorText = UIColor(hexString: self.colorText)
         return "\(self.flow.text):"
-            .initAttributeText(color: colorText, font: .semibold16)
+            .initAttributeText(color: self.colorText, font: .semibold16)
             .printSpacer()
             .addTextWithAttributeText(text: self.getNameClass())
             .printEnter().printTab().printTab().printSpacer()
             .addTextWithAttributeText(text: self.time.toString(), color: .gray, font: .regular12)
     }
-    
+
     func getTabAll() -> NSMutableAttributedString {
         var pares: [ParString] = []
         pares.append(ParString(key: "ID", value: self.id.uuidString))
@@ -64,21 +63,21 @@ struct InputARC: InputProtocol {
         pares.append(ParString(key: "Function", value: self.function))
         pares.append(ParString(key: "Line", value: String(self.line)))
         pares.append(ParString(key: "Time", value: self.time.toString(with: .iso8601)))
-        
+
         return pares.reduce()
     }
-    
+
     func encodableClass() -> String {
         guard let value = (anyObject as? Encodable) else { return empty }
         let data = try? JSONEncoder().encode(value)
         return data?.prettyPrintedJSONString?.null() ?? empty
     }
-    
+
     func navigationControllerDescription() -> String {
         guard let value = (anyObject as? UIViewController) else { return empty }
         return value.navigationController?.description ?? empty
     }
-    
+
     func viewDescription() -> String {
         guard let value = (anyObject as? UIViewController) else { return empty }
         return value.view.description
@@ -92,11 +91,11 @@ struct InputARC: InputProtocol {
         let describing = self.describingClass()
         return String(describing.split(separator: ":").first ?? "").replacingOccurrences(of: "<", with: "")
     }
-    
+
     func getNameProject() -> String {
         return String(self.getNameComplete().split(separator: ".").first ?? "")
     }
-    
+
     func getNameClass() -> String {
         return String(self.getNameComplete().split(separator: ".").last ?? "")
     }

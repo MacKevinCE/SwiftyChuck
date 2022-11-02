@@ -14,13 +14,13 @@ public protocol InputProtocol: Equatable {
     var function: String { get }
     var line: Int { get }
     var type: ChuckLevel { get }
-    var colorText: String { get }
+    var colorText: UIColor { get }
     func output() -> any OutputProtocol
     func getTabPreview() -> NSMutableAttributedString
     func getTabAll() -> NSMutableAttributedString
 }
 
-extension InputProtocol {
+public extension InputProtocol {
     static func == (lhs: Self, rhs: Self) -> Bool {
         lhs.id == rhs.id
     }

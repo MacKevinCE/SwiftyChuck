@@ -14,7 +14,7 @@ struct InputLog: InputProtocol {
     let line: Int
     let type: ChuckLevel
     let level: LogLevel
-    let colorText: String
+    let colorText: UIColor
     let items: [String]
     let separator: String
     let terminator: String
@@ -47,11 +47,10 @@ struct InputLog: InputProtocol {
     }
 
     func getTabPreview() -> NSMutableAttributedString {
-        let colorText = UIColor(hexString: self.colorText)
         return "\(self.level.text):"
-            .initAttributeText(color: colorText, font: .semibold16)
+            .initAttributeText(color: self.colorText, font: .semibold16)
             .printSpacer()
-            .addTextWithAttributeText(text: getTitle())
+            .addTextWithAttributeText(text: self.getTitle())
             .printEnter().printTab().printTab().printSpacer()
             .addTextWithAttributeText(text: self.time.toString(), color: .gray, font: .regular12)
     }
@@ -70,19 +69,19 @@ struct InputLog: InputProtocol {
 
         return pares.reduce()
     }
-    
+
     func getTitle() -> String {
         return "\(self.items.joined(separator: self.separator.visible()))\(self.terminator.visibleUltra())"
     }
 }
 
-func getColor(_ type: LogLevel) -> String {
+func getColor(_ type: LogLevel) -> UIColor {
     switch type {
-    case .print: return UIColor.black.toHexString()
-    case .debug: return UIColor.green.toHexString()
-    case .info: return UIColor.blue.toHexString()
-    case .warning: return UIColor.orange.toHexString()
-    case .error: return UIColor.red.toHexString()
+    case .print: return .black
+    case .debug: return .green
+    case .info: return .blue
+    case .warning: return .orange
+    case .error: return .red
     }
 }
 

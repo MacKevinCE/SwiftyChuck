@@ -10,7 +10,7 @@ import Foundation
 struct OutputService: OutputProtocol {
     let id: UUID
     let type: ChuckLevel
-    let colorText: String
+    let colorText: UIColor
     let title: String
     let previewAttributed: NSMutableAttributedString
     let detailTabs: [DetailTabs]

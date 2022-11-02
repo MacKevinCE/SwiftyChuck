@@ -9,10 +9,7 @@ import Foundation
 import UIKit
 
 class ChuckDebugViewController: UIViewController {
-    @IBOutlet private var titleLabel: UILabel!
     @IBOutlet private var enverimomentButton: UIButton!
-    @IBOutlet private var settingButton: UIButton!
-    @IBOutlet private var deleteButton: UIButton!
     @IBOutlet private var resultLabel: UILabel!
     @IBOutlet private var heightSegmentedControlConstraint: NSLayoutConstraint!
     @IBOutlet private var segmentedControl: UISegmentedControl! {
@@ -45,12 +42,50 @@ class ChuckDebugViewController: UIViewController {
         configView()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        navigationController?.navigationBar.titleTextAttributes = [
+            NSAttributedString.Key.foregroundColor: UIColor.black,
+            NSAttributedString.Key.font: UIFont.semibold16
+        ]
+    }
+
     private func configView() {
-        titleLabel.font = .semibold16
         heightSegmentedControlConstraint.isActive = enableType.count < 2
         segmentedControl.isHidden = enableType.count < 2
         enverimomentState()
-        settingSate()
+
+        title = "Swifty Chuck"
+        leftBarButtonItem()
+        rightBarButtonItem()
+    }
+
+    private func leftBarButtonItem() {
+        let title = "Detecting: \(SwiftyChuck.isDetecting.description)"
+        let color: UIColor = SwiftyChuck.isDetecting ? .green : .red
+        let button = UIBarButtonItem(title: title, style: .plain, target: self, action: #selector(detectingButtonTapped))
+        button.setTitleTextAttributes([
+            NSAttributedString.Key.foregroundColor: color,
+            NSAttributedString.Key.font: UIFont.semibold12
+        ], for: .normal)
+        button.setTitleTextAttributes([
+            NSAttributedString.Key.foregroundColor: color,
+            NSAttributedString.Key.font: UIFont.semibold12
+        ], for: .highlighted)
+        navigationItem.leftBarButtonItem = button
+        navigationController?.navigationBar.prefersLargeTitles = false
+    }
+
+    private func rightBarButtonItem() {
+        let button = UIBarButtonItem(title: "DELETE ALL", style: .plain, target: self, action: #selector(deleteButtonTapped))
+        button.setTitleTextAttributes([
+            NSAttributedString.Key.foregroundColor: UIColor.red,
+            NSAttributedString.Key.font: UIFont.semibold12
+        ], for: .normal)
+        button.setTitleTextAttributes([
+            NSAttributedString.Key.foregroundColor: UIColor.red,
+            NSAttributedString.Key.font: UIFont.semibold12
+        ], for: .highlighted)
+        navigationItem.rightBarButtonItem = button
     }
 
     func reloadData() {
@@ -89,15 +124,7 @@ class ChuckDebugViewController: UIViewController {
         enverimomentButton.setTitle(enverimoment, for: .normal)
     }
 
-    func settingSate() {
-        let title = "Detecting: \(SwiftyChuck.isDetecting.description)"
-        settingButton.setTitle(title, for: .normal)
-        let color: UIColor = SwiftyChuck.isDetecting ? .green : .red
-        settingButton.setTitleColor(color, for: .normal)
-    }
-
-    @objc
-    func changedSegmentedControl(_ sender: UISegmentedControl) {
+    @objc func changedSegmentedControl(_ sender: UISegmentedControl) {
         SwiftyChuck.tabControl = sender.selectedSegmentIndex
         tableView.reloadData()
     }
@@ -106,12 +133,12 @@ class ChuckDebugViewController: UIViewController {
         // falta
     }
 
-    @IBAction private func settingButtonTapped(_ sender: UIButton) {
+    @objc private func detectingButtonTapped() {
         SwiftyChuck.isDetecting.toggle()
-        settingSate()
+        leftBarButtonItem()
     }
 
-    @IBAction private func deleteButtonTapped(_ sender: UIButton) {
+    @objc private func deleteButtonTapped() {
         SwiftyChuck.resetChuck()
         searchBar.text = empty
         searchBar.resignFirstResponder()
@@ -124,7 +151,7 @@ extension ChuckDebugViewController: UISearchBarDelegate {
         SwiftyChuck.searchText = searchText
         tableView.reloadData()
     }
-    
+
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
     }
@@ -141,7 +168,7 @@ extension ChuckDebugViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: .default, reuseIdentifier: "ChuckDebugCell")
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ChuckDebugCell", for: indexPath)
         cell.textLabel?.numberOfLines = 4
         cell.selectionStyle = .blue
         cell.textLabel?.font = .regular14
@@ -154,12 +181,27 @@ extension ChuckDebugViewController: UITableViewDataSource {
         true
     }
 
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            let dato = data[indexPath.row]
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        var rowActions: [UITableViewRowAction] = []
+
+        let dato = data[indexPath.row]
+
+        dato.actions.forEach { action in
+            let executeAction = UITableViewRowAction(style: .normal, title: action.name) { [weak self] _, indexPath in
+                let dato = self?.data[indexPath.row]
+                action.execute(dato, indexPath)
+            }
+            executeAction.backgroundColor = action.color
+            rowActions.append(executeAction)
+        }
+
+        let deleteAction = UITableViewRowAction(style: .destructive, title: "Delete") { _, indexPath in
             SwiftyChuck.removeChuck(dato)
             tableView.deleteRows(at: [indexPath], with: .automatic)
         }
+        rowActions.append(deleteAction)
+
+        return rowActions
     }
 }
 

@@ -13,7 +13,7 @@ struct InputService: InputProtocol {
     let function: String
     let line: Int
     let type: ChuckLevel
-    let colorText: String
+    let colorText: UIColor
     let state: String
     let method: String
     let url: String
@@ -64,7 +64,7 @@ struct InputService: InputProtocol {
     }
 
     func getTabPreview() -> NSMutableAttributedString {
-        let colorText = UIColor(hexString: self.colorText)
+        let colorText = self.colorText
         let colorState: UIColor = (colorText == .black) ? .green : colorText
         return "\(self.state)"
             .initAttributeIndentation(indentation: 35)
@@ -97,8 +97,7 @@ struct InputService: InputProtocol {
     }
 
     func getTabResume() -> NSMutableAttributedString {
-        let colorText = UIColor(hexString: self.colorText)
-        let colorState = (colorText == .black) ? .green : colorText
+        let colorState = (colorText == .black) ? .green : self.colorText
 
         var attributeText = empty.initAttributeText(font: .regular14)
             .printTitleChuck("URL")
@@ -106,9 +105,9 @@ struct InputService: InputProtocol {
             .addTextWithAttributeText(text: self.state, color: colorState, font: .semibold14)
             .printSpacer().printSpacer()
             .addAttributeIndentation(indentation: 35)
-            .addTextWithAttributeText(text: self.method.uppercased(), color: colorText, font: .semibold14)
+            .addTextWithAttributeText(text: self.method.uppercased(), color: self.colorText, font: .semibold14)
             .printSpacer().printSpacer()
-            .addTextWithAttributeText(text: self.url, color: colorText, font: .regular14)
+            .addTextWithAttributeText(text: self.url, color: self.colorText, font: .regular14)
             .printEnter()
 
         if let err = self.error.null() {
@@ -207,17 +206,17 @@ func getState(_ response: HTTPURLResponse?) -> String {
     response?.statusCode.description ?? "RIP"
 }
 
-func getColor(_ response: HTTPURLResponse?) -> String {
+func getColor(_ response: HTTPURLResponse?) -> UIColor {
     if let status = response?.statusCode {
         switch status {
-        case 200: return UIColor.black.toHexString()
-        case 201 ... 299: return UIColor.green.toHexString()
-        case 300 ... 399: return UIColor.blue.toHexString()
-        case 400 ... 499: return UIColor.orange.toHexString()
-        default: return UIColor.red.toHexString()
+        case 200: return .black
+        case 201 ... 299: return .green
+        case 300 ... 399: return .blue
+        case 400 ... 499: return .orange
+        default: return .red
         }
     } else {
-        return UIColor.red.toHexString()
+        return .red
     }
 }
 
