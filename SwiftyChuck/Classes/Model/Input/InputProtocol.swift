@@ -17,7 +17,6 @@ public protocol InputProtocol: Equatable {
     var colorText: UIColor { get }
     func output() -> any OutputProtocol
     func getTabPreview() -> NSMutableAttributedString
-    func getTabAll() -> NSMutableAttributedString
 }
 
 public extension InputProtocol {

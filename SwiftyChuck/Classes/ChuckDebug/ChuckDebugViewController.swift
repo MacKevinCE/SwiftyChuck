@@ -168,11 +168,11 @@ extension ChuckDebugViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let dato = data[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "ChuckDebugCell", for: indexPath)
         cell.textLabel?.numberOfLines = 4
-        cell.selectionStyle = .blue
         cell.textLabel?.font = .regular14
-        let dato = data[indexPath.row]
+        cell.selectionStyle = (dato.detailTabs.count != .zero) ? .default : .none
         cell.textLabel?.attributedText = dato.previewAttributed
         return cell
     }
@@ -195,11 +195,13 @@ extension ChuckDebugViewController: UITableViewDataSource {
             rowActions.append(executeAction)
         }
 
-        let deleteAction = UITableViewRowAction(style: .destructive, title: "Delete") { _, indexPath in
-            SwiftyChuck.removeChuck(dato)
-            tableView.deleteRows(at: [indexPath], with: .automatic)
+        if dato.showDeleteAction {
+            let deleteAction = UITableViewRowAction(style: .destructive, title: "Delete") { _, indexPath in
+                SwiftyChuck.removeChuck(dato)
+                tableView.deleteRows(at: [indexPath], with: .automatic)
+            }
+            rowActions.append(deleteAction)
         }
-        rowActions.append(deleteAction)
 
         return rowActions
     }
@@ -209,7 +211,9 @@ extension ChuckDebugViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         searchBar.resignFirstResponder()
         let dato = data[indexPath.row]
-        let viewController = ChuckDebugDetailAssembly.build(chuck: dato)
-        navigationController?.pushViewController(viewController, animated: true)
+        if dato.detailTabs.count != .zero {
+            let viewController = ChuckDebugDetailAssembly.build(chuck: dato)
+            navigationController?.pushViewController(viewController, animated: true)
+        }
     }
 }

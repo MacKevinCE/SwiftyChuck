@@ -138,15 +138,6 @@ struct Inputtt: InputProtocol {
         return "\(type.text):"
             .initAttributeText(color: colorText, font: .systemFont(ofSize: 16, weight: .semibold))
     }
-
-    func getTabAll() -> NSMutableAttributedString {
-        var pares: [ParString] = []
-        pares.append(ParString(key: "File", value: file))
-        pares.append(ParString(key: "Function", value: function))
-        pares.append(ParString(key: "Line", value: String(line)))
-
-        return pares.reduce()
-    }
 }
 
 struct Outputtt: OutputProtocol {
@@ -155,19 +146,15 @@ struct Outputtt: OutputProtocol {
     var colorText: UIColor
     var title: String
     var previewAttributed: NSMutableAttributedString
-    var detailTabs: [DetailTabs]
     var actions: [ExecuteActions]
+    var showDeleteAction: Bool
     init(input: Inputtt) {
         self.id = input.id
         self.type = input.type
         self.colorText = input.colorText
         self.title = input.title
         self.previewAttributed = input.getTabPreview()
-        self.detailTabs = [
-            DetailTabs(name: "ALL", attributed: input.getTabAll()),
-            DetailTabs(name: "ALL2", attributed: input.getTabAll()),
-            DetailTabs(name: "ALL3", attributed: input.getTabAll())
-        ]
         self.actions = input.actions
+        self.showDeleteAction = false
     }
 }

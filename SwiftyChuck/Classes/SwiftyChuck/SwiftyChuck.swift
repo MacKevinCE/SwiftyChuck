@@ -160,10 +160,13 @@ open class SwiftyChuck {
         }
     }
 
+    open class func navigationController() -> UINavigationController {
+        UINavigationController(rootViewController: ChuckDebugAssembly.build())
+    }
+
     static func openViewChuckDebug() {
         guard let owner = UIApplication.rootViewController else { return }
         let final = owner.presentedViewController ?? owner
-        let navigation = UINavigationController(rootViewController: ChuckDebugAssembly.build())
-        final.present(navigation, animated: true, completion: nil)
+        final.present(navigationController(), animated: true, completion: nil)
     }
 }

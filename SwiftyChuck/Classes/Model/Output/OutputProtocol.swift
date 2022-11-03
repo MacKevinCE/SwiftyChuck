@@ -15,16 +15,25 @@ public protocol OutputProtocol: Equatable {
     var previewAttributed: NSMutableAttributedString { get }
     var detailTabs: [DetailTabs] { get }
     var actions: [ExecuteActions] { get set }
+    var showDeleteAction: Bool { get }
 }
 
 public extension OutputProtocol {
     static func == (lhs: Self, rhs: Self) -> Bool {
         lhs.id == rhs.id
     }
+    
+    var detailTabs: [DetailTabs] {
+        return []
+    }
 
     var actions: [ExecuteActions] {
         get { return [] }
         set {}
+    }
+
+    var showDeleteAction: Bool {
+        true
     }
 }
 
