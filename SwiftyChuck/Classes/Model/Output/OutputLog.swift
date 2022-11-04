@@ -12,17 +12,17 @@ struct OutputLog: OutputProtocol {
     let type: ChuckLevel
     let colorText: UIColor
     let title: String
-    let previewAttributed: NSMutableAttributedString
+    let preview: PreviewInfo
     let detailTabs: [DetailTabs]
 
-    init(log: InputLog) {
-        self.id = log.id
-        self.type = log.type
-        self.colorText = log.colorText
-        self.title = log.getTitle()
-        self.previewAttributed = log.getTabPreview()
+    init(_ input: InputLog) {
+        self.id = input.id
+        self.type = input.type
+        self.colorText = input.colorText
+        self.title = input.getTitle()
+        self.preview = .attributed(input.getTabPreview())
         self.detailTabs = [
-            DetailTabs(name: "ALL", attributed: log.getTabAll())
+            DetailTabs(name: "ALL", attributed: input.getTabAll())
         ]
     }
 }

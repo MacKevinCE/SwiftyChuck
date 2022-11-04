@@ -8,24 +8,24 @@
 import Foundation
 
 struct OutputService: OutputProtocol {
-    let id: UUID
+    var id: UUID
     let type: ChuckLevel
     let colorText: UIColor
     let title: String
-    let previewAttributed: NSMutableAttributedString
+    let preview: PreviewInfo
     let detailTabs: [DetailTabs]
     
-    init(service: InputService) {
-        self.id = service.id
-        self.type = service.type
-        self.colorText = service.colorText
-        self.title = service.endPoint.resumen()
-        self.previewAttributed = service.getTabPreview()
+    init(_ input: InputService) {
+        self.id = input.id
+        self.type = input.type
+        self.colorText = input.colorText
+        self.title = input.endPoint.resumen()
+        self.preview = .attributed(input.getTabPreview())
         self.detailTabs = [
-            DetailTabs(name: "RESUME", attributed: service.getTabResume()),
-            DetailTabs(name: "REQUEST", attributed: service.getTabRequest()),
-            DetailTabs(name: "RESPONSE", attributed: service.getTabResponse()),
-            DetailTabs(name: "All", attributed: service.getTabAll())
+            DetailTabs(name: "RESUME", attributed: input.getTabResume()),
+            DetailTabs(name: "REQUEST", attributed: input.getTabRequest()),
+            DetailTabs(name: "RESPONSE", attributed: input.getTabResponse()),
+            DetailTabs(name: "All", attributed: input.getTabAll())
         ]
     }
 }

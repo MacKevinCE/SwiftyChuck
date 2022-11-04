@@ -58,8 +58,13 @@ class ChuckDebugDetailViewController: UIViewController {
     }
 
     private func rightBarButtonItem() {
-        let button = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(sharedButtonTapped))
-        navigationItem.rightBarButtonItem = button
+        guard let chuck = chuck else { return }
+        var rightBarButtonItems: [UIBarButtonItem] = chuck.rightBarButtonItems(chuck)
+        if chuck.showSharedButton {
+            let button = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(sharedButtonTapped))
+            rightBarButtonItems.append(button)
+        }
+        navigationItem.rightBarButtonItems = rightBarButtonItems
     }
 
     private func backBarButtonItem() {

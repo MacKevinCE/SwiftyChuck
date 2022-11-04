@@ -32,10 +32,8 @@ extension String {
 
     func visibleUltra() -> String {
         return self
+            .visible()
             .replacingOccurrences(of: " ", with: "(space)")
-            .replacingOccurrences(of: "\r", with: "\\r")
-            .replacingOccurrences(of: "\n", with: "\\n")
-            .replacingOccurrences(of: "\t", with: "\\t")
     }
 
     func ranges<S: StringProtocol>(of string: S, options: String.CompareOptions = []) -> [NSRange] {

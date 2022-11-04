@@ -60,32 +60,45 @@ class ChuckDebugViewController: UIViewController {
     }
 
     private func leftBarButtonItem() {
-        let title = "Detecting: \(SwiftyChuck.isDetecting.description)"
-        let color: UIColor = SwiftyChuck.isDetecting ? .green : .red
-        let button = UIBarButtonItem(title: title, style: .plain, target: self, action: #selector(detectingButtonTapped))
-        button.setTitleTextAttributes([
-            NSAttributedString.Key.foregroundColor: color,
-            NSAttributedString.Key.font: UIFont.semibold12
-        ], for: .normal)
-        button.setTitleTextAttributes([
-            NSAttributedString.Key.foregroundColor: color,
-            NSAttributedString.Key.font: UIFont.semibold12
-        ], for: .highlighted)
-        navigationItem.leftBarButtonItem = button
-        navigationController?.navigationBar.prefersLargeTitles = false
+        var leftBarButtonItems: [UIBarButtonItem] = SwiftyChuck.leftBarButtonItems
+
+        if SwiftyChuck.showDetectingButton {
+            let title = "Detecting: \(SwiftyChuck.isDetecting.description)"
+            let color: UIColor = SwiftyChuck.isDetecting ? .green : .red
+            let button = UIBarButtonItem(title: title, style: .plain, target: self, action: #selector(detectingButtonTapped))
+            button.setTitleTextAttributes([
+                NSAttributedString.Key.foregroundColor: color,
+                NSAttributedString.Key.font: UIFont.semibold12
+            ], for: .normal)
+            button.setTitleTextAttributes([
+                NSAttributedString.Key.foregroundColor: color,
+                NSAttributedString.Key.font: UIFont.semibold12
+            ], for: .highlighted)
+
+            leftBarButtonItems.append(button)
+        }
+
+        navigationItem.leftBarButtonItems = leftBarButtonItems
     }
 
     private func rightBarButtonItem() {
-        let button = UIBarButtonItem(title: "DELETE ALL", style: .plain, target: self, action: #selector(deleteButtonTapped))
-        button.setTitleTextAttributes([
-            NSAttributedString.Key.foregroundColor: UIColor.red,
-            NSAttributedString.Key.font: UIFont.semibold12
-        ], for: .normal)
-        button.setTitleTextAttributes([
-            NSAttributedString.Key.foregroundColor: UIColor.red,
-            NSAttributedString.Key.font: UIFont.semibold12
-        ], for: .highlighted)
-        navigationItem.rightBarButtonItem = button
+        var rightBarButtonItems: [UIBarButtonItem] = SwiftyChuck.rightBarButtonItems
+
+        if SwiftyChuck.showDeleteAllButton {
+            let button = UIBarButtonItem(title: "DELETE ALL", style: .plain, target: self, action: #selector(deleteButtonTapped))
+            button.setTitleTextAttributes([
+                NSAttributedString.Key.foregroundColor: UIColor.red,
+                NSAttributedString.Key.font: UIFont.semibold12
+            ], for: .normal)
+            button.setTitleTextAttributes([
+                NSAttributedString.Key.foregroundColor: UIColor.red,
+                NSAttributedString.Key.font: UIFont.semibold12
+            ], for: .highlighted)
+
+            rightBarButtonItems.append(button)
+        }
+
+        navigationItem.rightBarButtonItems = rightBarButtonItems
     }
 
     func reloadData() {
@@ -104,12 +117,12 @@ class ChuckDebugViewController: UIViewController {
 
     private var data: [any OutputProtocol] = []
 
-    func dataFinal(type: ChuckLevel) -> [any OutputProtocol] {
+    private func dataFinal(type: ChuckLevel) -> [any OutputProtocol] {
         var data = SwiftyChuck.dataChuck.filter { $0.type == type }
         let countInicial = data.count
         if let textFilter = searchBar.text?.null() {
             data = data.filter {
-                $0.previewAttributed.string.lowercased().unaccent().contains(textFilter.lowercased().unaccent())
+                $0.preview.getSearchText.lowercased().unaccent().contains(textFilter.lowercased().unaccent())
             }
             resultLabel.text = "\(data.count) of \(countInicial)"
         } else {
@@ -118,13 +131,13 @@ class ChuckDebugViewController: UIViewController {
         return data.reversed()
     }
 
-    func enverimomentState() {
+    private func enverimomentState() {
         enverimomentButton.isEnabled = false
-        let enverimoment = SwiftyChuck.enverimoment.uppercased()
+        let enverimoment = SwiftyChuck.enverimoment
         enverimomentButton.setTitle(enverimoment, for: .normal)
     }
 
-    @objc func changedSegmentedControl(_ sender: UISegmentedControl) {
+    @objc private func changedSegmentedControl(_ sender: UISegmentedControl) {
         SwiftyChuck.tabControl = sender.selectedSegmentIndex
         tableView.reloadData()
     }
@@ -169,12 +182,20 @@ extension ChuckDebugViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let dato = data[indexPath.row]
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ChuckDebugCell", for: indexPath)
-        cell.textLabel?.numberOfLines = 4
-        cell.textLabel?.font = .regular14
-        cell.selectionStyle = (dato.detailTabs.count != .zero) ? .default : .none
-        cell.textLabel?.attributedText = dato.previewAttributed
-        return cell
+        switch dato.preview {
+        case .attributed(let attributedString):
+            let cell = tableView.dequeueReusableCell(withIdentifier: "ChuckDebugCell", for: indexPath)
+            cell.textLabel?.numberOfLines = 4
+            cell.textLabel?.font = .regular14
+            cell.selectionStyle = (dato.detailTabs.count != .zero) ? .default : .none
+            cell.textLabel?.attributedText = attributedString
+            return cell
+
+        case .cell(let typeCell, _):
+            let cell = tableView.dequeueReusableCell(with: typeCell, for: indexPath)
+            cell.seputView(output: dato)
+            return cell
+        }
     }
 
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {

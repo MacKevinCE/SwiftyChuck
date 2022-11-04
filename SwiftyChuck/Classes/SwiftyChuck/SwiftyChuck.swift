@@ -16,19 +16,27 @@
 import Foundation
 
 open class SwiftyChuck {
-    static let destination = BaseDestination()
+    public private(set) static var destination = BaseDestination()
     public private(set) static var isEnabled: Bool = false
-    public private(set) static var baseURL: String = empty
-    public private(set) static var enverimoment: String = empty
-    private(set) static var enableType: [ChuckLevel] = ChuckLevel.allCases
+    static var baseURL: String = empty
+    static var enverimoment: String = empty
+    static var enableType: [ChuckLevel] = ChuckLevel.allCases
+    static var showDetectingButton: Bool = true
+    static var showDeleteAllButton: Bool = true
     static var isDetecting: Bool = true
     static var searchText: String = empty
     static var searchTextDetail: String = empty
     static var tabControl: Int = .zero
     static var tabControlDetail: Int = .zero
     static var dataChuck: [any OutputProtocol] = []
+    static var leftBarButtonItems: [UIBarButtonItem] = []
+    static var rightBarButtonItems: [UIBarButtonItem] = []
 
     // MARK: Setting Handling
+
+    open class func isEnabled(_ isEnabled: Bool) {
+        self.isEnabled = isEnabled
+    }
 
     open class func setBaseURL(_ baseURL: String) {
         self.baseURL = baseURL
@@ -38,8 +46,36 @@ open class SwiftyChuck {
         self.enverimoment = enverimoment
     }
 
-    open class func isEnabled(_ isEnabled: Bool) {
-        self.isEnabled = isEnabled
+    open class func showDetectingButton(_ show: Bool) {
+        showDetectingButton = show
+    }
+
+    open class func showDeleteAllButton(_ show: Bool) {
+        showDeleteAllButton = show
+    }
+
+    open class func leftBarButtonItems(_ barButtonItems: [UIBarButtonItem]) {
+        leftBarButtonItems = barButtonItems
+    }
+
+    open class func rightBarButtonItems(_ barButtonItems: [UIBarButtonItem]) {
+        rightBarButtonItems = barButtonItems
+    }
+
+    open class func addLeftBarButtonItems(_ barButtonItem: UIBarButtonItem) {
+        leftBarButtonItems.append(barButtonItem)
+    }
+
+    open class func addLeftBarButtonItems(_ barButtonItems: [UIBarButtonItem]) {
+        leftBarButtonItems.append(contentsOf: barButtonItems)
+    }
+
+    open class func addRightBarButtonItems(_ barButtonItem: UIBarButtonItem) {
+        rightBarButtonItems.append(barButtonItem)
+    }
+
+    open class func addRightBarButtonItems(_ barButtonItems: [UIBarButtonItem]) {
+        rightBarButtonItems.append(contentsOf: barButtonItems)
     }
 
     open class func setEnableType(_ enableType: [ChuckLevel]) {
@@ -52,9 +88,9 @@ open class SwiftyChuck {
         self.enableType.uniqued()
     }
 
-    open class func addEnableType(_ enableType: [ChuckLevel]) {
-        self.enableType.append(contentsOf: enableType)
-        self.enableType.uniqued()
+    open class func addEnableType(_ enableTypes: [ChuckLevel]) {
+        enableType.append(contentsOf: enableTypes)
+        enableType.uniqued()
     }
 
     // MARK: Method Handling
@@ -147,6 +183,7 @@ open class SwiftyChuck {
 
     /// internal helper which dispatches send to dedicated queue if minLevel is ok
     class func dispatch_send(_ chuck: any InputProtocol, thread: String) {
+        guard isDetecting, isEnabled else { return }
         guard let queue = destination.queue else { return }
 
         if destination.asynchronously {

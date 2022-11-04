@@ -8,21 +8,30 @@
 import Foundation
 
 public protocol OutputProtocol: Equatable {
+    associatedtype Input : InputProtocol
+
     var id: UUID { get }
     var type: ChuckLevel { get }
     var colorText: UIColor { get }
     var title: String { get }
-    var previewAttributed: NSMutableAttributedString { get }
+    var preview: PreviewInfo { get }
     var detailTabs: [DetailTabs] { get }
     var actions: [ExecuteActions] { get set }
     var showDeleteAction: Bool { get }
+    var showSharedButton: Bool { get }
+    func rightBarButtonItems(_ output: any OutputProtocol) -> [UIBarButtonItem]
+    init(_ input: Input)
 }
 
 public extension OutputProtocol {
     static func == (lhs: Self, rhs: Self) -> Bool {
         lhs.id == rhs.id
     }
-    
+
+    var colorText: UIColor {
+        .black
+    }
+
     var detailTabs: [DetailTabs] {
         return []
     }
@@ -34,6 +43,14 @@ public extension OutputProtocol {
 
     var showDeleteAction: Bool {
         true
+    }
+
+    var showSharedButton: Bool {
+        true
+    }
+
+    func rightBarButtonItems(_ output: any OutputProtocol) -> [UIBarButtonItem] {
+        return []
     }
 }
 
@@ -61,4 +78,22 @@ public struct ExecuteActions: Equatable {
         self.color = color
         self.execute = execute
     }
+}
+
+public enum PreviewInfo {
+    case attributed(NSMutableAttributedString)
+    case cell(PreviewTableViewCell.Type, String)
+
+    var getSearchText: String {
+        switch self {
+            case .attributed(let attributedString):
+                return attributedString.string
+            case .cell(_, let searchText):
+                return searchText
+        }
+    }
+}
+
+public protocol PreviewTableViewCell: UITableViewCell {
+    func seputView(output: any OutputProtocol)
 }

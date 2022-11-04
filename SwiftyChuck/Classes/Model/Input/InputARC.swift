@@ -37,8 +37,8 @@ struct InputARC: InputProtocol {
         self.time = Date()
     }
 
-    func output() -> any OutputProtocol {
-        return OutputARC(arc: self)
+    func output() -> OutputARC {
+        return OutputARC(self)
     }
 
     func getTabPreview() -> NSMutableAttributedString {
@@ -63,7 +63,6 @@ struct InputARC: InputProtocol {
         pares.append(ParString(key: "Function", value: self.function))
         pares.append(ParString(key: "Line", value: String(self.line)))
         pares.append(ParString(key: "Time", value: self.time.toString(with: .iso8601)))
-
         return pares.reduce()
     }
 

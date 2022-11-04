@@ -13,6 +13,8 @@
 		607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
 		607FACEC1AFB9204008FA782 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* Tests.swift */; };
+		64FE34592913AB7800BA6407 /* NuevoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64FE34572913AB7800BA6407 /* NuevoTableViewCell.swift */; };
+		64FE345A2913AB7800BA6407 /* NuevoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 64FE34582913AB7800BA6407 /* NuevoTableViewCell.xib */; };
 		D323FA54AA27917BE75B8504 /* Pods_SwiftyChuck_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7CBF8360C8A14061F11ACC4 /* Pods_SwiftyChuck_Tests.framework */; };
 		F2CB7423622BD8F9570CFE4D /* Pods_SwiftyChuck_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C5A456CB1C189B9C5EF8083 /* Pods_SwiftyChuck_Example.framework */; };
 /* End PBXBuildFile section */
@@ -40,6 +42,8 @@
 		607FACE51AFB9204008FA782 /* SwiftyChuck_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftyChuck_Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACEA1AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACEB1AFB9204008FA782 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
+		64FE34572913AB7800BA6407 /* NuevoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NuevoTableViewCell.swift; sourceTree = "<group>"; };
+		64FE34582913AB7800BA6407 /* NuevoTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NuevoTableViewCell.xib; sourceTree = "<group>"; };
 		6D32BAA6D8D11B3438991309 /* Pods-SwiftyChuck_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftyChuck_Example.debug.xcconfig"; path = "Target Support Files/Pods-SwiftyChuck_Example/Pods-SwiftyChuck_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		715D99EA9DB1876AEA098CAD /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		A4F1BF3DDFD44CD54AAABBB3 /* Pods-SwiftyChuck_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftyChuck_Example.release.xcconfig"; path = "Target Support Files/Pods-SwiftyChuck_Example/Pods-SwiftyChuck_Example.release.xcconfig"; sourceTree = "<group>"; };
@@ -93,6 +97,7 @@
 		607FACD21AFB9204008FA782 /* Example for SwiftyChuck */ = {
 			isa = PBXGroup;
 			children = (
+				64FE34562913AB5B00BA6407 /* cell */,
 				607FACD51AFB9204008FA782 /* AppDelegate.swift */,
 				607FACD71AFB9204008FA782 /* ViewController.swift */,
 				607FACD91AFB9204008FA782 /* Main.storyboard */,
@@ -137,6 +142,15 @@
 				498E8A7693A2EFFEFFAF3F19 /* LICENSE */,
 			);
 			name = "Podspec Metadata";
+			sourceTree = "<group>";
+		};
+		64FE34562913AB5B00BA6407 /* cell */ = {
+			isa = PBXGroup;
+			children = (
+				64FE34572913AB7800BA6407 /* NuevoTableViewCell.swift */,
+				64FE34582913AB7800BA6407 /* NuevoTableViewCell.xib */,
+			);
+			name = cell;
 			sourceTree = "<group>";
 		};
 		A9E1B49E7E07A5EFC5AC68D2 /* Frameworks */ = {
@@ -249,6 +263,7 @@
 				607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */,
 				607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */,
 				607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */,
+				64FE345A2913AB7800BA6407 /* NuevoTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -331,6 +346,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				64FE34592913AB7800BA6407 /* NuevoTableViewCell.swift in Sources */,
 				607FACD81AFB9204008FA782 /* ViewController.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
 			);

@@ -10,19 +10,19 @@ import Foundation
 struct OutputARC: OutputProtocol {
     let id: UUID
     let type: ChuckLevel
-    var colorText: UIColor
-    var title: String
-    var previewAttributed: NSMutableAttributedString
+    let colorText: UIColor
+    let title: String
+    let preview: PreviewInfo
     let detailTabs: [DetailTabs]
     
-    init(arc: InputARC) {
-        self.id = arc.id
-        self.type = arc.type
-        self.colorText = arc.colorText
-        self.title = arc.getNameClass()
-        self.previewAttributed = arc.getTabPreview()
+    init(_ input: InputARC) {
+        self.id = input.id
+        self.type = input.type
+        self.colorText = input.colorText
+        self.title = input.getNameClass()
+        self.preview = .attributed(input.getTabPreview())
         self.detailTabs = [
-            DetailTabs(name: "ALL", attributed: arc.getTabAll())
+            DetailTabs(name: "ALL", attributed: input.getTabAll())
         ]
     }
 }

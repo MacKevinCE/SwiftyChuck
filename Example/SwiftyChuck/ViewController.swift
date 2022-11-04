@@ -102,7 +102,6 @@ class Persona: ARC, Encodable {
 
 struct Inputtt: InputProtocol {
     var id: UUID
-    var time: Date
     var file: String
     var title: String
     var function: String
@@ -125,18 +124,11 @@ struct Inputtt: InputProtocol {
         self.line = line
         self.type = .custom("Nuevooo")
         self.colorText = .black
-        self.time = Date()
         self.actions = actions
     }
 
-    func output() -> any OutputProtocol {
-        Outputtt(input: self)
-    }
-
-    func getTabPreview() -> NSMutableAttributedString {
-        let colorText = colorText
-        return "\(type.text):"
-            .initAttributeText(color: colorText, font: .systemFont(ofSize: 16, weight: .semibold))
+    func output() -> Outputtt {
+        Outputtt(self)
     }
 }
 
@@ -145,15 +137,19 @@ struct Outputtt: OutputProtocol {
     var type: ChuckLevel
     var colorText: UIColor
     var title: String
-    var previewAttributed: NSMutableAttributedString
+    var preview: PreviewInfo
     var actions: [ExecuteActions]
     var showDeleteAction: Bool
-    init(input: Inputtt) {
+    func rightBarButtonItem(_ output: any OutputProtocol) -> [UIBarButtonItem] {
+        return []
+    }
+
+    init(_ input: Inputtt) {
         self.id = input.id
         self.type = input.type
         self.colorText = input.colorText
         self.title = input.title
-        self.previewAttributed = input.getTabPreview()
+        self.preview = .cell(NuevoTableViewCell.self, type.text)
         self.actions = input.actions
         self.showDeleteAction = false
     }

@@ -8,7 +8,6 @@
 import Foundation
 
 struct InputLog: InputProtocol {
-    let id: UUID
     let file: String
     let function: String
     let line: Int
@@ -29,7 +28,6 @@ struct InputLog: InputProtocol {
         _ function: String,
         _ line: Int
     ) {
-        self.id = UUID()
         self.file = file
         self.function = function
         self.line = line
@@ -42,8 +40,8 @@ struct InputLog: InputProtocol {
         self.time = Date()
     }
 
-    func output() -> any OutputProtocol {
-        return OutputLog(log: self)
+    func output() -> OutputLog {
+        return OutputLog(self)
     }
 
     func getTabPreview() -> NSMutableAttributedString {

@@ -8,7 +8,6 @@
 import Foundation
 
 struct InputService: InputProtocol {
-    let id: UUID
     let file: String
     let function: String
     let line: Int
@@ -39,7 +38,6 @@ struct InputService: InputProtocol {
         _ line: Int
     ) {
         let response = urlResponse as? HTTPURLResponse
-        self.id = UUID()
         self.file = file
         self.function = function
         self.line = line
@@ -59,8 +57,8 @@ struct InputService: InputProtocol {
         self.time = Date()
     }
 
-    func output() -> any OutputProtocol {
-        return OutputService(service: self)
+    func output() -> OutputService {
+        return OutputService(self)
     }
 
     func getTabPreview() -> NSMutableAttributedString {
