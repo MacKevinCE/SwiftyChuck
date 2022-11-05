@@ -19,6 +19,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         log.isEnabled(true)
+        log.setEnverimoment("DEBUG")
+        log.setEnableType([.log,.service,.arc])
+        log.addEnableType(.custom("Nuevooo"))
         // Override point for customization after application launch.
         return true
     }

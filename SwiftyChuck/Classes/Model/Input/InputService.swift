@@ -60,6 +60,10 @@ struct InputService: InputProtocol {
     func output() -> OutputService {
         return OutputService(self)
     }
+    
+    func getPreview() -> PreviewInfo {
+        return .attributed(getTabPreview())
+    }
 
     func getTabPreview() -> NSMutableAttributedString {
         let colorText = self.colorText

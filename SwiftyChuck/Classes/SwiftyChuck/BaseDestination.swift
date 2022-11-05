@@ -19,17 +19,14 @@ open class BaseDestination {
 
     public init() {
         let uuid = NSUUID().uuidString
-        let queueLabel = "swiftybeaver-queue-" + uuid
+        let queueLabel = "swiftychuck-queue-" + uuid
         queue = DispatchQueue(label: queueLabel, target: queue)
     }
 
     /// send / store the formatted log message to the destination
     /// returns the formatted log message for processing by inheriting method
     /// and for unit tests (nil if error)
-    func send(_ chuck: any InputProtocol, thread: String) -> String? {
-        DispatchQueue.main.async {
-            SwiftyChuck.dataChuck.append(chuck.output())
-        }
-        return nil
+    func send(_ chuck: any InputProtocol, thread: String) -> OutputClass {
+        return chuck.output()
     }
 }

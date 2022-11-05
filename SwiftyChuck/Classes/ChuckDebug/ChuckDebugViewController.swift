@@ -69,12 +69,7 @@ class ChuckDebugViewController: UIViewController {
             button.setTitleTextAttributes([
                 NSAttributedString.Key.foregroundColor: color,
                 NSAttributedString.Key.font: UIFont.semibold12
-            ], for: .normal)
-            button.setTitleTextAttributes([
-                NSAttributedString.Key.foregroundColor: color,
-                NSAttributedString.Key.font: UIFont.semibold12
-            ], for: .highlighted)
-
+            ])
             leftBarButtonItems.append(button)
         }
 
@@ -89,12 +84,7 @@ class ChuckDebugViewController: UIViewController {
             button.setTitleTextAttributes([
                 NSAttributedString.Key.foregroundColor: UIColor.red,
                 NSAttributedString.Key.font: UIFont.semibold12
-            ], for: .normal)
-            button.setTitleTextAttributes([
-                NSAttributedString.Key.foregroundColor: UIColor.red,
-                NSAttributedString.Key.font: UIFont.semibold12
-            ], for: .highlighted)
-
+            ])
             rightBarButtonItems.append(button)
         }
 
@@ -115,9 +105,9 @@ class ChuckDebugViewController: UIViewController {
         }
     }()
 
-    private var data: [any OutputProtocol] = []
+    private var data: [OutputClass] = []
 
-    private func dataFinal(type: ChuckLevel) -> [any OutputProtocol] {
+    private func dataFinal(type: ChuckLevel) -> [OutputClass] {
         var data = SwiftyChuck.dataChuck.filter { $0.type == type }
         let countInicial = data.count
         if let textFilter = searchBar.text?.null() {

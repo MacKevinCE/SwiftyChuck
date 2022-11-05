@@ -16,21 +16,21 @@
 import Foundation
 
 open class SwiftyChuck {
+    public private(set) static var dataChuck: [OutputClass] = []
     public private(set) static var destination = BaseDestination()
     public private(set) static var isEnabled: Bool = false
-    static var baseURL: String = empty
-    static var enverimoment: String = empty
-    static var enableType: [ChuckLevel] = ChuckLevel.allCases
-    static var showDetectingButton: Bool = true
-    static var showDeleteAllButton: Bool = true
+    private(set) static var baseURL: String = empty
+    private(set) static var enverimoment: String = empty
+    private(set) static var enableType: [ChuckLevel] = ChuckLevel.allCases
+    private(set) static var showDetectingButton: Bool = true
+    private(set) static var showDeleteAllButton: Bool = true
+    private(set) static var leftBarButtonItems: [UIBarButtonItem] = []
+    private(set) static var rightBarButtonItems: [UIBarButtonItem] = []
     static var isDetecting: Bool = true
     static var searchText: String = empty
     static var searchTextDetail: String = empty
     static var tabControl: Int = .zero
     static var tabControlDetail: Int = .zero
-    static var dataChuck: [any OutputProtocol] = []
-    static var leftBarButtonItems: [UIBarButtonItem] = []
-    static var rightBarButtonItems: [UIBarButtonItem] = []
 
     // MARK: Setting Handling
 
@@ -108,7 +108,7 @@ open class SwiftyChuck {
         dataChuck.remove(at: index)
     }
 
-    open class func removeChuck(_ chuck: (any OutputProtocol)?) {
+    open class func removeChuck(_ chuck: OutputClass?) {
         guard let id = chuck?.id else { return }
         remove(id)
     }
@@ -178,21 +178,24 @@ open class SwiftyChuck {
 
     /// custom logging to manually adjust values, should just be used by other frameworks
     open class func custom(_ chuck: any InputProtocol) {
-        dispatch_send(chuck, thread: threadName())
+        if enableType.contains(chuck.type), isDetecting {
+            dispatch_send(chuck, thread: threadName())
+        }
     }
 
     /// internal helper which dispatches send to dedicated queue if minLevel is ok
     class func dispatch_send(_ chuck: any InputProtocol, thread: String) {
-        guard isDetecting, isEnabled else { return }
         guard let queue = destination.queue else { return }
 
         if destination.asynchronously {
             queue.async {
-                _ = destination.send(chuck, thread: thread)
+                let output = destination.send(chuck, thread: thread)
+                dataChuck.append(output)
             }
         } else {
             queue.sync {
-                _ = destination.send(chuck, thread: thread)
+                let output = destination.send(chuck, thread: thread)
+                dataChuck.append(output)
             }
         }
     }

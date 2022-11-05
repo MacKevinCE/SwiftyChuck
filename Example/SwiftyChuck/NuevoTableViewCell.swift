@@ -23,7 +23,7 @@ class NuevoTableViewCell: UITableViewCell, PreviewTableViewCell {
         // Configure the view for the selected state
     }
 
-    func seputView(output: any OutputProtocol) {
-        textButton.setTitle(output.type.text, for: .normal)
+    func seputView(output: OutputClass) {
+        textButton.setTitle(output.title, for: .normal)
     }
 }

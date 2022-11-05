@@ -7,22 +7,14 @@
 
 import Foundation
 
-struct OutputARC: OutputProtocol {
-    let id: UUID
-    let type: ChuckLevel
-    let colorText: UIColor
-    let title: String
-    let preview: PreviewInfo
-    let detailTabs: [DetailTabs]
-    
+class OutputARC: OutputClass {
     init(_ input: InputARC) {
-        self.id = input.id
-        self.type = input.type
-        self.colorText = input.colorText
+        super.init(input)
         self.title = input.getNameClass()
-        self.preview = .attributed(input.getTabPreview())
-        self.detailTabs = [
-            DetailTabs(name: "ALL", attributed: input.getTabAll())
-        ]
+        DispatchQueue.main.async {
+            self.detailTabs = [
+                DetailTabs(name: "ALL", attributed: input.getTabAll())
+            ]
+        }
     }
 }

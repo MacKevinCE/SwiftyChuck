@@ -32,7 +32,7 @@ class ChuckDebugDetailViewController: UIViewController {
         }
     }
 
-    var chuck: (any OutputProtocol)?
+    var chuck: OutputClass?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -69,6 +69,9 @@ class ChuckDebugDetailViewController: UIViewController {
 
     private func backBarButtonItem() {
         let button = UIBarButtonItem(title: "BACK", style: .plain, target: nil, action: nil)
+        button.setTitleTextAttributes([
+            NSAttributedString.Key.font: UIFont.semibold12
+        ])
         navigationController?.navigationBar.topItem?.backBarButtonItem = button
     }
 

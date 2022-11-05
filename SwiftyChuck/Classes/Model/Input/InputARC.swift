@@ -14,7 +14,6 @@ struct InputARC: InputProtocol {
     let line: Int
     let type: ChuckLevel
     let flow: ARCFlow
-    let colorText: UIColor
     let anyObject: AnyObject
     let time: Date
 
@@ -33,17 +32,20 @@ struct InputARC: InputProtocol {
         self.function = function
         self.line = line
         self.type = .arc
-        self.colorText = .black
         self.time = Date()
     }
 
     func output() -> OutputARC {
         return OutputARC(self)
     }
+    
+    func getPreview() -> PreviewInfo {
+        return .attributed(getTabPreview())
+    }
 
     func getTabPreview() -> NSMutableAttributedString {
         return "\(self.flow.text):"
-            .initAttributeText(color: self.colorText, font: .semibold16)
+            .initAttributeText(color: .black, font: .semibold16)
             .printSpacer()
             .addTextWithAttributeText(text: self.getNameClass())
             .printEnter().printTab().printTab().printSpacer()

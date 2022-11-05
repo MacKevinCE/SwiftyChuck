@@ -7,20 +7,11 @@
 
 import Foundation
 
-struct OutputService: OutputProtocol {
-    var id: UUID
-    let type: ChuckLevel
-    let colorText: UIColor
-    let title: String
-    let preview: PreviewInfo
-    let detailTabs: [DetailTabs]
-    
+class OutputService: OutputClass {
     init(_ input: InputService) {
-        self.id = input.id
-        self.type = input.type
-        self.colorText = input.colorText
+        super.init(input)
         self.title = input.endPoint.resumen()
-        self.preview = .attributed(input.getTabPreview())
+        self.colorText = input.colorText
         self.detailTabs = [
             DetailTabs(name: "RESUME", attributed: input.getTabResume()),
             DetailTabs(name: "REQUEST", attributed: input.getTabRequest()),

@@ -1,5 +1,5 @@
 PODS:
-  - SwiftyChuck (1.2.5)
+  - SwiftyChuck (2.0.0)
 
 DEPENDENCIES:
   - SwiftyChuck (from `../`)
@@ -9,7 +9,7 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  SwiftyChuck: acdeed57329e1236ac63e24e66d04bfcc8b2f80e
+  SwiftyChuck: fb372db0563b883e4d06a4f94aba0219cfbac37b
 
 PODFILE CHECKSUM: d3e7681e668d75e7a62eee4d3c6a15a1401fdfbb
 

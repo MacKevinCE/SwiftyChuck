@@ -43,6 +43,14 @@ struct InputLog: InputProtocol {
     func output() -> OutputLog {
         return OutputLog(self)
     }
+    
+    func getTitle() -> String {
+        return "\(self.items.joined(separator: self.separator.visible()))\(self.terminator.visibleUltra())"
+    }
+    
+    func getPreview() -> PreviewInfo {
+        return .attributed(getTabPreview())
+    }
 
     func getTabPreview() -> NSMutableAttributedString {
         return "\(self.level.text):"
@@ -66,10 +74,6 @@ struct InputLog: InputProtocol {
         pares.append(ParString(key: "Time", value: self.time.toString(with: .iso8601)))
 
         return pares.reduce()
-    }
-
-    func getTitle() -> String {
-        return "\(self.items.joined(separator: self.separator.visible()))\(self.terminator.visibleUltra())"
     }
 }
 

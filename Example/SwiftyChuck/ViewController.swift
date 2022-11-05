@@ -13,8 +13,6 @@ class ViewController: ARCViewController {
     let animal = Animal(name: "cangrejo")
     override func viewDidLoad() {
         super.viewDidLoad()
-        log.setEnverimoment("DEBUG")
-        log.addEnableType(.custom("Nuevooo"))
         log.service(nil, nil, nil)
         log.custom(Inputtt("Entroooo1", actions: [
             ExecuteActions(name: "BUILD", color: .blue, execute: { _, _ in
@@ -107,7 +105,6 @@ struct Inputtt: InputProtocol {
     var function: String
     var line: Int
     var type: ChuckLevel
-    var colorText: UIColor
     var actions: [ExecuteActions]
 
     init(
@@ -123,33 +120,23 @@ struct Inputtt: InputProtocol {
         self.function = function
         self.line = line
         self.type = .custom("Nuevooo")
-        self.colorText = .black
         self.actions = actions
     }
 
     func output() -> Outputtt {
         Outputtt(self)
     }
-}
-
-struct Outputtt: OutputProtocol {
-    var id: UUID
-    var type: ChuckLevel
-    var colorText: UIColor
-    var title: String
-    var preview: PreviewInfo
-    var actions: [ExecuteActions]
-    var showDeleteAction: Bool
-    func rightBarButtonItem(_ output: any OutputProtocol) -> [UIBarButtonItem] {
-        return []
+    
+    func getPreview() -> PreviewInfo {
+        return .cell(NuevoTableViewCell.self, type.text)
     }
 
+}
+
+class Outputtt: OutputClass {
     init(_ input: Inputtt) {
-        self.id = input.id
-        self.type = input.type
-        self.colorText = input.colorText
+        super.init(input)
         self.title = input.title
-        self.preview = .cell(NuevoTableViewCell.self, type.text)
         self.actions = input.actions
         self.showDeleteAction = false
     }

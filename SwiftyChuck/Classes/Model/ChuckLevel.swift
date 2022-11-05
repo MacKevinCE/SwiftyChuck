@@ -7,7 +7,7 @@
 
 import Foundation
 
-public enum ChuckLevel: CaseIterable, Hashable {
+public enum ChuckLevel: CaseIterable, Hashable, Equatable {
     public static var allCases: [ChuckLevel] = [.log, .service, .arc]
 
     case custom(String)
