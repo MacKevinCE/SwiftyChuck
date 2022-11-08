@@ -7,15 +7,9 @@
 
 import Foundation
 
-public extension Array where Element == ParString {
-    func toString() -> String {
-        reduce(empty) { ($1.value != empty) ? "\($0)\n(\($1.key)): \($1.value)" : empty }
-    }
-
-    func reduce() -> NSMutableAttributedString {
-        reduce(empty.initAttributeText(font: .regular14)) {
-            ($1.value != empty) ? $0.printParStringForChuck($1).printEnter() : $0
-        }
+extension Array {
+    func first<T>(with type: T.Type) -> T? {
+        first(where: { ($0 as? T) != nil }) as? T
     }
 }
 
@@ -30,5 +24,17 @@ extension Array where Element: Hashable {
             }
         }
         self = buffer
+    }
+}
+
+public extension Array where Element == ParString {
+    func toString() -> String {
+        reduce(empty) { ($1.value != empty) ? "\($0)\n(\($1.key)): \($1.value)" : empty }
+    }
+
+    func reduce() -> NSMutableAttributedString {
+        reduce(empty.initAttributeText(font: .regular14)) {
+            ($1.value != empty) ? $0.printParStringForChuck($1).printEnter() : $0
+        }
     }
 }

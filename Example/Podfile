@@ -7,7 +7,5 @@ target 'SwiftyChuck_Example' do
 
   target 'SwiftyChuck_Tests' do
     inherit! :search_paths
-
-    
   end
 end

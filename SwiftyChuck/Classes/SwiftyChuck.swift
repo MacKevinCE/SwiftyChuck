@@ -16,9 +16,10 @@
 import Foundation
 
 open class SwiftyChuck {
+    static var file: String = #file
     public private(set) static var dataChuck: [OutputClass] = []
     public private(set) static var destination = BaseDestination()
-    public private(set) static var isEnabled: Bool = false
+    public private(set) static var typeOpen: TypeOpen = .none
     private(set) static var baseURL: String = empty
     private(set) static var enverimoment: String = empty
     private(set) static var enableType: [ChuckLevel] = ChuckLevel.allCases
@@ -26,6 +27,8 @@ open class SwiftyChuck {
     private(set) static var showDeleteAllButton: Bool = true
     private(set) static var leftBarButtonItems: [UIBarButtonItem] = []
     private(set) static var rightBarButtonItems: [UIBarButtonItem] = []
+    private(set) static var iconCircle: TypeIcon = .character("😁")
+    static var location: CGPoint = .zero
     static var isDetecting: Bool = true
     static var searchText: String = empty
     static var searchTextDetail: String = empty
@@ -34,8 +37,8 @@ open class SwiftyChuck {
 
     // MARK: Setting Handling
 
-    open class func isEnabled(_ isEnabled: Bool) {
-        self.isEnabled = isEnabled
+    open class func typeOpen(_ typeOpen: TypeOpen) {
+        self.typeOpen = typeOpen
     }
 
     open class func setBaseURL(_ baseURL: String) {
@@ -44,6 +47,10 @@ open class SwiftyChuck {
 
     open class func setEnverimoment(_ enverimoment: String) {
         self.enverimoment = enverimoment
+    }
+
+    open class func setIconCircle(_ type: TypeIcon) {
+        iconCircle = type
     }
 
     open class func showDetectingButton(_ show: Bool) {
@@ -178,8 +185,19 @@ open class SwiftyChuck {
 
     /// custom logging to manually adjust values, should just be used by other frameworks
     open class func custom(_ chuck: any InputProtocol) {
-        if enableType.contains(chuck.type), isDetecting {
+        if enableType.contains(chuck.type) {
             dispatch_send(chuck, thread: threadName())
+        }
+    }
+
+    class func dispatchWorkItem(_ chuck: any InputProtocol, thread: String) -> DispatchWorkItem {
+        return DispatchWorkItem {
+            let output = destination.send(chuck, thread: thread)
+            if isDetecting {
+                dataChuck.append(output)
+
+                if SwiftyChuck.typeOpen == .circle || SwiftyChuck.typeOpen == .all { openChuckDebugView() }
+            }
         }
     }
 
@@ -188,25 +206,54 @@ open class SwiftyChuck {
         guard let queue = destination.queue else { return }
 
         if destination.asynchronously {
-            queue.async {
-                let output = destination.send(chuck, thread: thread)
-                dataChuck.append(output)
-            }
+            queue.async(execute: dispatchWorkItem(chuck, thread: thread))
         } else {
-            queue.sync {
-                let output = destination.send(chuck, thread: thread)
-                dataChuck.append(output)
+            queue.sync(execute: dispatchWorkItem(chuck, thread: thread))
+        }
+    }
+
+    static func getChuckDebugView() -> ChuckDebugView? {
+        guard let owner = UIApplication.rootViewController else { return nil }
+        return (owner.presentedViewController ?? owner).view.subviews.first(with: ChuckDebugView.self)
+    }
+
+    static func getDebugNavController() -> DebugNavController? {
+        guard let owner = UIApplication.rootViewController else { return nil }
+        return (owner.presentedViewController ?? owner).presentedViewController as? DebugNavController
+    }
+
+    static func openChuckDebugView() {
+        DispatchQueue.main.async {
+            guard let owner = UIApplication.rootViewController else { return }
+            guard getChuckDebugView() == nil else { return }
+            if let chuckController = getDebugNavController()?.getChuckDebugViewController() {
+                chuckController.reloadData()
+                return
+            } else {
+                ChuckDebugView().addPopUp(owner: owner.presentedViewController ?? owner)
             }
         }
     }
 
-    open class func navigationController() -> UINavigationController {
-        UINavigationController(rootViewController: ChuckDebugAssembly.build())
+    open class func debugNavController() -> UINavigationController {
+        DebugNavController(rootViewController: ChuckDebugAssembly.build())
     }
 
-    static func openViewChuckDebug() {
+    static func openChuckDebug() {
         guard let owner = UIApplication.rootViewController else { return }
         let final = owner.presentedViewController ?? owner
-        final.present(navigationController(), animated: true, completion: nil)
+        final.present(debugNavController(), animated: true, completion: nil)
     }
+}
+
+public enum TypeOpen {
+    case none
+    case shake
+    case circle
+    case all
+}
+
+public enum TypeIcon {
+    case icon(UIImage)
+    case character(Character)
 }

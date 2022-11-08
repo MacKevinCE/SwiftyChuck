@@ -10,7 +10,12 @@ import UIKit
 
 class ChuckDebugViewController: UIViewController {
     @IBOutlet private var enverimomentButton: UIButton!
-    @IBOutlet private var resultLabel: UILabel!
+    @IBOutlet private var resultLabel: UILabel! {
+        willSet {
+            newValue.text = empty
+        }
+    }
+
     @IBOutlet private var heightSegmentedControlConstraint: NSLayoutConstraint!
     @IBOutlet private var segmentedControl: UISegmentedControl! {
         willSet {

@@ -9,8 +9,8 @@ import UIKit
 
 extension UIViewController {
     override open func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
-        if motion == .motionShake, SwiftyChuck.isEnabled {
-            SwiftyChuck.openViewChuckDebug()
+        if motion == .motionShake, SwiftyChuck.typeOpen == .shake || SwiftyChuck.typeOpen == .all {
+            SwiftyChuck.openChuckDebug()
         }
     }
 }

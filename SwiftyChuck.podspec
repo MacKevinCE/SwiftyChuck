@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'SwiftyChuck'
-  s.version          = '2.0.0'
+  s.version          = '2.0.1'
   s.summary          = 'Chuck is in-app HTTP inspector for iOS OkHttp clients.'
   s.swift_versions   = '5'
 
@@ -31,10 +31,9 @@ Pod::Spec.new do |s|
   s.ios.deployment_target = '11.0'
 
   s.source_files = 'SwiftyChuck/Classes/**/*'
-  
-  # s.resource_bundles = {
-  #   'SwiftyChuck' => ['SwiftyChuck/Assets/*.png']
-  # }
+  s.resource_bundles = {
+     'SwiftyChuck' => ['SwiftyChuck/Assets/*.xcassets']
+  }
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
   s.frameworks = 'UIKit'

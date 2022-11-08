@@ -119,7 +119,7 @@ struct Inputtt: InputProtocol {
         self.title = title
         self.function = function
         self.line = line
-        self.type = .custom("Nuevooo")
+        self.type = .nuevoo
         self.actions = actions
     }
 

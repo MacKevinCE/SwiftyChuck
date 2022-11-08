@@ -9,7 +9,12 @@ import Foundation
 import UIKit
 
 class ChuckDebugDetailViewController: UIViewController {
-    @IBOutlet private var resultLabel: UILabel!
+    @IBOutlet private var resultLabel: UILabel! {
+        willSet {
+            newValue.text = empty
+        }
+    }
+
     @IBOutlet private var subtitleTextView: UITextView!
     @IBOutlet private var loaderView: UIView!
     @IBOutlet private var activityIndicatorView: UIActivityIndicatorView!
@@ -126,9 +131,32 @@ class ChuckDebugDetailViewController: UIViewController {
         queue()
     }
 
-    @objc private func sharedButtonTapped() {
+    func textToImg() -> UIImage? {
+        let width = subtitleTextView.bounds.width
+        let height = subtitleTextView.bounds.height
+        let size = CGSize(width: width, height: height)
+        UIGraphicsBeginImageContextWithOptions(size, false, 0.0)
+        subtitleTextView.attributedText.draw(in: subtitleTextView.bounds)
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return image
+    }
+
+    func getSharedItems() -> [Any] {
+        var items: [Any] = []
+
+        if let imgFinal = textToImg() {
+            items.append(imgFinal)
+        }
+
         let textoFinal = subtitleTextView.attributedText.string
-        let activityController = UIActivityViewController(activityItems: [textoFinal], applicationActivities: nil)
+        items.append(textoFinal)
+
+        return items
+    }
+
+    @objc private func sharedButtonTapped() {
+        let activityController = UIActivityViewController(activityItems: getSharedItems(), applicationActivities: nil)
         present(activityController, animated: true, completion: nil)
     }
 }

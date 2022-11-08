@@ -69,6 +69,7 @@ struct InputLog: InputProtocol {
         pares.append(ParString(key: "Separator", value: self.separator.visibleUltra()))
         pares.append(ParString(key: "Terminator", value: self.terminator.visibleUltra()))
         pares.append(ParString(key: "File", value: self.file))
+        pares.append(ParString(key: "New", value: String(SwiftyChuck.file)))
         pares.append(ParString(key: "Function", value: self.function))
         pares.append(ParString(key: "Line", value: String(self.line)))
         pares.append(ParString(key: "Time", value: self.time.toString(with: .iso8601)))

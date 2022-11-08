@@ -18,10 +18,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        log.isEnabled(true)
+        log.typeOpen(.all)
+       // log.setIconCircle(.character("😁"))
+        log.setIconCircle(.icon(.init(named: "alegre")!))
         log.setEnverimoment("DEBUG")
-        log.setEnableType([.log,.service,.arc])
-        log.addEnableType(.custom("Nuevooo"))
+        log.addEnableType(.nuevoo)
         // Override point for customization after application launch.
         return true
     }
@@ -51,3 +52,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 }
 
+extension ChuckLevel {
+    static let nuevoo = ChuckLevel.custom("Nuevooo")
+}

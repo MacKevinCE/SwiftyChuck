@@ -7,7 +7,7 @@
 
 import Foundation
 
-public extension UIColor {
+extension UIColor {
     convenience init(hexString: String) {
         let rgbaData = Self.getRGBAData(hexString: hexString)
         self.init(
