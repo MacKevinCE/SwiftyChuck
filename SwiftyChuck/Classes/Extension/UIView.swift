@@ -38,16 +38,13 @@ extension UIView {
         )
     }
 
-    func icon(name: Character, weight: UIFont.Weight = .regular, textColor: UIColor = .black, backgroundColor: UIColor = UIColor.clear, borderWidth: CGFloat = 0, borderColor: UIColor = UIColor.clear) -> UIImage {
-        let fontAspectRatio: CGFloat = 1
-        var size = CGSize(width: frame.width, height: frame.width / fontAspectRatio)
-        if size.width <= 0 { size.width = 1 }
-        if size.height <= 0 { size.height = 1 }
+    func getIcon(name: Character, weight: UIFont.Weight = .regular, textColor: UIColor = .black, backgroundColor: UIColor = UIColor.clear, borderWidth: CGFloat = 0, borderColor: UIColor = UIColor.clear) -> UIImage {
+        let size = bounds.size
 
         let paragraph = NSMutableParagraphStyle()
         paragraph.alignment = NSTextAlignment.center
 
-        let fontSize = min(size.width / fontAspectRatio, size.height)
+        let fontSize = min(size.width, size.height)
 
         // stroke width expects a whole number percentage of the font size
         let strokeWidth: CGFloat = fontSize == 0 ? 0 : (-100 * borderWidth / fontSize)
@@ -66,5 +63,13 @@ extension UIView {
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         return image!
+    }
+
+    @objc func getImage() -> UIImage? {
+        UIGraphicsBeginImageContextWithOptions(bounds.size, false, 0.0)
+        layer.render(in: UIGraphicsGetCurrentContext()!)
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return image
     }
 }

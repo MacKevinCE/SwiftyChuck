@@ -214,22 +214,28 @@ open class SwiftyChuck {
 
     static func getChuckDebugView() -> ChuckDebugView? {
         guard let owner = UIApplication.rootViewController else { return nil }
-        return (owner.presentedViewController ?? owner).view.subviews.first(with: ChuckDebugView.self)
+        let presented = owner.presentedViewController?.view.subviews.first(with: ChuckDebugView.self)
+        let direct = owner.view.subviews.first(with: ChuckDebugView.self)
+        return presented ?? direct
     }
 
     static func getDebugNavController() -> DebugNavController? {
         guard let owner = UIApplication.rootViewController else { return nil }
-        return (owner.presentedViewController ?? owner).presentedViewController as? DebugNavController
+        let presented = owner.presentedViewController?.presentedViewController as? DebugNavController
+        let direct = owner.presentedViewController as? DebugNavController
+        return presented ?? direct
     }
 
     static func openChuckDebugView() {
         DispatchQueue.main.async {
             guard let owner = UIApplication.rootViewController else { return }
-            guard getChuckDebugView() == nil else { return }
-            if let chuckController = getDebugNavController()?.getChuckDebugViewController() {
-                chuckController.reloadData()
+            if let chuckNav = getDebugNavController() {
+                if let chuckController = chuckNav.getChuckDebugViewController() {
+                    chuckController.reloadData()
+                }
                 return
             } else {
+                guard getChuckDebugView() == nil else { return }
                 ChuckDebugView().addPopUp(owner: owner.presentedViewController ?? owner)
             }
         }
@@ -243,6 +249,16 @@ open class SwiftyChuck {
         guard let owner = UIApplication.rootViewController else { return }
         let final = owner.presentedViewController ?? owner
         final.present(debugNavController(), animated: true, completion: nil)
+    }
+
+    static func getPath(_ file: String) -> String {
+        var path: String = #file
+        while !file.contains(path) {
+            let last = path.split(separator: "/").last?.description ?? empty
+            path = path.replacingOccurrences(of: "/\(last)", with: empty)
+        }
+        let final = file.replacingOccurrences(of: path, with: empty)
+        return "[Project Path]\(final)"
     }
 }
 

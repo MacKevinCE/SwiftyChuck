@@ -61,7 +61,7 @@ struct InputARC: InputProtocol {
         pares.append(ParString(key: "Encodable Class", value: self.encodableClass()))
         pares.append(ParString(key: "NavigationController Description", value: self.navigationControllerDescription()))
         pares.append(ParString(key: "View Description", value: self.viewDescription()))
-        pares.append(ParString(key: "File", value: self.file))
+        pares.append(ParString(key: "File", value: SwiftyChuck.getPath(self.file)))
         pares.append(ParString(key: "Function", value: self.function))
         pares.append(ParString(key: "Line", value: String(self.line)))
         pares.append(ParString(key: "Time", value: self.time.toString(with: .iso8601)))

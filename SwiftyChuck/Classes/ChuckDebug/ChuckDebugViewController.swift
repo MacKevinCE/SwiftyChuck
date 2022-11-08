@@ -20,11 +20,6 @@ class ChuckDebugViewController: UIViewController {
     @IBOutlet private var segmentedControl: UISegmentedControl! {
         willSet {
             newValue.addTarget(self, action: #selector(changedSegmentedControl(_:)), for: .valueChanged)
-            newValue.removeAllSegments()
-            enableType.enumerated().forEach {
-                newValue.insertSegment(withTitle: $0.element.text, at: $0.offset, animated: false)
-            }
-            newValue.selectedSegmentIndex = min(SwiftyChuck.tabControl, newValue.numberOfSegments - 1)
         }
     }
 
@@ -55,11 +50,8 @@ class ChuckDebugViewController: UIViewController {
     }
 
     private func configView() {
-        heightSegmentedControlConstraint.isActive = enableType.count < 2
-        segmentedControl.isHidden = enableType.count < 2
-        enverimomentState()
-
         title = "Swifty Chuck"
+        enverimomentState()
         leftBarButtonItem()
         rightBarButtonItem()
     }
@@ -99,16 +91,41 @@ class ChuckDebugViewController: UIViewController {
     func reloadData() {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
+            self.getNewLevels()
             self.tableView.reloadData()
         }
     }
 
-    private lazy var enableType: [ChuckLevel] = {
-        var data = SwiftyChuck.dataChuck
-        return SwiftyChuck.enableType.filter { type in
+    private var levels: [ChuckLevel]? {
+        willSet {
+            let levels = newValue ?? []
+            segmentedControl.removeAllSegments()
+            levels.enumerated().forEach {
+                segmentedControl.insertSegment(withTitle: $0.element.text, at: $0.offset, animated: false)
+            }
+            segmentedControl.selectedSegmentIndex = min(SwiftyChuck.tabControl, segmentedControl.numberOfSegments - 1)
+
+            heightSegmentedControlConstraint.isActive = levels.count < 2
+            segmentedControl.isHidden = levels.count < 2
+        }
+    }
+
+    @discardableResult
+    private func getNewLevels() -> [ChuckLevel] {
+        let data = SwiftyChuck.dataChuck
+        levels = SwiftyChuck.enableType.filter { type in
             !data.filter { $0.type == type }.isEmpty
         }
-    }()
+        return levels ?? []
+    }
+
+    private var getCurrentLevels: [ChuckLevel] {
+        if let levels = levels {
+            return levels
+        } else {
+            return getNewLevels()
+        }
+    }
 
     private var data: [OutputClass] = []
 
@@ -167,7 +184,7 @@ extension ChuckDebugViewController: UISearchBarDelegate {
 
 extension ChuckDebugViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if let chuckType = enableType[safe: segmentedControl.selectedSegmentIndex] {
+        if let chuckType = getCurrentLevels[safe: segmentedControl.selectedSegmentIndex] {
             data = dataFinal(type: chuckType)
             return data.count
         } else {

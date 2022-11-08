@@ -32,9 +32,9 @@ class ChuckDebugView: NibDebugView {
         switch SwiftyChuck.iconCircle {
         case .character(let character):
             if character.isASCII {
-                backgroundButton.setImage(backgroundButton.icon(name: character), backgroundButton.icon(name: "🟡"))
+                backgroundButton.setImage(backgroundButton.getIcon(name: character), backgroundButton.getIcon(name: "🟡"))
             } else {
-                backgroundButton.setBackgroundImage(backgroundButton.icon(name: character))
+                backgroundButton.setBackgroundImage(backgroundButton.getIcon(name: character))
             }
         case .icon(let image):
             backgroundButton.setBackgroundImage(image)

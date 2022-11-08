@@ -131,21 +131,10 @@ class ChuckDebugDetailViewController: UIViewController {
         queue()
     }
 
-    func textToImg() -> UIImage? {
-        let width = subtitleTextView.bounds.width
-        let height = subtitleTextView.bounds.height
-        let size = CGSize(width: width, height: height)
-        UIGraphicsBeginImageContextWithOptions(size, false, 0.0)
-        subtitleTextView.attributedText.draw(in: subtitleTextView.bounds)
-        let image = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        return image
-    }
-
     func getSharedItems() -> [Any] {
         var items: [Any] = []
 
-        if let imgFinal = textToImg() {
+        if let imgFinal = subtitleTextView.getImage() {
             items.append(imgFinal)
         }
 
