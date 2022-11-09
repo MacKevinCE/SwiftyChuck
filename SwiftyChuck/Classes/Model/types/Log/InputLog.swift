@@ -80,10 +80,10 @@ struct InputLog: InputProtocol {
 func getColor(_ type: LogLevel) -> UIColor {
     switch type {
     case .print: return .black
-    case .debug: return .green
-    case .info: return .blue
-    case .warning: return .orange
-    case .error: return .red
+    case .debug: return .systemGreen
+    case .info: return .systemBlue
+    case .warning: return .systemOrange
+    case .error: return .systemRed
     }
 }
 

@@ -16,7 +16,7 @@ extension UITableView {
     }
 
     func dequeueReusableCell<T: PreviewTableViewCell>(
-        with type: T.Type,
+        with _: T.Type,
         for indexPath: IndexPath,
         isRegistered: Bool = false
     ) -> T {
@@ -28,5 +28,9 @@ extension UITableView {
             fatalError("Could not dequeue cell with identifier: \(nibName)")
         }
         return cell
+    }
+
+    func reloadRowsVisiblesCell(with animation: UITableView.RowAnimation = .automatic) {
+        reloadRows(at: indexPathsForVisibleRows ?? [], with: animation)
     }
 }

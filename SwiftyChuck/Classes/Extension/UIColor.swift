@@ -33,6 +33,15 @@ extension UIColor {
         )
     }
 
+    func setAlpha(_ alpha: CGFloat) -> UIColor {
+        var red: CGFloat = 0
+        var green: CGFloat = 0
+        var blue: CGFloat = 0
+        var preAlpha: CGFloat = 0
+        getRed(&red, green: &green, blue: &blue, alpha: &preAlpha)
+        return UIColor(red: red, green: green, blue: blue, alpha: alpha)
+    }
+
     static func getRGBAData(hexString: String) -> (r: CGFloat, g: CGFloat, b: CGFloat, a: CGFloat) {
         var rgbaData: (r: CGFloat, g: CGFloat, b: CGFloat, a: CGFloat) = (r: 0, g: 0, b: 0, a: 0)
 

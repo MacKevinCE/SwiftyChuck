@@ -13,6 +13,13 @@ class ViewController: ARCViewController {
     let animal = Animal(name: "cangrejo")
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("algoooo")
+        log.service(nil, nil, nil)
+        log.service(nil, nil, nil)
+        log.service(nil, nil, nil)
+        log.service(nil, nil, nil)
+        log.service(nil, nil, nil)
+        log.service(nil, nil, nil)
         log.service(nil, nil, nil)
         log.custom(Inputtt("Entroooo1", actions: [
             ExecuteActions(name: "BUILD", color: .blue, execute: { _, _ in
@@ -126,11 +133,10 @@ struct Inputtt: InputProtocol {
     func output() -> Outputtt {
         Outputtt(self)
     }
-    
+
     func getPreview() -> PreviewInfo {
         return .cell(NuevoTableViewCell.self, type.text)
     }
-
 }
 
 class Outputtt: OutputClass {

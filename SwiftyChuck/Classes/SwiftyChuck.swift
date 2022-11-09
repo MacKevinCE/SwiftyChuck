@@ -18,6 +18,7 @@ import Foundation
 open class SwiftyChuck {
     static var file: String = #file
     public private(set) static var dataChuck: [OutputClass] = []
+    public private(set) static var selectChuck: [OutputClass] = []
     public private(set) static var destination = BaseDestination()
     public private(set) static var typeOpen: TypeOpen = .none
     private(set) static var baseURL: String = empty
@@ -36,6 +37,13 @@ open class SwiftyChuck {
     static var tabControlDetail: Int = .zero
 
     // MARK: Setting Handling
+
+    class func getSelectChuck(_ chuck: OutputClass) {
+        if !selectChuck.contains(chuck) {
+            selectChuck.removeAll(where: { $0.type == chuck.type })
+            selectChuck.append(chuck)
+        }
+    }
 
     open class func typeOpen(_ typeOpen: TypeOpen) {
         self.typeOpen = typeOpen
@@ -115,9 +123,17 @@ open class SwiftyChuck {
         dataChuck.remove(at: index)
     }
 
+    open class func remove(_ ids: [UUID]) {
+        ids.forEach { remove($0) }
+    }
+
     open class func removeChuck(_ chuck: OutputClass?) {
         guard let id = chuck?.id else { return }
         remove(id)
+    }
+
+    open class func removeChuck(_ chucks: [OutputClass]) {
+        chucks.forEach { removeChuck($0) }
     }
 
     /// returns the current thread name
@@ -212,21 +228,21 @@ open class SwiftyChuck {
         }
     }
 
-    static func getChuckDebugView() -> ChuckDebugView? {
+    class func getChuckDebugView() -> ChuckDebugView? {
         guard let owner = UIApplication.rootViewController else { return nil }
         let presented = owner.presentedViewController?.view.subviews.first(with: ChuckDebugView.self)
         let direct = owner.view.subviews.first(with: ChuckDebugView.self)
         return presented ?? direct
     }
 
-    static func getDebugNavController() -> DebugNavController? {
+    class func getDebugNavController() -> DebugNavController? {
         guard let owner = UIApplication.rootViewController else { return nil }
         let presented = owner.presentedViewController?.presentedViewController as? DebugNavController
         let direct = owner.presentedViewController as? DebugNavController
         return presented ?? direct
     }
 
-    static func openChuckDebugView() {
+    class func openChuckDebugView() {
         DispatchQueue.main.async {
             guard let owner = UIApplication.rootViewController else { return }
             if let chuckNav = getDebugNavController() {
@@ -245,13 +261,13 @@ open class SwiftyChuck {
         DebugNavController(rootViewController: ChuckDebugAssembly.build())
     }
 
-    static func openChuckDebug() {
+    class func openChuckDebug() {
         guard let owner = UIApplication.rootViewController else { return }
         let final = owner.presentedViewController ?? owner
         final.present(debugNavController(), animated: true, completion: nil)
     }
 
-    static func getPath(_ file: String) -> String {
+    class func getPath(_ file: String) -> String {
         var path: String = #file
         while !file.contains(path) {
             let last = path.split(separator: "/").last?.description ?? empty
@@ -260,16 +276,4 @@ open class SwiftyChuck {
         let final = file.replacingOccurrences(of: path, with: empty)
         return "[Project Path]\(final)"
     }
-}
-
-public enum TypeOpen {
-    case none
-    case shake
-    case circle
-    case all
-}
-
-public enum TypeIcon {
-    case icon(UIImage)
-    case character(Character)
 }

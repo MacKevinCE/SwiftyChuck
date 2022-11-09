@@ -10,6 +10,10 @@ import SwiftyChuck
 import UIKit
 
 class NuevoTableViewCell: UITableViewCell, PreviewTableViewCell {
+    func select(is select: Bool) {
+        backgroundColor =  .clear
+    }
+
     @IBOutlet var textButton: UIButton!
 
     override func awakeFromNib() {
@@ -25,5 +29,6 @@ class NuevoTableViewCell: UITableViewCell, PreviewTableViewCell {
 
     func seputView(output: OutputClass) {
         textButton.setTitle(output.title, for: .normal)
+        selectionStyle = .none
     }
 }

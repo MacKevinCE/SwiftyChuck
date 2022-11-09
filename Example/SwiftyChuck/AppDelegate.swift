@@ -53,5 +53,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 }
 
 extension ChuckLevel {
-    static let nuevoo = ChuckLevel.custom("Nuevooo")
+    static let nuevoo = ChuckLevel.custom("Nuevooo", true)
 }

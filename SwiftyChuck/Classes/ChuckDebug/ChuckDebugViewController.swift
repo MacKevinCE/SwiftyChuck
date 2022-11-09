@@ -37,6 +37,13 @@ class ChuckDebugViewController: UIViewController {
         }
     }
 
+    var isEdit: Bool = false {
+        willSet {
+            let type = getCurrentLevels[safe: segmentedControl.selectedSegmentIndex]
+            tableView.isEditing = newValue && (type?.isEditing ?? true)
+        }
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         configView()
@@ -57,33 +64,67 @@ class ChuckDebugViewController: UIViewController {
     }
 
     private func leftBarButtonItem() {
-        var leftBarButtonItems: [UIBarButtonItem] = SwiftyChuck.leftBarButtonItems
+        var leftBarButtonItems: [UIBarButtonItem] = []
 
-        if SwiftyChuck.showDetectingButton {
-            let title = "Detecting: \(SwiftyChuck.isDetecting.description)"
-            let color: UIColor = SwiftyChuck.isDetecting ? .green : .red
-            let button = UIBarButtonItem(title: title, style: .plain, target: self, action: #selector(detectingButtonTapped))
-            button.setTitleTextAttributes([
-                NSAttributedString.Key.foregroundColor: color,
+        if #available(iOS 13.0, *) {
+            let close = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(closeButtonTapped))
+            leftBarButtonItems.append(close)
+        } else {
+            let close = UIBarButtonItem(title: "Close", style: .plain, target: self, action: #selector(closeButtonTapped))
+            close.setTitleTextAttributes([
                 NSAttributedString.Key.font: UIFont.semibold12
             ])
-            leftBarButtonItems.append(button)
+            leftBarButtonItems.append(close)
         }
+
+        if SwiftyChuck.showDetectingButton {
+            let title = SwiftyChuck.isDetecting ? "Yes\nDetecting" : "No\nDetecting"
+            let color: UIColor = SwiftyChuck.isDetecting ? .systemGreen : .systemRed
+
+            let detectingBtn = UIButton(type: .system)
+            detectingBtn.setTitle(title, for: .normal)
+            detectingBtn.tintColor = color
+            detectingBtn.titleLabel?.font = .semibold12
+            detectingBtn.titleLabel?.textAlignment = .center
+            detectingBtn.titleLabel?.numberOfLines = 2
+            detectingBtn.addTarget(self, action: #selector(detectingButtonTapped), for: .touchUpInside)
+
+            let detectingItem = UIBarButtonItem(customView: detectingBtn)
+            leftBarButtonItems.append(detectingItem)
+        }
+
+        leftBarButtonItems.append(contentsOf: SwiftyChuck.leftBarButtonItems)
 
         navigationItem.leftBarButtonItems = leftBarButtonItems
     }
 
     private func rightBarButtonItem() {
-        var rightBarButtonItems: [UIBarButtonItem] = SwiftyChuck.rightBarButtonItems
+        var rightBarButtonItems: [UIBarButtonItem] = []
 
-        if SwiftyChuck.showDeleteAllButton {
-            let button = UIBarButtonItem(title: "DELETE ALL", style: .plain, target: self, action: #selector(deleteButtonTapped))
-            button.setTitleTextAttributes([
-                NSAttributedString.Key.foregroundColor: UIColor.red,
+        if let type = getCurrentLevels[safe: segmentedControl.selectedSegmentIndex], type.isEditing {
+            let edit = UIBarButtonItem(barButtonSystemItem: tableView.isEditing ? .done : .edit, target: self, action: #selector(editButtonTapped))
+            edit.setTitleTextAttributes([
                 NSAttributedString.Key.font: UIFont.semibold12
             ])
-            rightBarButtonItems.append(button)
+            rightBarButtonItems.append(edit)
         }
+
+        if SwiftyChuck.showDeleteAllButton || tableView.isEditing {
+            let title = tableView.isEditing ? "Delete\nSelection" : "Delete\nAll"
+
+            let deleteBtn = UIButton(type: .system)
+            deleteBtn.setTitle(title, for: .normal)
+            deleteBtn.tintColor = .systemRed
+            deleteBtn.titleLabel?.font = .semibold12
+            deleteBtn.titleLabel?.textAlignment = .center
+            deleteBtn.titleLabel?.numberOfLines = 2
+            deleteBtn.addTarget(self, action: #selector(deleteButtonTapped), for: .touchUpInside)
+
+            let deleteItem = UIBarButtonItem(customView: deleteBtn)
+            rightBarButtonItems.append(deleteItem)
+        }
+
+        rightBarButtonItems.append(contentsOf: SwiftyChuck.rightBarButtonItems)
 
         navigationItem.rightBarButtonItems = rightBarButtonItems
     }
@@ -151,11 +192,18 @@ class ChuckDebugViewController: UIViewController {
 
     @objc private func changedSegmentedControl(_ sender: UISegmentedControl) {
         SwiftyChuck.tabControl = sender.selectedSegmentIndex
+        let type = getCurrentLevels[safe: segmentedControl.selectedSegmentIndex]
+        tableView.isEditing = isEdit && (type?.isEditing ?? true)
+        rightBarButtonItem()
         tableView.reloadData()
     }
 
     @IBAction private func enverimomentButtonTapped(_ sender: UIButton) {
         // falta
+    }
+
+    @objc private func closeButtonTapped() {
+        dismiss(animated: true)
     }
 
     @objc private func detectingButtonTapped() {
@@ -164,10 +212,30 @@ class ChuckDebugViewController: UIViewController {
     }
 
     @objc private func deleteButtonTapped() {
-        SwiftyChuck.resetChuck()
-        searchBar.text = empty
         searchBar.resignFirstResponder()
-        tableView.reloadData()
+        if tableView.isEditing {
+            let indexPaths = tableView.indexPathsForSelectedRows ?? []
+            let ids = indexPaths.compactMap { data[safe: $0.row]?.id }
+            SwiftyChuck.remove(ids)
+            tableView.deleteRows(at: indexPaths, with: .automatic)
+        } else {
+            SwiftyChuck.resetChuck()
+            searchBar.text = empty
+            tableView.reloadData()
+        }
+    }
+
+    @objc private func editButtonTapped() {
+        isEdit.toggle()
+        if let type = getCurrentLevels[safe: segmentedControl.selectedSegmentIndex],
+           let selec = SwiftyChuck.selectChuck.first(where: { $0.type == type }),
+           let index = data.firstIndex(of: selec)
+        {
+            tableView.reloadRows(at: [IndexPath(row: index, section: 0)], with: .automatic)
+        } else {
+            tableView.reloadData()
+        }
+        rightBarButtonItem()
     }
 }
 
@@ -194,24 +262,30 @@ extension ChuckDebugViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let dato = data[indexPath.row]
+        let isSelect = SwiftyChuck.selectChuck.contains(dato)
         switch dato.preview {
         case .attributed(let attributedString):
             let cell = tableView.dequeueReusableCell(withIdentifier: "ChuckDebugCell", for: indexPath)
             cell.textLabel?.numberOfLines = 4
             cell.textLabel?.font = .regular14
-            cell.selectionStyle = (dato.detailTabs.count != .zero) ? .default : .none
+            cell.backgroundColor = (isSelect && !tableView.isEditing) ? .systemGray.setAlpha(0.25) : .clear
+            cell.selectionStyle = tableView.isEditing ? .default : .none
             cell.textLabel?.attributedText = attributedString
             return cell
 
         case .cell(let typeCell, _):
             let cell = tableView.dequeueReusableCell(with: typeCell, for: indexPath)
             cell.seputView(output: dato)
+            cell.select(is: isSelect)
+            if let type = getCurrentLevels[safe: segmentedControl.selectedSegmentIndex], type.isEditing, tableView.isEditing {
+                cell.selectionStyle = .default
+            }
             return cell
         }
     }
 
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        true
+        return true
     }
 
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
@@ -242,11 +316,16 @@ extension ChuckDebugViewController: UITableViewDataSource {
 
 extension ChuckDebugViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        searchBar.resignFirstResponder()
-        let dato = data[indexPath.row]
-        if dato.detailTabs.count != .zero {
-            let viewController = ChuckDebugDetailAssembly.build(chuck: dato)
-            navigationController?.pushViewController(viewController, animated: true)
+        if !tableView.isEditing {
+            tableView.deselectRow(at: indexPath, animated: false)
+            searchBar.resignFirstResponder()
+            let dato = data[indexPath.row]
+            SwiftyChuck.getSelectChuck(dato)
+            tableView.reloadRowsVisiblesCell()
+            if dato.detailTabs.count != .zero {
+                let viewController = ChuckDebugDetailAssembly.build(chuck: dato)
+                navigationController?.pushViewController(viewController, animated: true)
+            }
         }
     }
 }
