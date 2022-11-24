@@ -8,6 +8,6 @@
 import Foundation
 
 public protocol PreviewTableViewCell: UITableViewCell {
-    func seputView(output: OutputClass)
+    func seputCell(output: OutputClass)
     func select(is select: Bool)
 }

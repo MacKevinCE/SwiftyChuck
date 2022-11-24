@@ -11,7 +11,7 @@ class OutputService: OutputClass {
     init(_ input: InputService) {
         super.init(input)
         self.title = input.endPoint.resumen()
-        self.colorText = input.colorText
+        self.colorTitle = input.colorText
         self.detailTabs = [
             DetailTabs(name: "RESUME", attributed: input.getTabResume()),
             DetailTabs(name: "REQUEST", attributed: input.getTabRequest()),

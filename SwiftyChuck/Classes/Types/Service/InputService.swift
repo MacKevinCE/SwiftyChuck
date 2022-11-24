@@ -24,7 +24,6 @@ struct InputService: InputProtocol {
     let headersResponse: [ParString]
     let response: String
     let error: String
-    let time: Date
 
     init(
         _ urlResponse: URLResponse?,
@@ -54,21 +53,16 @@ struct InputService: InputProtocol {
         self.headersResponse = getHeadersResponse(response)
         self.response = getResponse(data)
         self.error = getError(error)
-        self.time = Date()
     }
 
     func output() -> OutputService {
         return OutputService(self)
     }
-    
-    func getPreview() -> PreviewInfo {
-        return .attributed(getTabPreview())
-    }
 
-    func getTabPreview() -> NSMutableAttributedString {
+    func getPreview() -> PreviewInfo {
         let colorText = self.colorText
         let colorState: UIColor = (colorText == .black) ? .green : colorText
-        return "\(self.state)"
+        let attributed = "\(self.state)"
             .initAttributeIndentation(indentation: 35)
             .addAttributeText(color: colorState, font: .semibold16)
             .printSpacer().printSpacer()
@@ -77,6 +71,7 @@ struct InputService: InputProtocol {
             .addTextWithAttributeText(text: self.endPoint.resumen(), color: colorText, font: .regular14)
             .printEnter().printTab().printTab().printSpacer()
             .addTextWithAttributeText(text: self.time.toString(), color: .gray, font: .regular12)
+        return .attributed(attributed)
     }
 
     func getTabAll() -> NSMutableAttributedString {
@@ -211,14 +206,14 @@ func getState(_ response: HTTPURLResponse?) -> String {
 func getColor(_ response: HTTPURLResponse?) -> UIColor {
     if let status = response?.statusCode {
         switch status {
-        case 200: return .black
-        case 201 ... 299: return .green
-        case 300 ... 399: return .blue
-        case 400 ... 499: return .orange
-        default: return .red
+        case 200: return .darkText
+        case 201 ... 299: return .systemGreen
+        case 300 ... 399: return .systemBlue
+        case 400 ... 499: return .systemOrange
+        default: return .systemRed
         }
     } else {
-        return .red
+        return .systemPink
     }
 }
 

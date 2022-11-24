@@ -21,6 +21,9 @@
                         <rect key="frame" x="20" y="20" width="360" height="132"/>
                         <state key="normal" title="Button"/>
                         <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                        <connections>
+                            <action selector="openButtonTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="B9r-1f-bBy"/>
+                        </connections>
                     </button>
                 </subviews>
                 <constraints>

@@ -1,6 +1,6 @@
 {
   "name": "SwiftyChuck",
-  "version": "2.0.3",
+  "version": "2.1.0",
   "summary": "Chuck is in-app HTTP inspector for iOS OkHttp clients.",
   "swift_versions": "5",
   "description": "Chuck is in-app HTTP inspector for iOS OkHttp clients. Chuck intercepts and persists all HTTP requests and responses inside your application, and provides a UI for inspecting their content.",
@@ -14,7 +14,7 @@
   },
   "source": {
     "git": "https://github.com/MacKevinCE/SwiftyChuck.git",
-    "tag": "2.0.3"
+    "tag": "2.1.0"
   },
   "documentation_url": "https://github.com/MacKevinCE/SwiftyChuck",
   "social_media_url": "https://twitter.com/MacKevinCE",

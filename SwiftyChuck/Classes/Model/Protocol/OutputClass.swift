@@ -10,22 +10,24 @@ import Foundation
 open class OutputClass: Equatable {
     public var id: UUID
     public var type: ChuckLevel
-    public var colorText: UIColor
+    public var colorTitle: UIColor
     public var title: String
     public var preview: PreviewInfo
     public var detailTabs: [DetailTabs]
-    public var actions: [ExecuteActions]
+    public var trailingSwipeActions: [SwipeActions]
+    public var leadingSwipeActions: [SwipeActions]
     public var showDeleteAction: Bool
     public var showSharedButton: Bool
 
     public init(_ input: any InputProtocol) {
         self.id = input.id
         self.type = input.type
-        self.colorText = .black
+        self.colorTitle = .black
         self.title = empty
         self.preview = input.getPreview()
         self.detailTabs = []
-        self.actions = []
+        self.trailingSwipeActions = []
+        self.leadingSwipeActions = []
         self.showDeleteAction = true
         self.showSharedButton = true
     }

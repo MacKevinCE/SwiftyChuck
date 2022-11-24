@@ -9,7 +9,7 @@ import Foundation
 
 public enum PreviewInfo {
     case attributed(NSMutableAttributedString)
-    case cell(PreviewTableViewCell.Type, String)
+    case cell(PreviewTableViewCell.Type, searchText: String)
 
     var getSearchText: String {
         switch self {

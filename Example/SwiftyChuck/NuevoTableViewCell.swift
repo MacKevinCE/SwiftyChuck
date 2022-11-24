@@ -10,25 +10,22 @@ import SwiftyChuck
 import UIKit
 
 class NuevoTableViewCell: UITableViewCell, PreviewTableViewCell {
-    func select(is select: Bool) {
-        backgroundColor =  .clear
-    }
-
     @IBOutlet var textButton: UIButton!
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+    func select(is select: Bool) {
+        backgroundColor = .clear
     }
 
-    func seputView(output: OutputClass) {
+    func seputCell(output: OutputClass) {
         textButton.setTitle(output.title, for: .normal)
         selectionStyle = .none
+    }
+
+    @IBAction func openButtonTapped(_ sender: Any) {
+        print("entro")
     }
 }

@@ -48,7 +48,7 @@ class ChuckDebugDetailViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         guard let chuck = chuck else { return }
         navigationController?.navigationBar.titleTextAttributes = [
-            NSAttributedString.Key.foregroundColor: chuck.colorText,
+            NSAttributedString.Key.foregroundColor: chuck.colorTitle,
             NSAttributedString.Key.font: UIFont.semibold16
         ]
     }
@@ -67,6 +67,7 @@ class ChuckDebugDetailViewController: UIViewController {
         var rightBarButtonItems: [UIBarButtonItem] = chuck.rightBarButtonItems(chuck)
         if chuck.showSharedButton {
             let button = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(sharedButtonTapped))
+            button.tintColor = .systemBlue
             rightBarButtonItems.append(button)
         }
         navigationItem.rightBarButtonItems = rightBarButtonItems

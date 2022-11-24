@@ -88,11 +88,11 @@ extension NSMutableAttributedString {
     func printEnter() -> NSMutableAttributedString {
         addTextWithAttributeText(text: enter)
     }
-    
+
     func printSpacer() -> NSMutableAttributedString {
         addTextWithAttributeText(text: space)
     }
-    
+
     func printTab() -> NSMutableAttributedString {
         addTextWithAttributeText(text: tab)
     }
@@ -111,7 +111,7 @@ extension NSMutableAttributedString {
         return self
     }
 
-    func printTitleChuck(_ text: String, color: UIColor = .blue) -> NSMutableAttributedString {
+    func printTitleChuck(_ text: String, color: UIColor = .systemBlue) -> NSMutableAttributedString {
         addTextWithAttributeText(text: text, color: color, font: .semibold14, isUnderline: true)
     }
 }

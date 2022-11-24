@@ -15,7 +15,6 @@ struct InputARC: InputProtocol {
     let type: ChuckLevel
     let flow: ARCFlow
     let anyObject: AnyObject
-    let time: Date
 
     init(
         _ id: UUID,
@@ -32,24 +31,20 @@ struct InputARC: InputProtocol {
         self.function = function
         self.line = line
         self.type = .arc
-        self.time = Date()
     }
 
     func output() -> OutputARC {
         return OutputARC(self)
     }
-    
-    func getPreview() -> PreviewInfo {
-        return .attributed(getTabPreview())
-    }
 
-    func getTabPreview() -> NSMutableAttributedString {
-        return "\(self.flow.text):"
+    func getPreview() -> PreviewInfo {
+        let attributed = "\(self.flow.text):"
             .initAttributeText(color: .black, font: .semibold16)
             .printSpacer()
             .addTextWithAttributeText(text: self.getNameClass())
             .printEnter().printTab().printTab().printSpacer()
             .addTextWithAttributeText(text: self.time.toString(), color: .gray, font: .regular12)
+        return .attributed(attributed)
     }
 
     func getTabAll() -> NSMutableAttributedString {
@@ -58,7 +53,7 @@ struct InputARC: InputProtocol {
         pares.append(ParString(key: "Project's Name", value: self.getNameProject()))
         pares.append(ParString(key: "Class Name", value: self.getNameClass()))
         pares.append(ParString(key: "All Describing Class", value: self.describingClass()))
-        pares.append(ParString(key: "Encodable Class", value: self.encodableClass()))
+        pares.append(ParString(key: "Encodable Class", value: self.jsonClass()))
         pares.append(ParString(key: "NavigationController Description", value: self.navigationControllerDescription()))
         pares.append(ParString(key: "View Description", value: self.viewDescription()))
         pares.append(ParString(key: "File", value: SwiftyChuck.getPath(self.file)))
@@ -68,7 +63,7 @@ struct InputARC: InputProtocol {
         return pares.reduce()
     }
 
-    func encodableClass() -> String {
+    func jsonClass() -> String {
         guard let value = (anyObject as? Encodable) else { return empty }
         let data = try? JSONEncoder().encode(value)
         return data?.prettyPrintedJSONString?.null() ?? empty
@@ -116,11 +111,11 @@ enum ARCFlow: CaseIterable {
 open class ARC {
     let idARC = UUID()
     public init() {
-        SwiftyChuck.classInit(idARC, self)
+        SwiftyChuck.classInit(self.idARC, self)
     }
 
     deinit {
-        SwiftyChuck.remove(idARC)
+        SwiftyChuck.removeChuck(idARC)
     }
 }
 
@@ -128,16 +123,16 @@ open class ARCViewController: UIViewController {
     let idARC = UUID()
     override public init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-        SwiftyChuck.classInit(idARC, self)
+        SwiftyChuck.classInit(self.idARC, self)
     }
 
     public required init?(coder: NSCoder) {
         super.init(coder: coder)
-        SwiftyChuck.classInit(idARC, self)
+        SwiftyChuck.classInit(self.idARC, self)
     }
 
     deinit {
-        SwiftyChuck.remove(idARC)
+        SwiftyChuck.removeChuck(idARC)
     }
 }
 
@@ -145,16 +140,16 @@ open class ARCTableViewCell: UITableViewCell {
     let idARC = UUID()
     override public init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        SwiftyChuck.classInit(idARC, self)
+        SwiftyChuck.classInit(self.idARC, self)
     }
 
     public required init?(coder: NSCoder) {
         super.init(coder: coder)
-        SwiftyChuck.classInit(idARC, self)
+        SwiftyChuck.classInit(self.idARC, self)
     }
 
     deinit {
-        SwiftyChuck.remove(idARC)
+        SwiftyChuck.removeChuck(idARC)
     }
 }
 
@@ -162,16 +157,16 @@ open class ARCCollectionViewCell: UICollectionViewCell {
     let idARC = UUID()
     override public init(frame: CGRect) {
         super.init(frame: frame)
-        SwiftyChuck.classInit(idARC, self)
+        SwiftyChuck.classInit(self.idARC, self)
     }
 
     public required init?(coder: NSCoder) {
         super.init(coder: coder)
-        SwiftyChuck.classInit(idARC, self)
+        SwiftyChuck.classInit(self.idARC, self)
     }
 
     deinit {
-        SwiftyChuck.remove(idARC)
+        SwiftyChuck.removeChuck(idARC)
     }
 }
 
@@ -179,15 +174,15 @@ open class ARCNavigationController: UINavigationController {
     let idARC = UUID()
     override public init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-        SwiftyChuck.classInit(idARC, self)
+        SwiftyChuck.classInit(self.idARC, self)
     }
 
     public required init?(coder: NSCoder) {
         super.init(coder: coder)
-        SwiftyChuck.classInit(idARC, self)
+        SwiftyChuck.classInit(self.idARC, self)
     }
 
     deinit {
-        SwiftyChuck.remove(idARC)
+        SwiftyChuck.removeChuck(idARC)
     }
 }

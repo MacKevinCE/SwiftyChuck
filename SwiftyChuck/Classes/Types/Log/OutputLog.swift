@@ -11,7 +11,7 @@ class OutputLog: OutputClass {
     init(_ input: InputLog) {
         super.init(input)
         self.title = input.getTitle()
-        self.colorText = input.colorText
+        self.colorTitle = input.colorText
         self.detailTabs = [
             DetailTabs(name: "ALL", attributed: input.getTabAll())
         ]

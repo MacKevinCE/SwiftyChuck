@@ -13,6 +13,8 @@ class ViewController: ARCViewController {
     let animal = Animal(name: "cangrejo")
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        UserDefaults.standard.set("Hola", forKey: "Hola")
         print("algoooo")
         log.service(nil, nil, nil)
         log.service(nil, nil, nil)
@@ -21,14 +23,35 @@ class ViewController: ARCViewController {
         log.service(nil, nil, nil)
         log.service(nil, nil, nil)
         log.service(nil, nil, nil)
+        log.service(nil, nil, nil)
+        log.service(nil, nil, nil)
+        log.service(nil, nil, nil)
+        log.service(nil, nil, nil)
+        log.service(nil, nil, nil)
+        log.service(nil, nil, nil)
+        log.service(nil, nil, nil)
+        log.service(nil, nil, nil)
+        log.service(nil, nil, nil)
+        log.service(nil, nil, nil)
+        log.service(nil, nil, nil)
+        log.service(nil, nil, nil)
+        log.service(nil, nil, nil)
+        log.service(nil, nil, nil)
+        log.service(nil, nil, nil)
+        log.service(nil, nil, nil)
+        log.service(nil, nil, nil)
+        log.service(nil, nil, nil)
+        log.service(nil, nil, nil)
+        log.service(nil, nil, nil)
+        log.service(nil, nil, nil)
         log.custom(Inputtt("Entroooo1", actions: [
-            ExecuteActions(name: "BUILD", color: .blue, execute: { _, _ in
+            SwipeActions(name: "BUILD", color: .blue, execute: { _, _ in
                 print("holaaaaaa2")
             }),
-            ExecuteActions(name: "INDEX", color: .gray, execute: { _, indexPath in
+            SwipeActions(name: "INDEX", color: .gray, execute: { _, indexPath in
                 print("holaaaaaa", indexPath)
             }),
-            ExecuteActions(name: "ID", color: .brown, execute: { output, indexPath in
+            SwipeActions(name: "ID", color: .brown, execute: { output, indexPath in
                 print("holaaaaaa", indexPath, output?.id.uuidString ?? "--")
             })
         ]))
@@ -76,7 +99,7 @@ class BaseViewController: UIViewController {
     }
 
     deinit {
-        log.remove(idARC)
+        log.removeChuck(idARC)
     }
 }
 
@@ -112,14 +135,14 @@ struct Inputtt: InputProtocol {
     var function: String
     var line: Int
     var type: ChuckLevel
-    var actions: [ExecuteActions]
+    var actions: [SwipeActions]
 
     init(
         _ title: String,
         _ file: String = #file,
         _ function: String = #function,
         _ line: Int = #line,
-        actions: [ExecuteActions]
+        actions: [SwipeActions]
     ) {
         self.id = UUID()
         self.file = file
@@ -135,7 +158,7 @@ struct Inputtt: InputProtocol {
     }
 
     func getPreview() -> PreviewInfo {
-        return .cell(NuevoTableViewCell.self, type.text)
+        return .cell(NuevoTableViewCell.self, searchText: type.text)
     }
 }
 
@@ -143,7 +166,8 @@ class Outputtt: OutputClass {
     init(_ input: Inputtt) {
         super.init(input)
         self.title = input.title
-        self.actions = input.actions
+        self.trailingSwipeActions = input.actions
+        self.leadingSwipeActions = input.actions
         self.showDeleteAction = false
     }
 }

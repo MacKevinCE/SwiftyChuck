@@ -17,7 +17,6 @@ struct InputLog: InputProtocol {
     let items: [String]
     let separator: String
     let terminator: String
-    let time: Date
 
     init(
         _ items: Any...,
@@ -37,28 +36,24 @@ struct InputLog: InputProtocol {
         self.items = items.map { "\($0)" }
         self.separator = separator
         self.terminator = terminator
-        self.time = Date()
     }
 
     func output() -> OutputLog {
         return OutputLog(self)
     }
-    
+
     func getTitle() -> String {
         return "\(self.items.joined(separator: self.separator.visible()))\(self.terminator.visibleUltra())"
     }
-    
-    func getPreview() -> PreviewInfo {
-        return .attributed(getTabPreview())
-    }
 
-    func getTabPreview() -> NSMutableAttributedString {
-        return "\(self.level.text):"
+    func getPreview() -> PreviewInfo {
+        let attributed = "\(self.level.text):"
             .initAttributeText(color: self.colorText, font: .semibold16)
             .printSpacer()
             .addTextWithAttributeText(text: self.getTitle())
             .printEnter().printTab().printTab().printSpacer()
             .addTextWithAttributeText(text: self.time.toString(), color: .gray, font: .regular12)
+        return .attributed(attributed)
     }
 
     func getTabAll() -> NSMutableAttributedString {
@@ -79,7 +74,7 @@ struct InputLog: InputProtocol {
 
 func getColor(_ type: LogLevel) -> UIColor {
     switch type {
-    case .print: return .black
+    case .print: return .darkText
     case .debug: return .systemGreen
     case .info: return .systemBlue
     case .warning: return .systemOrange

@@ -12,6 +12,7 @@ public protocol InputProtocol: Equatable {
 
     var id: UUID { get }
     var type: ChuckLevel { get }
+    var time: Date { get }
     func getPreview() -> PreviewInfo
     func output() -> Output
 }
@@ -23,5 +24,9 @@ public extension InputProtocol {
 
     var id: UUID {
         return UUID()
+    }
+
+    var time: Date {
+        return Date()
     }
 }

@@ -25,7 +25,6 @@ open class SwiftyChuck {
     private(set) static var enverimoment: String = empty
     private(set) static var enableType: [ChuckLevel] = ChuckLevel.allCases
     private(set) static var showDetectingButton: Bool = true
-    private(set) static var showDeleteAllButton: Bool = true
     private(set) static var leftBarButtonItems: [UIBarButtonItem] = []
     private(set) static var rightBarButtonItems: [UIBarButtonItem] = []
     private(set) static var iconCircle: TypeIcon = .character("😁")
@@ -63,10 +62,6 @@ open class SwiftyChuck {
 
     open class func showDetectingButton(_ show: Bool) {
         showDetectingButton = show
-    }
-
-    open class func showDeleteAllButton(_ show: Bool) {
-        showDeleteAllButton = show
     }
 
     open class func leftBarButtonItems(_ barButtonItems: [UIBarButtonItem]) {
@@ -118,22 +113,26 @@ open class SwiftyChuck {
         dataChuck.removeAll()
     }
 
-    open class func remove(_ id: UUID) {
+    open class func removeChuck(_ id: UUID) {
         guard let index = dataChuck.firstIndex(where: { $0.id == id }) else { return }
         dataChuck.remove(at: index)
     }
 
-    open class func remove(_ ids: [UUID]) {
-        ids.forEach { remove($0) }
+    open class func removeChuck(_ ids: [UUID]) {
+        ids.forEach { removeChuck($0) }
     }
 
     open class func removeChuck(_ chuck: OutputClass?) {
         guard let id = chuck?.id else { return }
-        remove(id)
+        removeChuck(id)
     }
 
     open class func removeChuck(_ chucks: [OutputClass]) {
         chucks.forEach { removeChuck($0) }
+    }
+
+    open class func removeChuck(_ type: ChuckLevel) {
+        dataChuck = dataChuck.filter { $0.type != type }
     }
 
     /// returns the current thread name
@@ -246,7 +245,7 @@ open class SwiftyChuck {
         DispatchQueue.main.async {
             guard let owner = UIApplication.rootViewController else { return }
             if let chuckNav = getDebugNavController() {
-                if let chuckController = chuckNav.getChuckDebugViewController() {
+                if let chuckController = chuckNav.getChuckDebugViewController(), chuckController.isViewLoaded {
                     chuckController.reloadData()
                 }
                 return
