@@ -56,11 +56,43 @@ struct InputLog: InputProtocol {
         return .attributed(attributed)
     }
 
+    func getTabResume() -> NSMutableAttributedString {
+        var attributeText = empty.initAttributeText(font: .regular14)
+
+        if let text = self.getText().null() {
+            attributeText = attributeText
+                .printTitleChuck("TEXT")
+                .printEnter()
+                .printJSONForChuck(text)
+                .printEnter()
+        }
+
+        if let file = SwiftyChuck.getPath(self.file).null() {
+            attributeText = attributeText
+                .printEnter()
+                .printTitleChuck("FILE")
+                .printEnter()
+                .printJSONForChuck(file)
+                .printEnter()
+        }
+
+        if let line = String(self.line).null() {
+            attributeText = attributeText
+                .printEnter()
+                .printTitleChuck("LINE")
+                .printEnter()
+                .printJSONForChuck(line)
+                .printEnter()
+        }
+
+        return attributeText
+    }
+
     func getTabAll() -> NSMutableAttributedString {
         var pares: [ParString] = []
         pares.append(ParString(key: "ID", value: self.id.uuidString))
-        pares.append(ParString(key: "Text", value: self.items.joined(separator: self.separator) + self.terminator))
-        pares.append(ParString(key: "Items", value: "[" + self.items.map { $0.visibleUltra() }.joined(separator: ", ") + "]"))
+        pares.append(ParString(key: "Text", value: self.getText()))
+        pares.append(ParString(key: "Items", value: self.getItems()))
         pares.append(ParString(key: "Separator", value: self.separator.visibleUltra()))
         pares.append(ParString(key: "Terminator", value: self.terminator.visibleUltra()))
         pares.append(ParString(key: "File", value: SwiftyChuck.getPath(self.file)))
@@ -69,6 +101,14 @@ struct InputLog: InputProtocol {
         pares.append(ParString(key: "Time", value: self.time.toString(with: .iso8601)))
 
         return pares.reduce()
+    }
+
+    func getText() -> String {
+        return self.items.joined(separator: self.separator) + self.terminator
+    }
+
+    func getItems() -> String {
+        return "[" + self.items.map { $0.visibleUltra() }.joined(separator: ", ") + "]"
     }
 }
 

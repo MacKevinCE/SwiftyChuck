@@ -22,7 +22,8 @@
                     <rect key="frame" x="0.0" y="0.0" width="75" height="75"/>
                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                     <connections>
-                        <action selector="backgroundButtonTapped:" destination="-1" eventType="touchUpInside" id="ixn-EH-rUo"/>
+                        <action selector="backgroundButtonTouchDown:" destination="-1" eventType="touchDown" id="Oju-02-R9J"/>
+                        <action selector="backgroundButtonTouchUpInside:" destination="-1" eventType="touchUpInside" id="Rpe-y5-2XW"/>
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="02h-nP-hv1">
@@ -33,7 +34,7 @@
                     </constraints>
                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                     <connections>
-                        <action selector="closeButtonTapped:" destination="-1" eventType="touchUpInside" id="l3R-C6-Jn3"/>
+                        <action selector="closeButtonTouchUpInside:" destination="-1" eventType="touchUpInside" id="aXW-Mg-Cn8"/>
                     </connections>
                 </button>
             </subviews>

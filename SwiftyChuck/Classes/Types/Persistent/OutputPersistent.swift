@@ -1,20 +1,22 @@
 //
-//  OutputLog.swift
+//  OutputPersistent.swift
 //  SwiftyChuck
 //
-//  Created by Mc Kevin on 15/07/22.
+//  Created by Mc Kevin on 9/11/22.
 //
 
 import Foundation
 
-class OutputLog: OutputClass {
-    init(_ input: InputLog) {
+class OutputPersistent: OutputClass {
+    init(_ input: InputPersistent) {
         super.init(input)
-        self.title = input.getTitle()
-        self.colorTitle = input.colorText
+        self.title = input.key
+        self.colorTitle = .systemTeal
         self.detailTabs = [
             DetailTabs(name: "RESUME", attributed: input.getTabResume()),
             DetailTabs(name: "ALL", attributed: input.getTabAll())
         ]
     }
 }
+
+extension UIAlertController {}

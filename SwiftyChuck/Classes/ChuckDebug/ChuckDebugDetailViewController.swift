@@ -147,6 +147,9 @@ class ChuckDebugDetailViewController: UIViewController {
 
     @objc private func sharedButtonTapped() {
         let activityController = UIActivityViewController(activityItems: getSharedItems(), applicationActivities: nil)
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            activityController.popoverPresentationController?.barButtonItem = navigationItem.rightBarButtonItem
+        }
         present(activityController, animated: true, completion: nil)
     }
 }

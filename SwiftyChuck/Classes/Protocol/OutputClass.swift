@@ -14,8 +14,8 @@ open class OutputClass: Equatable {
     public var title: String
     public var preview: PreviewInfo
     public var detailTabs: [DetailTabs]
-    public var trailingSwipeActions: [SwipeActions]
     public var leadingSwipeActions: [SwipeActions]
+    public var trailingSwipeActions: [SwipeActions]
     public var showDeleteAction: Bool
     public var showSharedButton: Bool
 
@@ -26,8 +26,8 @@ open class OutputClass: Equatable {
         self.title = empty
         self.preview = input.getPreview()
         self.detailTabs = []
-        self.trailingSwipeActions = []
         self.leadingSwipeActions = []
+        self.trailingSwipeActions = []
         self.showDeleteAction = true
         self.showSharedButton = true
     }

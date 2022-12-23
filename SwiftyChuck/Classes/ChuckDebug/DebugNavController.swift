@@ -9,10 +9,10 @@ import UIKit
 
 class DebugNavController: UINavigationController {
     func getChuckDebugViewController() -> ChuckDebugViewController? {
-        return viewControllers.first as? ChuckDebugViewController
+        return viewControllers.first(with: ChuckDebugViewController.self)
     }
 
     func getChuckDebugDetailViewController() -> ChuckDebugDetailViewController? {
-        return viewControllers.first as? ChuckDebugDetailViewController
+        return viewControllers.first(with: ChuckDebugDetailViewController.self)
     }
 }

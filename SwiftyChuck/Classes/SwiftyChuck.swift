@@ -16,11 +16,10 @@
 import Foundation
 
 open class SwiftyChuck {
-    static var file: String = #file
-    public private(set) static var dataChuck: [OutputClass] = []
-    public private(set) static var selectChuck: [OutputClass] = []
-    public private(set) static var destination = BaseDestination()
-    public private(set) static var typeOpen: TypeOpen = .none
+    private(set) static var dataChuck: [OutputClass] = []
+    private(set) static var selectChuck: [OutputClass] = []
+    private(set) static var destination = BaseDestination()
+    private(set) static var typeOpen: TypeOpen = .none
     private(set) static var baseURL: String = empty
     private(set) static var enverimoment: String = empty
     private(set) static var enableType: [ChuckLevel] = ChuckLevel.allCases
@@ -195,7 +194,21 @@ open class SwiftyChuck {
     }
 
     open class func classInit(_ id: UUID, _ anyObject: AnyObject, file: String = #file, function: String = #function, line: Int = #line) {
-        return custom(InputARC(id, anyObject, .inital, file, function, line))
+        return custom(InputARC(id, anyObject, file, function, line))
+    }
+
+    open class func persistent(namespace: String, key: String, value: Any?, file: String = #file, function: String = #function, line: Int = #line) {
+        return custom(InputPersistent(namespace, key, value, file, function, line))
+    }
+
+    open class func persistent(namespace: String, key: String, callback: (String) -> Any?, file: String = #file, function: String = #function, line: Int = #line) {
+        let value = callback(key)
+        return custom(InputPersistent(namespace, key, value, file, function, line))
+    }
+
+    open class func userDefaults(key: String, file: String = #file, function: String = #function, line: Int = #line) {
+        let value = UserDefaults.standard.object(forKey: key)
+        return custom(InputPersistent("UserDefaults", key, value, file, function, line))
     }
 
     /// custom logging to manually adjust values, should just be used by other frameworks

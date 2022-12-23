@@ -31,8 +31,8 @@ public enum ChuckLevel: CaseIterable, Hashable, Equatable {
         case .custom(let config): return config.isEdit
         case .log: return true
         case .service: return true
-        case .persistent: return true
-        case .arc: return true
+        case .persistent: return false
+        case .arc: return false
         }
     }
 
@@ -41,8 +41,8 @@ public enum ChuckLevel: CaseIterable, Hashable, Equatable {
         case .custom(let config): return config.showDeleteAll
         case .log: return true
         case .service: return true
-        case .persistent: return true
-        case .arc: return true
+        case .persistent: return false
+        case .arc: return false
         }
     }
 }

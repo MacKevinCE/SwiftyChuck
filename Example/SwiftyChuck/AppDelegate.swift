@@ -9,18 +9,11 @@
 import SwiftyChuck
 import UIKit
 
-let log = SwiftyChuck.self
-
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        log.typeOpen(.all)
-        // log.setIconCircle(.character("😁"))
-        log.setIconCircle(.icon(.init(named: "alegre")!))
-        log.setEnverimoment("DEBUG")
-        log.addEnableType(.nuevoo)
         // Override point for customization after application launch.
         return true
     }
@@ -46,13 +39,4 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
-}
-
-extension ChuckLevel {
-    static let nuevoo = ChuckLevel.custom(
-        config: ConfigLevel(
-            name: "Nuevooo",
-            isEdit: false
-        )
-    )
 }

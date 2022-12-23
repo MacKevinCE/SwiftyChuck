@@ -9,5 +9,5 @@ import Foundation
 
 public enum TypeIcon {
     case icon(UIImage)
-    case character(Character)
+    case character(Character, backgroundImage: UIImage? = nil)
 }

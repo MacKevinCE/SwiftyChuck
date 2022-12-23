@@ -30,17 +30,31 @@ class ChuckDebugView: NibDebugView {
         closeButton.layer.cornerRadius = radiusClose / 2
 
         switch SwiftyChuck.iconCircle {
-        case .character(let character):
+        case let .character(character, backgroundImage):
             if character.isASCII {
-                backgroundButton.setImage(backgroundButton.getIcon(name: character), backgroundButton.getIcon(name: "🟡"))
+                backgroundButton.setImage(backgroundButton.getIcon(name: character), backgroundImage ?? backgroundButton.getIcon(name: "🟡"))
             } else {
-                backgroundButton.setBackgroundImage(backgroundButton.getIcon(name: character))
+                backgroundButton.setImage(backgroundButton.getIcon(name: character), backgroundImage)
             }
-        case .icon(let image):
+        case let .icon(image):
             backgroundButton.setBackgroundImage(image)
         }
 
         closeButton.setBackgroundImage(ChuckDebugView.closeImage)
+
+        startOpacity()
+    }
+
+    override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
+        let closePF = closeButton.frame
+        let backgroundPF = backgroundButton.frame
+
+        if closePF.contains(point) {
+            return closeButton
+        } else if backgroundPF.contains(point) {
+            return backgroundButton
+        }
+        return nil
     }
 
     func addPopUp(owner: UIViewController) {
@@ -108,6 +122,19 @@ class ChuckDebugView: NibDebugView {
         UIView.animate(withDuration: 0.1, delay: 0, options: [.curveEaseInOut], animations: { [weak self] in
             self?.newLocation(pointFinal)
             owner.view.layoutIfNeeded()
+        }, completion: { [weak self] _ in
+            self?.startOpacity()
+        })
+    }
+
+    private func startOpacity() {
+        afterOpacity(delay: 4, opacity: 0.25)
+    }
+
+    private func afterOpacity(delay: TimeInterval, opacity: Float) {
+        UIView.animate(withDuration: delay, delay: delay, animations: { [weak self] in
+            self?.view.layer.opacity = opacity
+        }, completion: { _ in
         })
     }
 
@@ -123,11 +150,16 @@ class ChuckDebugView: NibDebugView {
         }
     }
 
-    @IBAction private func backgroundButtonTapped(_ sender: Any) {
-        SwiftyChuck.openChuckDebug()
+    @IBAction func backgroundButtonTouchDown(_ sender: Any) {
+        view.layer.opacity = 1
     }
 
-    @IBAction private func closeButtonTapped(_ sender: Any) {
+    @IBAction private func backgroundButtonTouchUpInside(_ sender: Any) {
+        SwiftyChuck.openChuckDebug()
+        startOpacity()
+    }
+
+    @IBAction private func closeButtonTouchUpInside(_ sender: Any) {
         removeFromSuperview()
     }
 }

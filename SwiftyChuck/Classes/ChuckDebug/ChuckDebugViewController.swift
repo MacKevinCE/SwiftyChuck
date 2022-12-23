@@ -276,9 +276,9 @@ extension ChuckDebugViewController: UITableViewDataSource {
         let dato = data[indexPath.row]
         let isSelect = SwiftyChuck.selectChuck.contains(dato)
         switch dato.preview {
-        case .attributed(let attributedString):
+        case .attributed(let attributedString, let numberOfLines):
             let cell = tableView.dequeueReusableCell(withIdentifier: "ChuckDebugCell", for: indexPath)
-            cell.textLabel?.numberOfLines = 4
+            cell.textLabel?.numberOfLines = numberOfLines
             cell.textLabel?.font = .regular14
             cell.backgroundColor = (isSelect && !isAllEdit) ? .systemGray.setAlpha(0.25) : .clear
             cell.selectionStyle = isAllEdit ? .default : .none
